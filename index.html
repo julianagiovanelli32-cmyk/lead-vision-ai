@@ -237,7 +237,7 @@
         .filter-bar {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             overflow-x: auto;
             padding-bottom: 5px;
         }
@@ -258,6 +258,26 @@
             background-color: #2563eb;
             color: white;
             border-color: #2563eb;
+        }
+
+        .search-box-container {
+            margin-bottom: 20px;
+        }
+
+        .search-box-container input {
+            width: 100%;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box-container input:focus {
+            border-color: #3b82f6;
         }
 
         .lead-card {
@@ -531,7 +551,7 @@
 
         <h2 style="margin-bottom: 16px;">Oportunidades em Destaque</h2>
 
-        <!-- Barra de Filtros com SP e RJ adicionados -->
+        <!-- Barra de Filtros -->
         <div class="filter-bar">
             <button class="filter-btn active" onclick="filtrarLeads('todos', this)">Todos</button>
             <button class="filter-btn" onclick="filtrarLeads('tubarao', this)">📍 Tubarão</button>
@@ -540,6 +560,11 @@
             <button class="filter-btn" onclick="filtrarLeads('rj', this)">📍 Rio de Janeiro</button>
             <button class="filter-btn" onclick="filtrarLeads('varejo', this)">🛒 Varejo</button>
             <button class="filter-btn" onclick="filtrarLeads('construcao', this)">🏗️ Construção</button>
+        </div>
+
+        <!-- Barra de Pesquisa por Cidade/Estado/Segmento -->
+        <div class="search-box-container">
+            <input type="text" id="input-busca" placeholder="🔍 Pesquisar por qualquer cidade, estado ou segmento..." onkeyup="pesquisarLeads()">
         </div>
 
         <!-- Lista de Leads -->
@@ -712,10 +737,27 @@
             botoes.forEach(btn => btn.classList.remove('active'));
             elementoBotao.classList.add('active');
 
+            // Limpa o campo de busca ao usar os botões
+            document.getElementById('input-busca').value = '';
+
             const cards = document.querySelectorAll('.lead-card');
             cards.forEach(card => {
                 const categoriasCard = card.getAttribute('data-category');
                 if (categoria === 'todos' || (categoriasCard && categoriasCard.includes(categoria))) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function pesquisarLeads() {
+            const termo = document.getElementById('input-busca').value.toLowerCase();
+            const cards = document.querySelectorAll('.lead-card');
+
+            cards.forEach(card => {
+                const textoCard = card.innerText.toLowerCase();
+                if (textoCard.includes(termo)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
