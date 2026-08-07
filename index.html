@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeadVision AI - Dashboard</title>
     <style>
-        /* (Mantive o mesmo estilo anterior para não perder o layout) */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0b0f19; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
         .dashboard-container { background-color: #111827; border: 1px solid #1f2937; border-radius: 24px; padding: 30px; width: 100%; max-width: 800px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); text-align: left; }
@@ -17,8 +16,16 @@
         .lead-info h3 { font-size: 16px; color: #ffffff; margin-bottom: 4px; }
         .lead-info p { font-size: 13px; color: #9ca3af; margin-bottom: 10px; }
         .lead-action-btn { background-color: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; }
-        .status-select { background-color: #111827; color: #d1d5db; border: 1px solid #374151; padding: 6px 10px; border-radius: 8px; font-size: 12px; cursor: pointer; }
+        .lead-action-btn:hover { background-color: #1d4ed8; }
         .badge { background-color: #10b981; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+        
+        /* Modal Styles */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; padding: 20px; z-index: 1000; }
+        .modal-card { background-color: #111827; border: 1px solid #374151; border-radius: 20px; padding: 24px; width: 100%; max-width: 420px; text-align: left; }
+        .ai-message-box { background-color: #1f2937; border: 1px solid #374151; border-radius: 10px; padding: 12px; font-size: 13px; color: #d1d5db; margin-bottom: 20px; line-height: 1.5; }
+        .modal-buttons { display: flex; gap: 10px; }
+        .btn-copy { flex: 1; background-color: #2563eb; color: white; border: none; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .btn-close { background-color: #374151; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -33,42 +40,170 @@
             </div>
         </div>
 
-        <!-- Apenas o campo de pesquisa -->
+        <!-- Campo de Pesquisa -->
         <div class="search-box-container">
-            <input type="text" id="input-busca" placeholder="🔍 Ex: São Paulo, Rio de Janeiro, Varejo..." onkeyup="pesquisarLeads()">
+            <input type="text" id="input-busca" placeholder="🔍 Digite a cidade (ex: Florianópolis, Santos, Campinas...)" onkeyup="pesquisarLeads()">
         </div>
 
         <div id="lista-leads">
-            <!-- Exemplos cadastrados -->
+            <!-- Florianópolis -->
             <div class="lead-card">
                 <div class="lead-info">
-                    <h3>Supermercado Exemplo Ltda</h3>
-                    <p>Segmento: Varejo • Tubarão / SC</p>
-                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
+                    <h3>Inovação Tech Floripa</h3>
+                    <p>Segmento: Tecnologia • Florianópolis / Santa Catarina</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Inovação Tech Floripa', 'Olá! Vimos o crescimento da Inovação Tech em Florianópolis. A LeadVision AI pode otimizar suas captações. Vamos conversar?')">✨ Gerar Abordagem</button>
                 </div>
-                <div class="lead-actions">
-                    <span class="badge">98%</span>
-                </div>
+                <div class="lead-actions"><span class="badge">96%</span></div>
             </div>
+
+            <!-- Porto Alegre / Rio Grande do Sul -->
             <div class="lead-card">
                 <div class="lead-info">
-                    <h3>Tech Inova SP</h3>
-                    <p>Segmento: Varejo • São Paulo / SP</p>
-                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
+                    <h3>Sul Logística & Cia</h3>
+                    <p>Segmento: Transporte • Porto Alegre / Rio Grande do Sul</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Sul Logística & Cia', 'Olá equipe da Sul Logística em Porto Alegre! Temos ferramentas de IA ideais para expandir sua operação no Rio Grande do Sul.')">✨ Gerar Abordagem</button>
                 </div>
-                <div class="lead-actions">
-                    <span class="badge">97%</span>
-                </div>
+                <div class="lead-actions"><span class="badge">92%</span></div>
             </div>
+
+            <!-- Paraná -->
             <div class="lead-card">
                 <div class="lead-info">
-                    <h3>Construtora Carioca</h3>
-                    <p>Segmento: Construção • Rio de Janeiro / RJ</p>
-                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
+                    <h3>Paraná Comércio Global</h3>
+                    <p>Segmento: Varejo • Curitiba / Paraná</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Paraná Comércio Global', 'Olá! Notamos a forte presença do seu comércio no Paraná. Nossa IA ajuda a encontrar novos clientes locais.')">✨ Gerar Abordagem</button>
                 </div>
-                <div class="lead-actions">
-                    <span class="badge">94%</span>
+                <div class="lead-actions"><span class="badge">95%</span></div>
+            </div>
+
+            <!-- Santos -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Portuária Santos Express</h3>
+                    <p>Segmento: Serviços • Santos / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Portuária Santos Express', 'Olá! Buscamos otimizar empresas de serviços em Santos com inteligência artificial. Podemos agendar uma call?')">✨ Gerar Abordagem</button>
                 </div>
+                <div class="lead-actions"><span class="badge">98%</span></div>
+            </div>
+
+            <!-- Ceará -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Nordeste Soluções Ceará</h3>
+                    <p>Segmento: Indústria • Fortaleza / Ceará</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Nordeste Soluções Ceará', 'Olá! A LeadVision AI pode acelerar suas vendas industriais no Ceará. Vamos conversar?')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">91%</span></div>
+            </div>
+
+            <!-- Campinas -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Campinas Tech Solutions</h3>
+                    <p>Segmento: Tecnologia • Campinas / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Campinas Tech Solutions', 'Olá! Vimos sua atuação em Campinas. Nossa plataforma automatiza sua prospecção de clientes.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">94%</span></div>
+            </div>
+
+            <!-- Mogi Guaçu, Mogi das Cruzes, Mogi Mirim -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Mogi Comércio & Serviços</h3>
+                    <p>Segmento: Comércio • Mogi Guaçu / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Mogi Comércio & Serviços', 'Olá! Conectamos empresas em Mogi Guaçu e região com novos clientes usando inteligência artificial.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">90%</span></div>
+            </div>
+
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Cruzes Construtora</h3>
+                    <p>Segmento: Construção • Mogi das Cruzes / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Cruzes Construtora', 'Olá equipe de Mogi das Cruzes! Temos soluções automatizadas para o setor de construção civil.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">93%</span></div>
+            </div>
+
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Mirim Indústria e Metais</h3>
+                    <p>Segmento: Indústria • Mogi Mirim / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Mirim Indústria e Metais', 'Olá! A LeadVision AI ajuda indústrias em Mogi Mirim a encontrarem grandes compradores.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">92%</span></div>
+            </div>
+
+            <!-- Andradas & Minas Gerais -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Café & Grãos Andradas</h3>
+                    <p>Segmento: Agronegócio • Andradas / Minas Gerais</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Café & Grãos Andradas', 'Olá! Soluções inteligentes de prospecção para impulsionar o agronegócio em Andradas e Minas Gerais.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">97%</span></div>
+            </div>
+
+            <!-- Espírito Santo do Pinhal -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Pinhal Agro & Tech</h3>
+                    <p>Segmento: Agronegócio • Espírito Santo do Pinhal / São Paulo</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Pinhal Agro & Tech', 'Olá! Vimos o destaque da sua empresa em Espírito Santo do Pinhal. Quer conhecer nossa IA?')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">95%</span></div>
+            </div>
+
+            <!-- Mato Grosso -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Cuiabá Grãos & Insumos</h3>
+                    <p>Segmento: Agronegócio • Cuiabá / Mato Grosso</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Cuiabá Grãos & Insumos', 'Olá! Expanda seus negócios no Mato Grosso com prospecção automatizada por IA.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">96%</span></div>
+            </div>
+
+            <!-- Salvador / Bahia -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Bahia Inova Salvador</h3>
+                    <p>Segmento: Serviços • Salvador / Bahia</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Bahia Inova Salvador', 'Olá! Ajudamos empresas de Salvador e toda a Bahia a acelerarem suas vendas.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">94%</span></div>
+            </div>
+
+            <!-- Laguna & Braço do Norte (SC) -->
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Laguna Comércio Naval</h3>
+                    <p>Segmento: Comércio • Laguna / Santa Catarina</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Laguna Comércio Naval', 'Olá! Soluções de captação de clientes em Laguna e região com inteligência artificial.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">91%</span></div>
+            </div>
+
+            <div class="lead-card">
+                <div class="lead-info">
+                    <h3>Braço do Norte Móveis</h3>
+                    <p>Segmento: Varejo • Braço do Norte / Santa Catarina</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Braço do Norte Móveis', 'Olá! Otimize as vendas do seu varejo em Braço do Norte com a LeadVision AI.')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions"><span class="badge">93%</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE ABORDAGEM -->
+    <div id="ai-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 id="modal-title" style="margin-bottom: 8px; color: #fff;">Abordagem Gerada</h3>
+            <p style="font-size: 13px; color: #9ca3af; margin-bottom: 12px;">Sugestão de mensagem criada pela IA:</p>
+            <div id="modal-text" class="ai-message-box"></div>
+            <div class="modal-buttons">
+                <button class="btn-copy" onclick="copiarMensagem()">Copiar Mensagem</button>
+                <button class="btn-close" onclick="fecharModal()">Fechar</button>
             </div>
         </div>
     </div>
@@ -79,9 +214,24 @@
             const cards = document.querySelectorAll('.lead-card');
             cards.forEach(card => {
                 const textoCard = card.innerText.toLowerCase();
-                // Mostra se o termo digitado estiver presente no texto do cartão
                 card.style.display = textoCard.includes(termo) ? 'flex' : 'none';
             });
+        }
+
+        function abrirModal(nomeEmpresa, mensagem) {
+            document.getElementById('modal-title').innerText = "Abordagem: " + nomeEmpresa;
+            document.getElementById('modal-text').innerText = mensagem;
+            document.getElementById('ai-modal').classList.remove('hidden');
+        }
+
+        function fecharModal() {
+            document.getElementById('ai-modal').classList.add('hidden');
+        }
+
+        function copiarMensagem() {
+            const textoMensagem = document.getElementById('modal-text').innerText;
+            navigator.clipboard.writeText(textoMensagem);
+            alert("Mensagem copiada para a área de transferência!");
         }
     </script>
 </body>
