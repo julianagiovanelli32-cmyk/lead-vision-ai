@@ -531,16 +531,18 @@
 
         <h2 style="margin-bottom: 16px;">Oportunidades em Destaque</h2>
 
-        <!-- Barra de Filtros -->
+        <!-- Barra de Filtros com SP e RJ adicionados -->
         <div class="filter-bar">
             <button class="filter-btn active" onclick="filtrarLeads('todos', this)">Todos</button>
             <button class="filter-btn" onclick="filtrarLeads('tubarao', this)">📍 Tubarão</button>
             <button class="filter-btn" onclick="filtrarLeads('criciuma', this)">📍 Criciúma</button>
+            <button class="filter-btn" onclick="filtrarLeads('sp', this)">📍 São Paulo</button>
+            <button class="filter-btn" onclick="filtrarLeads('rj', this)">📍 Rio de Janeiro</button>
             <button class="filter-btn" onclick="filtrarLeads('varejo', this)">🛒 Varejo</button>
             <button class="filter-btn" onclick="filtrarLeads('construcao', this)">🏗️ Construção</button>
         </div>
 
-        <!-- Lista de Leads com Seletor de Status CRM -->
+        <!-- Lista de Leads -->
         <div id="lista-leads">
             <div class="lead-card" data-category="tubarao varejo">
                 <div class="lead-info">
@@ -589,7 +591,41 @@
                     <span class="badge">91%</span>
                 </div>
             </div>
-        
+
+            <!-- Lead de São Paulo -->
+            <div class="lead-card" data-category="sp varejo">
+                <div class="lead-info">
+                    <h3>Tech Inova SP</h3>
+                    <p>Segmento: Varejo • São Paulo / SP</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Tech Inova SP', 'Olá! Vimos que a Tech Inova busca expansão no varejo em São Paulo. A LeadVision AI pode ajudar a acelerar suas vendas. Vamos agendar uma conversa?')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions">
+                    <select class="status-select">
+                        <option value="novo">🆕 Novo</option>
+                        <option value="contato">💬 Em Contato</option>
+                        <option value="ganho">🏆 Ganho</option>
+                    </select>
+                    <span class="badge">97%</span>
+                </div>
+            </div>
+
+            <!-- Lead do Rio de Janeiro -->
+            <div class="lead-card" data-category="rj construcao">
+                <div class="lead-info">
+                    <h3>Construtora Carioca</h3>
+                    <p>Segmento: Construção • Rio de Janeiro / RJ</p>
+                    <button class="lead-action-btn" onclick="abrirModal('Construtora Carioca', 'Olá equipe! Notamos grandes projetos da Construtora Carioca no Rio de Janeiro. Nossas soluções de IA para prospecção podem otimizar seus resultados. Podemos conversar?')">✨ Gerar Abordagem</button>
+                </div>
+                <div class="lead-actions">
+                    <select class="status-select">
+                        <option value="novo">🆕 Novo</option>
+                        <option value="contato">💬 Em Contato</option>
+                        <option value="ganho">🏆 Ganho</option>
+                    </select>
+                    <span class="badge">94%</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL / POP-UP DE ABORDAGEM DA IA -->
@@ -607,7 +643,7 @@
         </div>
     </div>
 
-    <!-- SEÇÃO DE PLANOS (FORA DAS TELAS DE LOGIN/DASHBOARD PARA APARECER ABAIXO) -->
+    <!-- SEÇÃO DE PLANOS -->
     <section id="planos" style="padding: 40px 20px; text-align: center; background: #ffffff; color: #333; width: 100%; max-width: 900px; border-radius: 20px; margin-top: 40px;">
         <h2 style="margin-bottom: 30px; color: #000;">Escolha o plano ideal para você</h2>
         <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -679,7 +715,7 @@
             const cards = document.querySelectorAll('.lead-card');
             cards.forEach(card => {
                 const categoriasCard = card.getAttribute('data-category');
-                if (categoria === 'todos' || categoriasCard.includes(categoria)) {
+                if (categoria === 'todos' || (categoriasCard && categoriasCard.includes(categoria))) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
