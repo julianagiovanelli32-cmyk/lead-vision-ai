@@ -5,780 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeadVision AI - Dashboard</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .card-container {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 24px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .dashboard-container {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 24px;
-            padding: 30px;
-            width: 100%;
-            max-width: 800px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            text-align: left;
-        }
-
-        .logo-area {
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .logo-area h1 {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-
-        .logo-area h1 span {
-            color: #3b82f6;
-        }
-
-        .logo-area p {
-            color: #9ca3af;
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
-        .card-container h2, .dashboard-container h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
-            color: #9ca3af;
-            font-size: 13px;
-            margin-bottom: 24px;
-        }
-
-        .input-group {
-            text-align: left;
-            margin-bottom: 16px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            color: #d1d5db;
-            margin-bottom: 6px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-wrapper input {
-            width: 100%;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 12px 14px 12px 40px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .input-wrapper input:focus {
-            border-color: #3b82f6;
-        }
-
-        .input-wrapper .icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-        }
-
-        .options-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            margin-bottom: 24px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #9ca3af;
-            cursor: pointer;
-        }
-
-        .remember-me input {
-            accent-color: #3b82f6;
-            width: 16px;
-            height: 16px;
-        }
-
-        .forgot-password {
-            color: #3b82f6;
-            text-decoration: none;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .btn-submit:hover {
-            opacity: 0.9;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-            color: #4b5563;
-            font-size: 13px;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #374151;
-        }
-
-        .divider span {
-            padding: 0 10px;
-        }
-
-        .btn-google {
-            width: 100%;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 12px;
-            color: white;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-google:hover {
-            background-color: #374151;
-        }
-
-        .switch-text {
-            margin-top: 24px;
-            font-size: 13px;
-            color: #9ca3af;
-            text-align: center;
-        }
-
-        .switch-text a {
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .switch-text a:hover {
-            text-decoration: underline;
-        }
-
-        .dash-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #1f2937;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-
-        .filter-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-
-        .filter-btn {
-            background-color: #1f2937;
-            color: #9ca3af;
-            border: 1px solid #374151;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background-color: #2563eb;
-            color: white;
-            border-color: #2563eb;
-        }
-
-        .search-box-container {
-            margin-bottom: 20px;
-        }
-
-        .search-box-container input {
-            width: 100%;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 12px 14px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-box-container input:focus {
-            border-color: #3b82f6;
-        }
-
-        .lead-card {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .lead-info {
-            flex: 1;
-        }
-
-        .lead-info h3 {
-            font-size: 16px;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .lead-info p {
-            font-size: 13px;
-            color: #9ca3af;
-            margin-bottom: 10px;
-        }
-
-        .lead-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .lead-action-btn {
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s;
-            white-space: nowrap;
-        }
-
-        .lead-action-btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        .status-select {
-            background-color: #111827;
-            color: #d1d5db;
-            border: 1px solid #374151;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .status-select:focus {
-            border-color: #3b82f6;
-        }
-
-        .badge {
-            background-color: #10b981;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 1000;
-        }
-
-        .modal-card {
-            background-color: #111827;
-            border: 1px solid #374151;
-            border-radius: 20px;
-            padding: 24px;
-            width: 100%;
-            max-width: 420px;
-            text-align: left;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
-
-        .modal-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .modal-card p {
-            font-size: 13px;
-            color: #9ca3af;
-            margin-bottom: 16px;
-        }
-
-        .ai-message-box {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 13px;
-            color: #d1d5db;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-copy {
-            flex: 1;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn-close {
-            background-color: #374151;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .hidden {
-            display: none !important;
-        }
+        /* (Mantive o mesmo estilo anterior para não perder o layout) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0b0f19; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        .dashboard-container { background-color: #111827; border: 1px solid #1f2937; border-radius: 24px; padding: 30px; width: 100%; max-width: 800px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); text-align: left; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 20px; margin-bottom: 20px; }
+        .search-box-container { margin-bottom: 25px; }
+        .search-box-container input { width: 100%; background-color: #1f2937; border: 1px solid #374151; border-radius: 12px; padding: 15px 20px; color: #ffffff; font-size: 16px; outline: none; border: 2px solid #374151; }
+        .search-box-container input:focus { border-color: #3b82f6; }
+        .lead-card { background-color: #1f2937; border: 1px solid #374151; border-radius: 12px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .lead-info h3 { font-size: 16px; color: #ffffff; margin-bottom: 4px; }
+        .lead-info p { font-size: 13px; color: #9ca3af; margin-bottom: 10px; }
+        .lead-action-btn { background-color: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+        .status-select { background-color: #111827; color: #d1d5db; border: 1px solid #374151; padding: 6px 10px; border-radius: 8px; font-size: 12px; cursor: pointer; }
+        .badge { background-color: #10b981; color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- TELA DE LOGIN -->
-    <div id="login-screen" class="card-container">
-        <div class="logo-area">
-            <h1>LeadVision <span>AI</span></h1>
-            <p>A IA que encontra seus próximos clientes antes da concorrência.</p>
-        </div>
-
-        <h2>Bem-vindo de volta!</h2>
-        <p class="subtitle">Faça login para continuar</p>
-
-        <form onsubmit="event.preventDefault(); irParaDashboard();">
-            <div class="input-group">
-                <label>E-mail</label>
-                <div class="input-wrapper">
-                    <span class="icon">✉️</span>
-                    <input type="email" placeholder="seu@email.com" required>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>Senha</label>
-                <div class="input-wrapper">
-                    <span class="icon">🔒</span>
-                    <input type="password" placeholder="Sua senha" required>
-                </div>
-            </div>
-
-            <div class="options-row">
-                <label class="remember-me">
-                    <input type="checkbox"> Lembrar de mim
-                </label>
-                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
-            </div>
-
-            <button type="submit" class="btn-submit">Entrar</button>
-        </form>
-
-        <div class="divider">
-            <span>ou</span>
-        </div>
-
-        <button type="button" class="btn-google" onclick="irParaDashboard()">
-            🌐 Continuar com Google
-        </button>
-
-        <div class="switch-text">
-            Não tem uma conta? <a onclick="mostrarCadastro()">Criar conta</a>
-        </div>
-    </div>
-
-    <!-- TELA DE CADASTRO -->
-    <div id="register-screen" class="card-container hidden">
-        <div class="logo-area">
-            <h1>LeadVision <span>AI</span></h1>
-            <p>Comece a prospectar clientes com inteligência artificial hoje.</p>
-        </div>
-
-        <h2>Crie sua conta</h2>
-        <p class="subtitle">Preencha os dados abaixo para começar</p>
-
-        <form onsubmit="event.preventDefault(); irParaDashboard();">
-            <div class="input-group">
-                <label>Nome completo / Empresa</label>
-                <div class="input-wrapper">
-                    <span class="icon">👤</span>
-                    <input type="text" placeholder="Seu Nome ou Nome da Empresa" required>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>E-mail profissional</label>
-                <div class="input-wrapper">
-                    <span class="icon">✉️</span>
-                    <input type="email" placeholder="seu@email.com" required>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>Criar senha</label>
-                <div class="input-wrapper">
-                    <span class="icon">🔒</span>
-                    <input type="password" placeholder="Mínimo 6 caracteres" required>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit">Cadastrar</button>
-        </form>
-
-        <div class="divider">
-            <span>ou</span>
-        </div>
-
-        <button type="button" class="btn-google" onclick="irParaDashboard()">
-            🌐 Cadastrar com Google
-        </button>
-
-        <div class="switch-text">
-            Já tem uma conta? <a onclick="mostrarLogin()">Fazer login</a>
-        </div>
-    </div>
-
     <!-- TELA PRINCIPAL (DASHBOARD) -->
-    <div id="dashboard-screen" class="dashboard-container hidden">
+    <div id="dashboard-screen" class="dashboard-container">
         <div class="dash-header">
             <div>
-                <h1>LeadVision <span>AI</span> - Painel</h1>
-                <p style="color: #9ca3af; font-size: 13px;">Leads encontrados recentemente pela inteligência artificial</p>
+                <h1>LeadVision <span>AI</span></h1>
+                <p style="color: #9ca3af; font-size: 13px;">Pesquise por cidade, estado ou segmento</p>
             </div>
-            <button onclick="sairParaLogin()" style="background-color: #374151; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px;">Sair</button>
         </div>
 
-        <h2 style="margin-bottom: 16px;">Oportunidades em Destaque</h2>
-
-        <!-- Barra de Filtros -->
-        <div class="filter-bar">
-            <button class="filter-btn active" onclick="filtrarLeads('todos', this)">Todos</button>
-            <button class="filter-btn" onclick="filtrarLeads('tubarao', this)">📍 Tubarão</button>
-            <button class="filter-btn" onclick="filtrarLeads('criciuma', this)">📍 Criciúma</button>
-            <button class="filter-btn" onclick="filtrarLeads('sp', this)">📍 São Paulo</button>
-            <button class="filter-btn" onclick="filtrarLeads('rj', this)">📍 Rio de Janeiro</button>
-            <button class="filter-btn" onclick="filtrarLeads('varejo', this)">🛒 Varejo</button>
-            <button class="filter-btn" onclick="filtrarLeads('construcao', this)">🏗️ Construção</button>
-        </div>
-
-        <!-- Barra de Pesquisa por Cidade/Estado/Segmento -->
+        <!-- Apenas o campo de pesquisa -->
         <div class="search-box-container">
-            <input type="text" id="input-busca" placeholder="🔍 Pesquisar por qualquer cidade, estado ou segmento..." onkeyup="pesquisarLeads()">
+            <input type="text" id="input-busca" placeholder="🔍 Ex: São Paulo, Rio de Janeiro, Varejo..." onkeyup="pesquisarLeads()">
         </div>
 
-        <!-- Lista de Leads -->
         <div id="lista-leads">
-            <div class="lead-card" data-category="tubarao varejo">
+            <!-- Exemplos cadastrados -->
+            <div class="lead-card">
                 <div class="lead-info">
                     <h3>Supermercado Exemplo Ltda</h3>
                     <p>Segmento: Varejo • Tubarão / SC</p>
-                    <button class="lead-action-btn" onclick="abrirModal('Supermercado Exemplo Ltda', 'Olá! Notei que o Supermercado Exemplo está buscando otimizações no varejo em Tubarão. Nós da LeadVision ajudamos a captar clientes locais com IA. Podemos agendar uma rápida conversa?')">✨ Gerar Abordagem</button>
+                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
                 </div>
                 <div class="lead-actions">
-                    <select class="status-select">
-                        <option value="novo">🆕 Novo</option>
-                        <option value="contato">💬 Em Contato</option>
-                        <option value="ganho">🏆 Ganho</option>
-                    </select>
                     <span class="badge">98%</span>
                 </div>
             </div>
-
-            <div class="lead-card" data-category="tubarao construcao">
-                <div class="lead-info">
-                    <h3>Construtora Horizonte</h3>
-                    <p>Segmento: Construção • Tubarão / SC</p>
-                    <button class="lead-action-btn" onclick="abrirModal('Construtora Horizonte', 'Olá equipe da Construtora Horizonte! Vimos que estão expandindo projetos em Tubarão. Temos soluções automatizadas de prospecção ideais para o setor de construção civil. Vamos conversar?')">✨ Gerar Abordagem</button>
-                </div>
-                <div class="lead-actions">
-                    <select class="status-select">
-                        <option value="novo">🆕 Novo</option>
-                        <option value="contato">💬 Em Contato</option>
-                        <option value="ganho">🏆 Ganho</option>
-                    </select>
-                    <span class="badge">95%</span>
-                </div>
-            </div>
-
-            <div class="lead-card" data-category="criciuma varejo">
-                <div class="lead-info">
-                    <h3>Comércio de Roupas Estilo</h3>
-                    <p>Segmento: Moda • Criciúma / SC</p>
-                    <button class="lead-action-btn" onclick="abrirModal('Comércio de Roupas Estilo', 'Olá! Parabéns pela expansão das filiais em Criciúma. A LeadVision AI pode acelerar a atração de novos clientes para o seu comércio de moda. Tem 5 minutos esta semana?')">✨ Gerar Abordagem</button>
-                </div>
-                <div class="lead-actions">
-                    <select class="status-select">
-                        <option value="novo">🆕 Novo</option>
-                        <option value="contato">💬 Em Contato</option>
-                        <option value="ganho">🏆 Ganho</option>
-                    </select>
-                    <span class="badge">91%</span>
-                </div>
-            </div>
-
-            <!-- Lead de São Paulo -->
-            <div class="lead-card" data-category="sp varejo">
+            <div class="lead-card">
                 <div class="lead-info">
                     <h3>Tech Inova SP</h3>
                     <p>Segmento: Varejo • São Paulo / SP</p>
-                    <button class="lead-action-btn" onclick="abrirModal('Tech Inova SP', 'Olá! Vimos que a Tech Inova busca expansão no varejo em São Paulo. A LeadVision AI pode ajudar a acelerar suas vendas. Vamos agendar uma conversa?')">✨ Gerar Abordagem</button>
+                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
                 </div>
                 <div class="lead-actions">
-                    <select class="status-select">
-                        <option value="novo">🆕 Novo</option>
-                        <option value="contato">💬 Em Contato</option>
-                        <option value="ganho">🏆 Ganho</option>
-                    </select>
                     <span class="badge">97%</span>
                 </div>
             </div>
-
-            <!-- Lead do Rio de Janeiro -->
-            <div class="lead-card" data-category="rj construcao">
+            <div class="lead-card">
                 <div class="lead-info">
                     <h3>Construtora Carioca</h3>
                     <p>Segmento: Construção • Rio de Janeiro / RJ</p>
-                    <button class="lead-action-btn" onclick="abrirModal('Construtora Carioca', 'Olá equipe! Notamos grandes projetos da Construtora Carioca no Rio de Janeiro. Nossas soluções de IA para prospecção podem otimizar seus resultados. Podemos conversar?')">✨ Gerar Abordagem</button>
+                    <button class="lead-action-btn">✨ Gerar Abordagem</button>
                 </div>
                 <div class="lead-actions">
-                    <select class="status-select">
-                        <option value="novo">🆕 Novo</option>
-                        <option value="contato">💬 Em Contato</option>
-                        <option value="ganho">🏆 Ganho</option>
-                    </select>
                     <span class="badge">94%</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL / POP-UP DE ABORDAGEM DA IA -->
-    <div id="ai-modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <h3 id="modal-title">Abordagem Gerada</h3>
-            <p>Sugestão de mensagem criada pela inteligência artificial:</p>
-            <div id="modal-text" class="ai-message-box">
-                <!-- Texto inserido via script -->
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-copy" onclick="copiarMensagem()">Copiar Mensagem</button>
-                <button class="btn-close" onclick="fecharModal()">Fechar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SEÇÃO DE PLANOS -->
-    <section id="planos" style="padding: 40px 20px; text-align: center; background: #ffffff; color: #333; width: 100%; max-width: 900px; border-radius: 20px; margin-top: 40px;">
-        <h2 style="margin-bottom: 30px; color: #000;">Escolha o plano ideal para você</h2>
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            
-            <!-- Plano Inicial -->
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: left;">
-                <h3 style="color: #333;">Inicial</h3>
-                <h2 style="color: #0070f3; margin: 10px 0;">R$ 97<span style="font-size: 14px; color: #666;">/mês</span></h2>
-                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ 500 leads/mês</li>
-                    <li>✓ Automação básica</li>
-                    <li>✓ Suporte por e-mail</li>
-                </ul>
-            </div>
-
-            <!-- Plano Profissional -->
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); border: 2px solid #0070f3; text-align: left;">
-                <h3 style="color: #0070f3;">Profissional</h3>
-                <h2 style="color: #0070f3; margin: 10px 0;">R$ 197<span style="font-size: 14px; color: #666;">/mês</span></h2>
-                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ 2.000 leads/mês</li>
-                    <li>✓ Automação avançada</li>
-                    <li>✓ Relatórios em tempo real</li>
-                    <li>✓ Suporte via WhatsApp</li>
-                </ul>
-            </div>
-
-            <!-- Plano Empresarial -->
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: left;">
-                <h3 style="color: #333;">Empresarial</h3>
-                <h2 style="color: #0070f3; margin: 10px 0;">R$ 397<span style="font-size: 14px; color: #666;">/mês</span></h2>
-                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ Leads ilimitados</li>
-                    <li>✓ Múltiplos usuários</li>
-                    <li>✓ Integrações via API</li>
-                    <li>✓ Gerente dedicado</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
     <script>
-        function mostrarCadastro() {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.remove('hidden');
-        }
-
-        function mostrarLogin() {
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('login-screen').classList.remove('hidden');
-        }
-
-        function irParaDashboard() {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('dashboard-screen').classList.remove('hidden');
-        }
-
-        function sairParaLogin() {
-            document.getElementById('dashboard-screen').classList.add('hidden');
-            document.getElementById('login-screen').classList.remove('hidden');
-        }
-
-        function filtrarLeads(categoria, elementoBotao) {
-            const botoes = document.querySelectorAll('.filter-btn');
-            botoes.forEach(btn => btn.classList.remove('active'));
-            elementoBotao.classList.add('active');
-
-            // Limpa o campo de busca ao usar os botões
-            document.getElementById('input-busca').value = '';
-
-            const cards = document.querySelectorAll('.lead-card');
-            cards.forEach(card => {
-                const categoriasCard = card.getAttribute('data-category');
-                if (categoria === 'todos' || (categoriasCard && categoriasCard.includes(categoria))) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
         function pesquisarLeads() {
             const termo = document.getElementById('input-busca').value.toLowerCase();
             const cards = document.querySelectorAll('.lead-card');
-
             cards.forEach(card => {
                 const textoCard = card.innerText.toLowerCase();
-                if (textoCard.includes(termo)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                // Mostra se o termo digitado estiver presente no texto do cartão
+                card.style.display = textoCard.includes(termo) ? 'flex' : 'none';
             });
-        }
-
-        function abrirModal(nomeEmpresa, mensagem) {
-            document.getElementById('modal-title').innerText = "Abordagem: " + nomeEmpresa;
-            document.getElementById('modal-text').innerText = mensagem;
-            document.getElementById('ai-modal').classList.remove('hidden');
-        }
-
-        function fecharModal() {
-            document.getElementById('ai-modal').classList.add('hidden');
-        }
-
-        function copiarMensagem() {
-            const textoMensagem = document.getElementById('modal-text').innerText;
-            navigator.clipboard.writeText(textoMensagem);
-            alert("Mensagem copiada para a área de transferência!");
         }
     </script>
 </body>
