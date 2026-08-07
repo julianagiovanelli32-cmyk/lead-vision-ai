@@ -16,6 +16,7 @@
             background-color: #0b0f19;
             color: #ffffff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -310,7 +311,6 @@
             background-color: #1d4ed8;
         }
 
-        /* Seletor de Status (CRM) */
         .status-select {
             background-color: #111827;
             color: #d1d5db;
@@ -607,6 +607,48 @@
         </div>
     </div>
 
+    <!-- SEÇÃO DE PLANOS (FORA DAS TELAS DE LOGIN/DASHBOARD PARA APARECER ABAIXO) -->
+    <section id="planos" style="padding: 40px 20px; text-align: center; background: #ffffff; color: #333; width: 100%; max-width: 900px; border-radius: 20px; margin-top: 40px;">
+        <h2 style="margin-bottom: 30px; color: #000;">Escolha o plano ideal para você</h2>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            
+            <!-- Plano Inicial -->
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: left;">
+                <h3 style="color: #333;">Inicial</h3>
+                <h2 style="color: #0070f3; margin: 10px 0;">R$ 97<span style="font-size: 14px; color: #666;">/mês</span></h2>
+                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                    <li>✓ 500 leads/mês</li>
+                    <li>✓ Automação básica</li>
+                    <li>✓ Suporte por e-mail</li>
+                </ul>
+            </div>
+
+            <!-- Plano Profissional -->
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); border: 2px solid #0070f3; text-align: left;">
+                <h3 style="color: #0070f3;">Profissional</h3>
+                <h2 style="color: #0070f3; margin: 10px 0;">R$ 197<span style="font-size: 14px; color: #666;">/mês</span></h2>
+                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                    <li>✓ 2.000 leads/mês</li>
+                    <li>✓ Automação avançada</li>
+                    <li>✓ Relatórios em tempo real</li>
+                    <li>✓ Suporte via WhatsApp</li>
+                </ul>
+            </div>
+
+            <!-- Plano Empresarial -->
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 260px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: left;">
+                <h3 style="color: #333;">Empresarial</h3>
+                <h2 style="color: #0070f3; margin: 10px 0;">R$ 397<span style="font-size: 14px; color: #666;">/mês</span></h2>
+                <ul style="list-style: none; padding: 0; font-size: 14px; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                    <li>✓ Leads ilimitados</li>
+                    <li>✓ Múltiplos usuários</li>
+                    <li>✓ Integrações via API</li>
+                    <li>✓ Gerente dedicado</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <script>
         function mostrarCadastro() {
             document.getElementById('login-screen').classList.add('hidden');
@@ -626,7 +668,6 @@
 
         function sairParaLogin() {
             document.getElementById('dashboard-screen').classList.add('hidden');
-            document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('login-screen').classList.remove('hidden');
         }
 
@@ -660,46 +701,7 @@
             const textoMensagem = document.getElementById('modal-text').innerText;
             navigator.clipboard.writeText(textoMensagem);
             alert("Mensagem copiada para a área de transferência!");
-        <section id="planos" style="padding: 40px 20px; text-align: center; background: #ffffff; color: #333; width: 100%; margin-top: 40px;">
-    <h2 style="margin-bottom: 30px; color: #000;">Escolha o plano ideal para você</h2>
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        
-        <!-- Plano Inicial -->
-        <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <h3>Inicial</h3>
-            <h2 style="color: #0070f3;">R$ 97<span style="font-size: 16px; color: #666;">/mês</span></h2>
-            <ul style="text-align: left; list-style: none; padding: 0;">
-                <li>✓ 500 leads/mês</li>
-                <li>✓ Automação básica</li>
-                <li>✓ Suporte por e-mail</li>
-            </ul>
-        </div>
-
-        <!-- Plano Profissional -->
-        <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); border: 2px solid #0070f3;">
-            <h3 style="color: #0070f3;">Profissional</h3>
-            <h2 style="color: #0070f3;">R$ 197<span style="font-size: 16px; color: #666;">/mês</span></h2>
-            <ul style="text-align: left; list-style: none; padding: 0;">
-                <li>✓ 2.000 leads/mês</li>
-                <li>✓ Automação avançada</li>
-                <li>✓ Relatórios em tempo real</li>
-                <li>✓ Suporte via WhatsApp</li>
-            </ul>
-        </div>
-
-        <!-- Plano Empresarial -->
-        <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <h3>Empresarial</h3>
-            <h2 style="color: #0070f3;">R$ 397<span style="font-size: 16px; color: #666;">/mês</span></h2>
-            <ul style="text-align: left; list-style: none; padding: 0;">
-                <li>✓ Leads ilimitados</li>
-                <li>✓ Múltiplos usuários</li>
-                <li>✓ Integrações via API</li>
-                <li>✓ Gerente dedicado</li>
-            </ul>
-        </div>
-        </div>
-</section>
-</body> 
-</html> 
-            
+        }
+    </script>
+</body>
+</html>
