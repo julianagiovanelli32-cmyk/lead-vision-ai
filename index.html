@@ -317,7 +317,19 @@
             const textoMensagem = document.getElementById('modal-text').innerText;
             navigator.clipboard.writeText(textoMensagem);
             alert("Mensagem copiada para a área de transferência!");
-        }
+        } function entrarNoLeadVision() {
+    const nome = document.getElementById('cadastro-nome').value.trim();
+    const email = document.getElementById('cadastro-email').value.trim();
+    const senha = document.getElementById('cadastro-senha').value.trim();
+
+    if (!nome || !email || !senha) {
+        alert('Preencha nome, e-mail e senha para continuar.');
+        return;
+    }
+
+    document.getElementById('cadastro-screen').style.display = 'none';
+    document.getElementById('dashboard-screen').style.display = 'block';
+}
     </script>
 </body>
 </html>
