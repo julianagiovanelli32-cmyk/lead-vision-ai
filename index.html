@@ -30,7 +30,35 @@
 </head>
 <body>
 
-    <div id="dashboard-screen" class="dashboard-container">
+   <!-- ================= TELA DE CADASTRO ================= -->
+<div id="cadastro-screen" class="dashboard-container" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;">
+
+    <div style="width:100%; max-width:420px; background:#111827; border:1px solid #374151; border-radius:20px; padding:28px;">
+
+        <h1 style="text-align:center; color:#fff; margin-bottom:8px;">
+            LeadVision <span style="color:#3b82f6;">AI</span>
+        </h1>
+
+        <p style="text-align:center; color:#9ca3af; margin-bottom:24px;">
+            Crie sua conta para começar
+        </p>
+
+        <input id="cadastro-nome" type="text" placeholder="Seu nome"
+            style="width:100%; padding:13px; margin-bottom:12px; border-radius:10px; border:1px solid #374151; background:#1f2937; color:white; box-sizing:border-box;">
+
+        <input id="cadastro-email" type="email" placeholder="Seu e-mail"
+            style="width:100%; padding:13px; margin-bottom:12px; border-radius:10px; border:1px solid #374151; background:#1f2937; color:white; box-sizing:border-box;">
+
+        <input id="cadastro-senha" type="password" placeholder="Crie uma senha"
+            style="width:100%; padding:13px; margin-bottom:18px; border-radius:10px; border:1px solid #374151; background:#1f2937; color:white; box-sizing:border-box;">
+
+        <button onclick="entrarNoLeadVision()"
+            style="width:100%; padding:14px; border:none; border-radius:10px; background:#2563eb; color:white; font-size:15px; font-weight:600; cursor:pointer;">
+            🚀 Criar conta e começar
+        </button>
+
+    </div>
+</div> <div id="dashboard-screen" class="dashboard-container">
         <div class="dash-header">
             <div>
                 <h1>LeadVision <span>AI</span></h1>
