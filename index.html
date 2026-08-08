@@ -289,13 +289,32 @@
     </div>
 
     <script>
-      function pesquisarLeads() {
+      
+function pesquisarLeads() {
     const termo = document.getElementById('input-busca').value
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
 
     const cards = document.querySelectorAll('.lead-card');
+    const mensagem = document.getElementById('mensagem-inicial');
+
+    if (termo === "") {
+        cards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        if (mensagem) {
+            mensagem.style.display = 'block';
+        }
+
+        return;
+    }
+
+    if (mensagem) {
+        mensagem.style.display = 'none';
+    }
 
     cards.forEach(card => {
         const textoCard = card.innerText
@@ -305,8 +324,7 @@
 
         card.style.display = textoCard.includes(termo) ? 'flex' : 'none';
     });
-}  
-
+}
         function abrirModal(nomeEmpresa, mensagem) {
             document.getElementById('modal-title').innerText = "Abordagem: " + nomeEmpresa;
             document.getElementById('modal-text').innerText = mensagem;
