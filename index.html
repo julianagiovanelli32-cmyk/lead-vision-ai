@@ -418,17 +418,33 @@ function pesquisarLeads() {
         mensagem.style.display = 'none';
     }
 
-        cards.forEach(card => {
-        const textoCard = card.innerText.toLowerCase();
-        const combinaCidade = termoCidade === "" || textoCard.includes(termoCidade);
-        const combinaTermo = termo === "" || textoCard.includes(termo);
+            const termo = document.getElementById('input-busca').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    const cards = document.querySelectorAll('.lead-card');
+    const mensagem = document.getElementById('mensagem-inicial');
 
-        if (combinaCidade && combinaTermo) {
+    if (termo === "") {
+        cards.forEach(card => {
+            card.style.display = 'none';
+        });
+        if (mensagem) {
+            mensagem.style.display = 'block';
+        }
+        return;
+    }
+
+    if (mensagem) {
+        mensagem.style.display = 'none';
+    }
+
+    cards.forEach(card => {
+        const textoCard = card.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (textoCard.includes(termo)) {
             card.style.display = "flex";
         } else {
             card.style.display = "none";
         }
     });
+
 
         }});
 }
