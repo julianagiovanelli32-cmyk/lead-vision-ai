@@ -394,7 +394,7 @@
  function pesquisarLeads() {
     const inputBusca = document.getElementById('input-busca');
     const termo = inputBusca ? inputBusca.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
-    const cards = document.querySelectorAll('.cartao-principal, .lead-card, [aula*="cartão"]');
+    const cards = document.querySelectorAll('div[aula*="cartão"], div[class*="cartao"], div[class*="lead-card"]');
     const mensagem = document.getElementById('mensagem-inicial');
 
     if (termo === "") {
@@ -421,11 +421,6 @@
     });
 }
 
-    });
-
-
-        }});
-}
         function abrirModal(nomeEmpresa, mensagem) {
             document.getElementById('modal-title').innerText = "Abordagem: " + nomeEmpresa;
             document.getElementById('modal-text').innerText = mensagem;
