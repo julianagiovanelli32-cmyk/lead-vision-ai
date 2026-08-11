@@ -1,22 +1,14 @@
-         <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LeadVision AI - Automação Inteligente</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #0b0f19;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .dashboard-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #fff; margin: 0; padding: 0; }
+    .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    .card { background: #111627; padding: 24px; border-radius: 12px; border: 1px solid #1f2937; }
+    button { cursor: pointer; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -24,154 +16,61 @@
   <!-- ================= TELA DE APRESENTAÇÃO ================= -->
   <div id="apresentacao-screen" class="dashboard-container">
     <div style="text-align: center; padding: 40px 20px;">
-      <h1 style="font-size: 32px; color: #fff; margin-bottom: 10px;">
-        LeadVision <span style="color: #3b82f6;">AI</span>
-      </h1>
-      <p style="color: #9ca3af; font-size: 16px; max-width: 600px; margin: 0 auto 30px auto;">
-        Automatize seu atendimento no WhatsApp com inteligência artificial e transforme conversas em vendas 24 horas por dia.
-      </p>
-      
-      <!-- Botão que leva para o Cadastro -->
-      <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
-        🚀 Quero Testar Gratuitamente
-      </button>
+      <h1 style="font-size: 32px; color: #fff;">LeadVision <span style="color: #3b82f6;">AI</span></h1>
+      <p style="color: #9ca3af; max-width: 600px; margin: 0 auto 30px auto;">Automatize seu atendimento e transforme conversas em vendas 24h por dia.</p>
+      <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; font-size: 16px;">🚀 Quero Testar Gratuitamente</button>
     </div>
 
-    <!-- Seção de Benefícios / O que a IA faz -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px;">
-      <div style="background: #111627; padding: 24px; border-radius: 12px; border: 1px solid #1f2937;">
-        <h3 style="color: #3b82f6; margin-top: 0;">⚡ Atendimento Instantâneo</h3>
-        <p style="color: #9ca3af; font-size: 14px; line-height: 1.5;">Responda seus clientes em segundos, a qualquer hora do dia ou da noite, sem deixar ninguém no vácuo.</p>
+    <!-- FAQ -->
+    <div style="margin-top: 40px;">
+      <h2 style="text-align: center; margin-bottom: 20px;">Dúvidas Frequentes</h2>
+      <div class="card" style="margin-bottom: 10px;">
+        <h4 style="margin:0; color:#3b82f6;">Como a IA aprende sobre meu negócio?</h4>
+        <p style="font-size: 14px; color: #9ca3af;">Você nos envia informações básicas sobre seus serviços e a IA personaliza o atendimento.</p>
       </div>
-      <div style="background: #111627; padding: 24px; border-radius: 12px; border: 1px solid #1f2937;">
-        <h3 style="color: #3b82f6; margin-top: 0;">🤖 IA Humanizada</h3>
-        <p style="color: #9ca3af; font-size: 14px; line-height: 1.5;">A inteligência aprende sobre o seu negócio e conversa de forma natural, parecendo uma pessoa real.</p>
+      <div class="card">
+        <h4 style="margin:0; color:#3b82f6;">Preciso deixar o celular ligado?</h4>
+        <p style="font-size: 14px; color: #9ca3af;">Não! O sistema funciona na nuvem, 24 horas por dia, de forma independente.</p>
       </div>
-      <div style="background: #111627; padding: 24px; border-radius: 12px; border: 1px solid #1f2937;">
-        <h3 style="color: #3b82f6; margin-top: 0;">📈 Mais Vendas</h3>
-        <p style="color: #9ca3af; font-size: 14px; line-height: 1.5;">Qualifica leads e encaminha para o fechamento apenas os clientes realmente interessados.</p>
-      </div>
-    </div>
-
-    <!-- Rodapé da Apresentação -->
-    <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #1f2937;">
-      <p style="color: #6b7280; font-size: 12px; margin: 0;">
-        © 2026 LeadVision AI. Todos os direitos reservados.
-      </p>
-      <p style="color: #6b7280; font-size: 11px; margin-top: 6px;">
-        <span onclick="abrirTermos()" style="color: #3a82f6; cursor: pointer; text-decoration: underline;">Termos de Uso</span> | 
-        <span onclick="abrirPrivacidade()" style="color: #3a82f6; cursor: pointer; text-decoration: underline;">Política de Privacidade</span>
-      </p>
     </div>
   </div>
 
-
-  <!-- ================= TELA DE CADASTRO (Inicia Oculta) ================= -->
+  <!-- ================= TELA DE CADASTRO ================= -->
   <div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 40px;">
-    <div style="width: 100%; max-width: 420px; margin: 0 auto; background: #111627; padding: 30px; border-radius: 12px; border: 1px solid #374151;">
-      <h2 style="text-align: center; color: #fff; margin-top: 0;">Crie sua conta</h2>
-      <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Preencha seus dados para começar</p>
-      
-      <label style="font-size: 13px; color: #9ca3af;">Nome</label>
-      <input id="cadastro-nome" type="text" placeholder="Seu nome" style="width: 100%; padding: 12px; margin: 6px 0 16px 0; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
-      
-      <label style="font-size: 13px; color: #9ca3af;">E-mail</label>
-      <input id="cadastro-email" type="email" placeholder="seu@email.com" style="width: 100%; padding: 12px; margin: 6px 0 16px 0; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
-      
-      <label style="font-size: 13px; color: #9ca3af;">Senha</label>
-      <input id="cadastro-senha" type="password" placeholder="Sua senha" style="width: 100%; padding: 12px; margin: 6px 0 20px 0; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
-      
-      <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px;">
-        Continuar para os Planos ➔
-      </button>
-
-      <p style="text-align: center; margin-top: 15px;">
-        <span onclick="voltarParaApresentacao()" style="color: #9ca3af; font-size: 13px; cursor: pointer; text-decoration: underline;">← Voltar ao início</span>
-      </p>
+    <div class="card" style="max-width: 420px; margin: 0 auto;">
+      <h2 style="text-align: center;">Crie sua conta</h2>
+      <input id="cadastro-nome" type="text" placeholder="Seu nome" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
+      <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; width: 100%;">Continuar para Planos ➔</button>
     </div>
   </div>
 
-
-  <!-- ================= TELA DE PLANOS (Inicia Oculta) ================= -->
+  <!-- ================= TELA DE PLANOS ================= -->
   <div id="planos-screen" class="dashboard-container" style="display: none; padding-top: 40px; text-align: center;">
-    <h2 style="color: white; margin-bottom: 10px;">Escolha o seu plano</h2>
-    <p style="color: #9ca3af; margin-bottom: 30px;">Desbloqueie todo o poder da inteligência artificial</p>
-    
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-      <div style="background: #111627; border: 1px solid #374151; padding: 30px; border-radius: 12px; width: 280px; text-align: left;">
-        <h3 style="color: #3b82f6; margin-top: 0;">Plano Mensal</h3>
-        <p style="font-size: 24px; font-weight: bold; color: #fff;">R$ 97<span style="font-size: 12px; color: #9ca3af;">/mês</span></p>
-        <p style="color: #9ca3af; font-size: 13px; line-height: 1.4;">Ideal para começar a automatizar o atendimento sem compromisso de longo prazo.</p>
-        <button onclick="alert('Redirecionando para o pagamento...')" style="background: #3a82f6; color: #fff; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 15px;">Assinar Agora</button>
+    <h2>Escolha seu Plano</h2>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      <div class="card" style="width: 280px;">
+        <h3>Mensal</h3>
+        <p style="font-size: 24px; font-weight: bold;">R$ 97/mês</p>
+        <button style="background: #3a82f6; color: #fff; width: 100%;">Assinar</button>
+      </div>
+      <div class="card" style="width: 280px; border-color: #3b82f6;">
+        <h3 style="color: #3b82f6;">Anual (Economize)</h3>
+        <p style="font-size: 24px; font-weight: bold;">R$ 77/mês</p>
+        <button style="background: #3b82f6; color: #fff; width: 100%;">Assinar Anual</button>
       </div>
     </div>
-
-    <p style="margin-top: 30px;">
-      <span onclick="voltarParaApresentacao()" style="color: #9ca3af; font-size: 13px; cursor: pointer; text-decoration: underline;">← Voltar ao início</span>
-    </p>
   </div>
 
-
-  <!-- ================= JANELAS (MODAIS) DE TERMOS E PRIVACIDADE ================= -->
-  <div id="modal-termos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #111627; border: 1px solid #374151; border-radius: 12px; max-width: 500px; width: 100%; padding: 20px; max-height: 80vh; overflow-y: auto; text-align: left;">
-      <h3 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Termos de Uso</h3>
-      <p style="color: #9ca3af; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
-        Bem-vindo ao LeadVision AI. Ao utilizar nossa plataforma de automação e inteligência artificial para WhatsApp, você concorda em utilizar o serviço de forma ética, respeitando as políticas de envio de mensagens e as diretrizes comerciais vigentes. O uso indevido para spam ou práticas ilícitas resultará no cancelamento imediato da conta.
-      </p>
-      <button onclick="fecharModais()" style="background: #3a82f6; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%;">Fechar</button>
-    </div>
-  </div>
-
-  <div id="modal-privacidade" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #111627; border: 1px solid #374151; border-radius: 12px; max-width: 500px; width: 100%; padding: 20px; max-height: 80vh; overflow-y: auto; text-align: left;">
-      <h3 style="color: #fff; font-size: 18px; margin-bottom: 10px;">Política de Privacidade</h3>
-      <p style="color: #9ca3af; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
-        O LeadVision AI valoriza a sua privacidade. Os dados coletados no cadastro (como nome e e-mail) são utilizados estritamente para o funcionamento e acesso à ferramenta. Garantimos que suas informações e dados de clientes não serão comercializados ou cedidos a terceiros em hipótese alguma.
-      </p>
-      <button onclick="fecharModais()" style="background: #3a82f6; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%;">Fechar</button>
-    </div>
-  </div>
-
-
-  <!-- ================= SCRIPTS DE NAVEGAÇÃO ================= -->
   <script>
-    function irParaCadastro() {
-      document.getElementById('apresentacao-screen').style.display = 'none';
-      document.getElementById('cadastro-screen').style.display = 'block';
-      document.getElementById('planos-screen').style.display = 'none';
-      window.scrollTo(0, 0);
-    }
-
-    function irParaPlanos() {
+    function irParaCadastro() { show('cadastro-screen'); }
+    function irParaPlanos() { show('planos-screen'); }
+    function show(id) {
       document.getElementById('apresentacao-screen').style.display = 'none';
       document.getElementById('cadastro-screen').style.display = 'none';
-      document.getElementById('planos-screen').style.display = 'block';
-      window.scrollTo(0, 0);
-    }
-
-    function voltarParaApresentacao() {
-      document.getElementById('apresentacao-screen').style.display = 'block';
-      document.getElementById('cadastro-screen').style.display = 'none';
       document.getElementById('planos-screen').style.display = 'none';
-      window.scrollTo(0, 0);
-    }
-
-    function abrirTermos() {
-      document.getElementById('modal-termos').style.display = 'flex';
-    }
-
-    function abrirPrivacidade() {
-      document.getElementById('modal-privacidade').style.display = 'flex';
-    }
-
-    function fecharModais() {
-      document.getElementById('modal-termos').style.display = 'none';
-      document.getElementById('modal-privacidade').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
+      window.scrollTo(0,0);
     }
   </script>
-
 </body>
 </html>
-      
-    
