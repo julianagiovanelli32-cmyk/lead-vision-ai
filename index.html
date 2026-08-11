@@ -32,9 +32,29 @@
     </style>
 </head>
 <body>
+<!-- ================= TELA DE APRESENTAÇÃO / INÍCIO ================= -->
+<div id="apresentacao-screen" class="dashboard-container" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div style="width:100%; max-width:600px; text-align:center; background:#111627; border:1px solid #374151; border-radius:20px; padding:30px;">
+    
+    <h1 style="color:#fff; font-size:24px; margin-bottom:12px;">
+      LeadVision <span style="color:#3a82f6;">AI</span>
+    </h1>
+    
+    <p style="color:#9ca3af; font-size:15px; line-height:1.5; margin-bottom:24px;">
+      Automatize o atendimento do seu WhatsApp e capture mais clientes no automático com Inteligência Artificial 24 horas por dia.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <button onclick="document.getElementById('apresentacao-screen').style.display='none'; document.getElementById('cadastro-screen').style.display='flex';" style="width:100%; padding:12px; background:#3a82f6; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
+        🚀 Criar Conta Gratuita
+      </button>
+    </div>
+
+  </div>
+</div>
 
    <!-- ================= TELA DE CADASTRO ================= -->
-<div id="cadastro-screen" class="dashboard-container" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;">
+<div id="cadastro-screen" class="dashboard-container" style="display:none; min-height:100vh; align-items:center; justify-content:center; padding:20px;">
 
     <div style="width:100%; max-width:420px; background:#111827; border:1px solid #374151; border-radius:20px; padding:28px;">
 
