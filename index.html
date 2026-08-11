@@ -34,24 +34,39 @@
 <body>
 <!-- ================= TELA DE APRESENTAÇÃO / INÍCIO ================= -->
 <div id="apresentacao-screen" class="dashboard-container" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;">
-  <div style="width:100%; max-width:600px; text-align:center; background:#111627; border:1px solid #374151; border-radius:20px; padding:30px;">
+  <div style="width:100%; max-width:650px; text-align:left; background:#111627; border:1px solid #374151; border-radius:20px; padding:30px;">
     
-    <h1 style="color:#fff; font-size:24px; margin-bottom:12px;">
-      LeadVision <span style="color:#3a82f6;">AI</span>
-    </h1>
+    <div style="text-align:center; margin-bottom:20px;">
+      <h1 style="color:#fff; font-size:26px; margin-bottom:8px;">
+        LeadVision <span style="color:#3a82f6;">AI</span>
+      </h1>
+      <p style="color:#3a82f6; font-size:14px; font-weight:bold;">
+        Revolucione o atendimento da sua empresa local
+      </p>
+    </div>
     
-    <p style="color:#9ca3af; font-size:15px; line-height:1.5; margin-bottom:24px;">
-      Automatize o atendimento do seu WhatsApp e capture mais clientes no automático com Inteligência Artificial 24 horas por dia.
+    <p style="color:#9ca3af; font-size:15px; line-height:1.6; margin-bottom:20px; text-align:center;">
+      Você perde tempo respondendo sempre as mesmas dúvidas no WhatsApp ou quer capturar mais contatos na internet de forma automática? Nossa ferramenta usa inteligência artificial para resolver isso para você!
     </p>
 
+    <div style="background:#1f2937; border:1px solid #374151; border-radius:12px; padding:16px; margin-bottom:24px;">
+      <p style="color:#fff; font-size:14px; font-weight:bold; margin-bottom:10px;">✨ O que a ferramenta faz por você:</p>
+      <ul style="color:#9ca3af; font-size:14px; line-height:1.6; padding-left:20px; margin:0;">
+        <li style="margin-bottom:6px;"><strong>Atendimento 24/7 no WhatsApp:</strong> Responde clientes instantaneamente a qualquer hora.</li>
+        <li style="margin-bottom:6px;"><strong>Captura de Leads:</strong> Organiza e salva os contatos interessados no automático.</li>
+        <li><strong>Mais Vendas:</strong> Economiza seu tempo para você focar em fechar negócios.</li>
+      </ul>
+    </div>
+
     <div style="display:flex; flex-direction:column; gap:12px;">
-      <button onclick="document.getElementById('apresentacao-screen').style.display='none'; document.getElementById('cadastro-screen').style.display='flex';" style="width:100%; padding:12px; background:#3a82f6; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
-        🚀 Criar Conta Gratuita
+      <button onclick="document.getElementById('apresentacao-screen').style.display='none'; document.getElementById('cadastro-screen').style.display='flex';" style="width:100%; padding:14px; background:#3a82f6; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer; text-align:center;">
+        🚀 Quero Testar Gratuitamente
       </button>
     </div>
 
   </div>
 </div>
+
 
    <!-- ================= TELA DE CADASTRO ================= -->
 <div id="cadastro-screen" class="dashboard-container" style="display:none; min-height:100vh; align-items:center; justify-content:center; padding:20px;">
