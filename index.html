@@ -374,7 +374,7 @@
 <div class="lead-card"><div class="lead-info"><h3>Tubarão Contabilidade & Gestão</h3><p>Segmento: Contabilidade • Tubarão / Santa Catarina</p><button class="lead-action-btn" onclick="abrirModal('Tubarão Contabilidade & Gestão', 'Olá! Encontre novas empresas clientes em Tubarão.')">✨ Gerar Abordagem</button></div><div class="lead-actions"><span class="badge">97%</span></div></div>
 
 <div class="lead-card"><div class="lead-info"><h3>Tubarão Imóveis</h3><p>Segmento: Imobiliário • Tubarão / Santa Catarina</p><button class="lead-action-btn" onclick="abrirModal('Tubarão Imóveis', 'Olá! Encontre novos compradores e oportunidades imobiliárias em Tubarão.')">✨ Gerar Abordagem</button></div><div class="lead-actions"><span class="badge">95%</span></div></div>
-
+function
 <div class="lead-card"><div class="lead-info"><h3>Tubarão Moda & Estilo</h3><p>Segmento: Moda • Tubarão / Santa Catarina</p><button class="lead-action-btn" onclick="abrirModal('Tubarão Moda & Estilo', 'Olá! Aumente as vendas da sua loja de moda em Tubarão.')">✨ Gerar Abordagem</button></div><div class="lead-actions"><span class="badge">90%</span></div></div>
 
 <div class="lead-card"><div class="lead-info"><h3>Tubarão Agro & Distribuição</h3><p>Segmento: Agronegócio • Tubarão / Santa Catarina</p><button class="lead-action-btn" onclick="abrirModal('Tubarão Agro & Distribuição', 'Olá! Encontre novos compradores e parceiros para seu negócio em Tubarão e região.')">✨ Gerar Abordagem</button></div><div class="lead-actions"><span class="badge">98%</span></div></div>  <!-- MODAL DE ABORDAGEM -->
@@ -392,34 +392,10 @@
 
     <script>
       
-function pesquisarLeads() {
-    const termo = document.getElementById('input-busca').value
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-
-    const cards = document.querySelectorAll('.lead-card');
-    const mensagem = document.getElementById('mensagem-inicial');
-
-    if (termo === "") {
-        cards.forEach(card => {
-            card.style.display = 'none';
-        });
-
-        if (mensagem) {
-            mensagem.style.display = 'block';
-        }
-
-        return;
-    }
-
-    if (mensagem) {
-        mensagem.style.display = 'none';
-    }
-
-            const termo = document.getElementById('input-busca').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-    const cards = document.querySelectorAll('.lead-card');
+ function pesquisarLeads() {
+    const inputBusca = document.getElementById('input-busca');
+    const termo = inputBusca ? inputBusca.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
+    const cards = document.querySelectorAll('.cartao-principal, .lead-card, [aula*="cartão"]');
     const mensagem = document.getElementById('mensagem-inicial');
 
     if (termo === "") {
@@ -443,6 +419,9 @@ function pesquisarLeads() {
         } else {
             card.style.display = "none";
         }
+    });
+}
+
     });
 
 
