@@ -10,6 +10,9 @@
     .card { background: #111627; padding: 26px; border-radius: 14px; border: 1px solid #1f2937; margin-bottom: 20px; }
     button { cursor: pointer; border: none; padding: 16px 24px; border-radius: 10px; font-weight: bold; font-size: 17px; }
     input { width: 100%; padding: 16px; margin-bottom: 18px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 17px; }
+    .footer { text-align: center; padding: 30px 0; border-top: 1px solid #1f2937; margin-top: 40px; color: #9ca3af; font-size: 14px; }
+    .footer a { color: #3b82f6; text-decoration: none; margin: 0 10px; }
+    .footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -30,6 +33,7 @@
       </div>
     </div>
 
+    <!-- SEÇÃO DE BENEFÍCIOS -->
     <h3 style="color: #3b82f6; margin-bottom: 18px; text-transform: uppercase; font-size: 16px; letter-spacing: 1px;">Por que escolher o LeadVision AI?</h3>
     <div style="display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 35px;">
       <div class="card">
@@ -46,6 +50,20 @@
       </div>
     </div>
 
+    <!-- SEÇÃO DE PROVA SOCIAL (DEPOIMENTOS) -->
+    <h3 style="color: #3b82f6; margin-bottom: 18px; text-transform: uppercase; font-size: 16px; letter-spacing: 1px;">O que dizem nossos clientes</h3>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 35px;">
+      <div class="card" style="background: #161b2e;">
+        <p style="color: #e2e8f0; font-style: italic; font-size: 16px; margin: 0 0 12px 0;">"Antes eu demorava horas para responder no WhatsApp e perdia clientes. Com a IA do LeadVision, o atendimento é imediato e minhas vendas dobraram no primeiro mês!"</p>
+        <span style="color: #3b82f6; font-weight: bold; font-size: 15px;">— Carlos Silva, Proprietário de Loja Virtual</span>
+      </div>
+      <div class="card" style="background: #161b2e;">
+        <p style="color: #e2e8f0; font-style: italic; font-size: 16px; margin: 0 0 12px 0;">"Ferramenta fantástica. Configurei rapidinho e agora os clientes tiram dúvidas de madrugada e já chegam prontos para fechar negócio."</p>
+        <span style="color: #3b82f6; font-weight: bold; font-size: 15px;">— Mariana Souza, Prestadora de Serviços</span>
+      </div>
+    </div>
+
+    <!-- SEÇÃO DE FAQ (DÚVIDAS FREQUENTES) -->
     <h3 style="color: #3b82f6; margin-bottom: 18px; text-transform: uppercase; font-size: 16px; letter-spacing: 1px;">Dúvidas Frequentes</h3>
     <div class="card">
       <h4 style="margin: 0 0 10px 0; font-size: 19px; color: #fff;">Como a IA aprende sobre meu negócio?</h4>
@@ -59,6 +77,16 @@
     <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; width: 100%; margin-top: 30px; margin-bottom: 40px; padding: 18px;">
       🪙 Ganhar 5 Moedas de Teste Grátis
     </button>
+
+    <!-- RODAPÉ COM TERMOS E PRIVACIDADE -->
+    <div class="footer">
+      <p style="margin-bottom: 10px;">LeadVision AI &copy; 2026 - Todos os direitos reservados.</p>
+      <div>
+        <a href="#" onclick="alert('Página de Termos de Uso em construção.')">Termos de Uso</a> | 
+        <a href="#" onclick="alert('Página de Política de Privacidade em construção.')">Política de Privacidade</a> | 
+        <a href="#" onclick="alert('Suporte via WhatsApp: (00) 00000-0000')">Suporte</a>
+      </div>
+    </div>
   </div>
 
   <!-- ================= TELA DE CADASTRO ================= -->
@@ -85,7 +113,6 @@
   <div id="dashboard-screen" class="dashboard-container" style="display: none; padding-top: 30px;">
     <div class="card" style="max-width: 600px; margin: 0 auto; border-color: #3b82f6;">
       
-      <!-- Cabeçalho do Painel -->
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 15px;">
         <h2 style="margin: 0; font-size: 20px; color: #3b82f6;">🤖 Teste Prático da IA</h2>
         <div style="background: #0b0f19; padding: 8px 14px; border-radius: 8px; border: 1px solid #374151; font-weight: bold; color: #3b82f6;">
@@ -95,20 +122,17 @@
 
       <p style="color: #9ca3af; font-size: 15px; margin-top: 0;">Envie mensagens simulando um cliente interessado para testar as respostas automáticas da inteligência artificial.</p>
 
-      <!-- Caixa de Mensagens do Chat -->
       <div id="chat-box" style="background: #0b0f19; height: 260px; border-radius: 10px; border: 1px solid #374151; padding: 15px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
         <div style="background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;">
           Olá! Sou a inteligência artificial do seu negócio. Digite algo abaixo para testar como eu respondo aos seus clientes! 🚀
         </div>
       </div>
 
-      <!-- Área de Digitação -->
       <div id="input-area" style="display: flex; gap: 10px;">
         <input type="text" id="mensagem-input" placeholder="Digite sua mensagem de teste..." style="margin-bottom: 0;">
         <button onclick="enviarMensagem()" style="background: #3a82f6; color: #fff; width: 120px; padding: 0;">Enviar</button>
       </div>
 
-      <!-- Botão de Planos que aparece quando as moedas acabam -->
       <div id="aviso-esgotado" style="display: none; text-align: center; margin-top: 15px;">
         <p style="color: #ef4444; font-weight: bold; margin-bottom: 10px;">Suas moedas de teste acabaram!</p>
         <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; width: 100%;">🚀 Escolher um Plano e Assinar Ilimitado</button>
@@ -128,21 +152,30 @@
     <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Inicial</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 97<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Inicial (R$ 97)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Inicial</button>
+      <!-- Substitua o '#' abaixo pelo link de checkout real do seu gateway de pagamento (Mercado Pago, Stripe, Asaas, etc) -->
+      <a href="#" target="_blank" style="text-decoration: none;">
+        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Inicial</button>
+      </a>
     </div>
 
     <!-- Plano Profissional -->
     <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left; border-color: #3b82f6;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Profissional</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 197<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Profissional (R$ 197)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Profissional</button>
+      <!-- Substitua o '#' abaixo pelo link de checkout real -->
+      <a href="#" target="_blank" style="text-decoration: none;">
+        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Profissional</button>
+      </a>
     </div>
 
     <!-- Plano Empresarial -->
     <div class="card" style="max-width: 380px; margin: 0 auto 30px auto; text-align: left;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Empresarial</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 397<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Empresarial (R$ 397)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Empresarial</button>
+      <!-- Substitua o '#' abaixo pelo link de checkout real -->
+      <a href="#" target="_blank" style="text-decoration: none;">
+        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Empresarial</button>
+      </a>
     </div>
 
     <p onclick="voltarDashboard()" style="text-align: center; color: #9ca3af; cursor: pointer; text-decoration: underline; font-size: 16px;">← Voltar ao painel</p>
@@ -172,7 +205,6 @@
       
       if (input.value.trim() === '' || moedas <= 0) return;
 
-      // Adiciona mensagem do usuário
       const msgUsuario = document.createElement('div');
       msgUsuario.style.cssText = "background: #3a82f6; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-end; font-size: 15px;";
       msgUsuario.textContent = input.value;
@@ -181,17 +213,15 @@
       input.value = '';
       chatBox.scrollTop = chatBox.scrollHeight;
 
-      // Desconta 1 moeda
       moedas--;
       document.getElementById('contador-moedas').textContent = moedas;
 
-      // Resposta simulada da IA após meio segundo
       setTimeout(() => {
         const msgIA = document.createElement('div');
         msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;";
         
         if (moedas > 0) {
-          msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por da. (Restam " + moedas + " moedas de teste)";
+          msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por dia. (Restam " + moedas + " moedas de teste)";
         } else {
           msgIA.textContent = "Suas moedas de teste acabaram! Escolha um plano abaixo para continuar.";
           document.getElementById('input-area').style.display = 'none';
