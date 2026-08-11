@@ -78,6 +78,39 @@
 
   </div>
 </div>
+    <!-- Janela de Termos de Uso -->
+    <div id="modal-termos" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:999; align-items:center; justify-content:center; padding:20px;">
+      <div style="background:#111627; border:1px solid #374151; border-radius:12px; max-width:500px; width:100%; padding:20px; max-height:80vh; overflow-y:auto; text-align:left;">
+        <h3 style="color:#fff; font-size:18px; margin-bottom:10px;">Termos de Uso</h3>
+        <p style="color:#9ca3af; font-size:13px; line-height:1.5; margin-bottom:15px;">
+          Bem-vindo ao LeadVision AI. Ao utilizar nossa plataforma de automação e inteligência artificial para WhatsApp, você concorda em utilizar o serviço de forma ética, respeitando as políticas de envio de mensagens e as diretrizes comerciais vigentes. O uso indevido para spam ou práticas ilícitas resultará no cancelamento imediato da conta.
+        </p>
+        <button onclick="fecharModais()" style="background:#3a82f6; color:#fff; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; font-weight:bold; width:100%;">Fechar</button>
+      </div>
+    </div>
+
+    <!-- Janela de Política de Privacidade -->
+    <div id="modal-privacidade" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:999; align-items:center; justify-content:center; padding:20px;">
+      <div style="background:#111627; border:1px solid #374151; border-radius:12px; max-width:500px; width:100%; padding:20px; max-height:80vh; overflow-y:auto; text-align:left;">
+        <h3 style="color:#fff; font-size:18px; margin-bottom:10px;">Política de Privacidade</h3>
+        <p style="color:#9ca3af; font-size:13px; line-height:1.5; margin-bottom:15px;">
+          O LeadVision AI valoriza a sua privacidade. Os dados coletados no cadastro (como nome e e-mail) são utilizados estritamente para o funcionamento e acesso à ferramenta. Garantimos que suas informações e dados de clientes não serão comercializados ou cedidos a terceiros em hipótese alguma.
+        </p>
+        <button onclick="fecharModais()" style="background:#3a82f6; color:#fff; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; font-weight:bold; width:100%;">Fechar</button>
+      </div>
+    </div>
+<script>
+  function abrirTermos() {
+    document.getElementById('modal-termos').style.display = 'flex';
+  }
+  function abrirPrivacidade() {
+    document.getElementById('modal-privacidade').style.display = 'flex';
+  }
+  function fecharModais() {
+    document.getElementById('modal-termos').style.display = 'none';
+    document.getElementById('modal-privacidade').style.display = 'none';
+  }
+</script>
 
    <!-- ================= TELA DE CADASTRO ================= -->
 <div id="cadastro-screen" class="dashboard-container" style="display:none; min-height:100vh; align-items:center; justify-content:center; padding:20px;">
