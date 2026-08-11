@@ -418,35 +418,18 @@ function pesquisarLeads() {
         mensagem.style.display = 'none';
     }
 
-    cards.forEach(card => {
-        const textoCard = card.innerText
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+        cards.forEach(card => {
+        const textoCard = card.innerText.toLowerCase();
+        const combinaCidade = termoCidade === "" || textoCard.includes(termoCidade);
+        const combinaTermo = termo === "" || textoCard.includes(termo);
 
-        const segmentos = {
-            "restaurante": ["restaurante", "alimentacao", "comida", "lanchonete"],
-            "comercio": ["comercio", "varejo", "loja"],
-            "construcao": ["construcao", "engenharia"],
-            "automotivo": ["automotivo", "oficina", "auto center"],
-            "saude": ["saude", "clinica"],
-            "contabilidade": ["contabilidade", "contabil"],
-            "imobiliaria": ["imobiliario", "imobiliaria", "imoveis"],
-            "moda": ["moda", "roupas"],
-            "agro": ["agronegocio", "agro"],
-            "tecnologia": ["tecnologia"]
-        };
-
-        let encontrou = textoCard.includes(termo);
-
-        if (segmentos[termo]) {
-            encontrou = segmentos[termo].some(palavra =>
-                textoCard.includes(palavra)
-            );
+        if (combinaCidade && combinaTermo) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
         }
-
-        card.style.display = encontrou ? 'flex' : 'none';
     });
+
         }});
 }
         function abrirModal(nomeEmpresa, mensagem) {
