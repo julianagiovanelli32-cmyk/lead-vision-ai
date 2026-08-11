@@ -13,46 +13,85 @@
 </head>
 <body>
 
-  <!-- ================= TELA ÚNICA DE APRESENTAÇÃO E VENDAS ================= -->
+  <!-- ================= PÁGINA PRINCIPAL (Apresentação no Topo + Conteúdo Completo) ================= -->
   <div id="home-screen" class="dashboard-container">
-    <div style="text-align: center; padding: 40px 0;">
+    
+    <!-- 1. APRESENTAÇÃO NO TOPO -->
+    <div style="text-align: center; padding: 30px 0 20px 0;">
       <h1 style="font-size: 36px; margin-bottom: 10px;">LeadVision <span style="color: #3b82f6;">AI</span></h1>
-      <p style="color: #9ca3af; font-size: 18px; margin-bottom: 30px;">Automatize seu atendimento no WhatsApp com inteligência artificial e transforme conversas em vendas 24h por dia.</p>
+      <p style="color: #9ca3af; font-size: 18px; margin-bottom: 25px; line-height: 1.5;">
+        Automatize seu atendimento no WhatsApp com inteligência artificial e transforme conversas em vendas 24 horas por dia.
+      </p>
+      
+      <!-- Botão logo no início -->
+      <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; margin-bottom: 30px;">
+        🚀 Quero Testar Gratuitamente
+      </button>
     </div>
 
-    <!-- BENEFÍCIOS -->
-    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px;">
-      <div class="card"><h3>⚡ Atendimento Instantâneo</h3><p style="color: #9ca3af;">Responda clientes em segundos, sem filas.</p></div>
-      <div class="card"><h3>🤖 IA Humanizada</h3><p style="color: #9ca3af;">Conversas naturais que encantam seu cliente.</p></div>
-      <div class="card"><h3>📈 Mais Vendas</h3><p style="color: #9ca3af;">Foque apenas nos leads que já estão prontos para comprar.</p></div>
+    <!-- 2. SEÇÃO DE BENEFÍCIOS -->
+    <h3 style="color: #3b82f6; margin-bottom: 15px; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Por que escolher o LeadVision AI?</h3>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px;">
+      <div class="card">
+        <h4 style="margin: 0 0 5px 0;">⚡ Atendimento Instantâneo</h4>
+        <p style="color: #9ca3af; margin: 0; font-size: 14px;">Responda clientes em segundos, a qualquer hora do dia ou da noite, sem filas.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin: 0 0 5px 0;">🤖 IA Humanizada</h4>
+        <p style="color: #9ca3af; margin: 0; font-size: 14px;">Conversas naturais que entendem o seu negócio e encantam o seu cliente.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin: 0 0 5px 0;">📈 Mais Vendas</h4>
+        <p style="color: #9ca3af; margin: 0; font-size: 14px;">Foque apenas nos leads que realmente estão prontos para comprar de você.</p>
+      </div>
     </div>
 
-    <!-- FAQ -->
-    <h2 style="text-align: center;">Dúvidas Frequentes</h2>
-    <div class="card"><h4>Como a IA aprende?</h4><p style="color: #9ca3af;">Você nos envia os detalhes dos seus serviços e a IA se personaliza.</p></div>
-    <div class="card"><h4>Preciso deixar o celular ligado?</h4><p style="color: #9ca3af;">Não, funciona 100% na nuvem.</p></div>
+    <!-- 3. SEÇÃO DE FAQ (DÚVIDAS FREQUENTES) -->
+    <h3 style="color: #3b82f6; margin-bottom: 15px; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Dúvidas Frequentes</h3>
+    <div class="card">
+      <h4 style="margin: 0 0 5px 0;">Como a IA aprende sobre meu negócio?</h4>
+      <p style="color: #9ca3af; margin: 0; font-size: 14px;">Você nos envia os detalhes dos seus serviços e a IA se personaliza automaticamente.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin: 0 0 5px 0;">Preciso deixar o celular ligado?</h4>
+      <p style="color: #9ca3af; margin: 0; font-size: 14px;">Não! O sistema funciona 100% na nuvem de forma totalmente independente.</p>
+    </div>
 
-    <!-- BOTÃO FINAL PARA AÇÃO -->
-    <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; margin-top: 20px;">🚀 Quero Testar Gratuitamente</button>
+    <!-- Botão repetido no final para facilitar a conversão -->
+    <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; margin-top: 20px; margin-bottom: 40px;">
+      🚀 Quero Testar Gratuitamente
+    </button>
   </div>
 
   <!-- ================= TELA DE CADASTRO ================= -->
   <div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 50px;">
     <div class="card" style="max-width: 400px; margin: 0 auto;">
-      <h2 style="text-align: center;">Crie sua conta</h2>
+      <h2 style="text-align: center; margin-top: 0;">Crie sua conta</h2>
+      <p style="text-align: center; color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Insira seus dados para continuar</p>
       <input type="text" placeholder="Seu nome" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
       <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff;">Continuar ➔</button>
-      <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; margin-top: 15px; text-decoration: underline;">Voltar</p>
+      <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; margin-top: 15px; text-decoration: underline; font-size: 13px;">← Voltar ao início</p>
     </div>
   </div>
 
   <!-- ================= TELA DE PLANOS ================= -->
   <div id="planos-screen" class="dashboard-container" style="display: none; padding-top: 50px; text-align: center;">
     <h2>Escolha seu Plano</h2>
-    <div class="card"><h3>Mensal: R$ 97/mês</h3></div>
-    <div class="card" style="border-color: #3b82f6;"><h3>Anual: R$ 77/mês (Economize!)</h3></div>
-    <button style="background: #3a82f6; color: #fff;">Assinar Agora</button>
-    <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; margin-top: 15px; text-decoration: underline;">Voltar</p>
+    <p style="color: #9ca3af; margin-bottom: 25px;">Desbloqueie todo o poder da automação</p>
+    
+    <div class="card" style="max-width: 350px; margin: 0 auto 15px auto; text-align: left;">
+      <h3 style="margin-top: 0; color: #3b82f6;">Plano Mensal</h3>
+      <p style="font-size: 22px; font-weight: bold; margin: 5px 0;">R$ 97<span style="font-size: 12px; color: #9ca3af;">/mês</span></p>
+      <button style="background: #3a82f6; color: #fff; margin-top: 10px;">Assinar Mensal</button>
+    </div>
+
+    <div class="card" style="max-width: 350px; margin: 0 auto 25px auto; text-align: left; border-color: #3b82f6;">
+      <h3 style="margin-top: 0; color: #3b82f6;">Plano Anual (Economize)</h3>
+      <p style="font-size: 22px; font-weight: bold; margin: 5px 0;">R$ 77<span style="font-size: 12px; color: #9ca3af;">/mês</span></p>
+      <button style="background: #3b82f6; color: #fff; margin-top: 10px;">Assinar Anual</button>
+    </div>
+
+    <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; text-decoration: underline; font-size: 13px;">← Voltar ao início</p>
   </div>
 
   <script>
