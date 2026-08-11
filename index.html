@@ -8,7 +8,7 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #fff; margin: 0; padding: 0; }
     .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
     .card { background: #111627; padding: 26px; border-radius: 14px; border: 1px solid #1f2937; margin-bottom: 20px; }
-    button { cursor: pointer; border: none; padding: 18px 28px; border-radius: 10px; font-weight: bold; width: 100%; font-size: 18px; }
+    button { cursor: pointer; border: none; padding: 16px 24px; border-radius: 10px; font-weight: bold; font-size: 17px; }
     input { width: 100%; padding: 16px; margin-bottom: 18px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 17px; }
   </style>
 </head>
@@ -56,7 +56,7 @@
       <p style="color: #cbd5e1; margin: 0; font-size: 17px; line-height: 1.6;">Não! O sistema funciona 100% na nuvem de forma totalmente independente.</p>
     </div>
 
-    <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; margin-top: 30px; margin-bottom: 40px;">
+    <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; width: 100%; margin-top: 30px; margin-bottom: 40px; padding: 18px;">
       🪙 Ganhar 5 Moedas de Teste Grátis
     </button>
   </div>
@@ -76,29 +76,47 @@
       <label style="font-size: 15px; color: #cbd5e1; display: block; margin-bottom: 6px;">WhatsApp</label>
       <input type="text" placeholder="(00) 00000-0000">
 
-      <button onclick="irParaDashboard()" style="background: #3a82f6; color: #fff; margin-top: 10px;">Resgatar Minhas Moedas 🪙</button>
+      <button onclick="irParaDashboard()" style="background: #3a82f6; color: #fff; width: 100%; margin-top: 10px; padding: 18px;">Resgatar Minhas Moedas 🪙</button>
       <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer; margin-top: 24px; text-decoration: underline; font-size: 16px;">← Voltar ao início</p>
     </div>
   </div>
 
-  <!-- ================= TELA DE PAINEL COM CRÉDITOS / TESTE ================= -->
-  <div id="dashboard-screen" class="dashboard-container" style="display: none; padding-top: 40px; text-align: center;">
-    <div class="card" style="max-width: 500px; margin: 0 auto; text-align: left; border-color: #3b82f6;">
-      <h2 style="margin-top: 0; color: #3b82f6; font-size: 24px;">🎉 Painel de Testes Ativo!</h2>
-      <p style="color: #cbd5e1; font-size: 17px; line-height: 1.5;">Suas 5 moedas de teste foram liberadas. Cada mensagem trocada com a IA consome 1 moeda para você conferir a velocidade da resposta.</p>
+  <!-- ================= TELA DE CHAT DE TESTE (COM AS 5 MOEDAS) ================= -->
+  <div id="dashboard-screen" class="dashboard-container" style="display: none; padding-top: 30px;">
+    <div class="card" style="max-width: 600px; margin: 0 auto; border-color: #3b82f6;">
       
-      <div style="background: #0b0f19; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; border: 1px solid #374151;">
-        <span style="font-size: 15px; color: #9ca3af; display: block;">Seu Saldo Disponível:</span>
-        <span style="font-size: 34px; font-weight: bold; color: #3b82f6;">🪙 5 Moedas</span>
-        <span style="font-size: 14px; color: #9ca3af; display: block; margin-top: 5px;">Amostra rápida de testes</span>
+      <!-- Cabeçalho do Painel -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 15px;">
+        <h2 style="margin: 0; font-size: 20px; color: #3b82f6;">🤖 Teste Prático da IA</h2>
+        <div style="background: #0b0f19; padding: 8px 14px; border-radius: 8px; border: 1px solid #374151; font-weight: bold; color: #3b82f6;">
+          🪙 <span id="contador-moedas">5</span> Moedas
+        </div>
       </div>
 
-      <p style="color: #cbd5e1; font-size: 16px; line-height: 1.6;">Como as moedas acabam rápido, escolha um plano para garantir atendimento ilimitado e não perder nenhuma venda no WhatsApp.</p>
+      <p style="color: #9ca3af; font-size: 15px; margin-top: 0;">Envie mensagens simulando um cliente interessado para testar as respostas automáticas da inteligência artificial.</p>
 
-      <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; margin-top: 15px;">🚀 Escolher um Plano e Assinar</button>
+      <!-- Caixa de Mensagens do Chat -->
+      <div id="chat-box" style="background: #0b0f19; height: 260px; border-radius: 10px; border: 1px solid #374151; padding: 15px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;">
+          Olá! Sou a inteligência artificial do seu negócio. Digite algo abaixo para testar como eu respondo aos seus clientes! 🚀
+        </div>
+      </div>
+
+      <!-- Área de Digitação -->
+      <div id="input-area" style="display: flex; gap: 10px;">
+        <input type="text" id="mensagem-input" placeholder="Digite sua mensagem de teste..." style="margin-bottom: 0;">
+        <button onclick="enviarMensagem()" style="background: #3a82f6; color: #fff; width: 120px; padding: 0;">Enviar</button>
+      </div>
+
+      <!-- Botão de Planos que aparece quando as moedas acabam -->
+      <div id="aviso-esgotado" style="display: none; text-align: center; margin-top: 15px;">
+        <p style="color: #ef4444; font-weight: bold; margin-bottom: 10px;">Suas moedas de teste acabaram!</p>
+        <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; width: 100%;">🚀 Escolher um Plano e Assinar Ilimitado</button>
+      </div>
+
     </div>
 
-    <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer; margin-top: 24px; text-decoration: underline; font-size: 16px;">← Sair / Voltar ao início</p>
+    <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer; margin-top: 20px; text-decoration: underline; font-size: 15px;">← Sair / Voltar ao início</p>
   </div>
 
   <!-- ================= TELA DE PLANOS ================= -->
@@ -110,27 +128,29 @@
     <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Inicial</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 97<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Inicial (R$ 97)...')" style="background: #3a82f6; color: #fff; margin-top: 15px;">Assinar Inicial</button>
+      <button onclick="alert('Redirecionando para o pagamento do Plano Inicial (R$ 97)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Inicial</button>
     </div>
 
     <!-- Plano Profissional -->
     <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left; border-color: #3b82f6;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Profissional</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 197<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Profissional (R$ 197)...')" style="background: #3a82f6; color: #fff; margin-top: 15px;">Assinar Profissional</button>
+      <button onclick="alert('Redirecionando para o pagamento do Plano Profissional (R$ 197)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Profissional</button>
     </div>
 
     <!-- Plano Empresarial -->
     <div class="card" style="max-width: 380px; margin: 0 auto 30px auto; text-align: left;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Empresarial</h3>
       <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 397<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <button onclick="alert('Redirecionando para o pagamento do Plano Empresarial (R$ 397)...')" style="background: #3a82f6; color: #fff; margin-top: 15px;">Assinar Empresarial</button>
+      <button onclick="alert('Redirecionando para o pagamento do Plano Empresarial (R$ 397)...')" style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Empresarial</button>
     </div>
 
     <p onclick="voltarDashboard()" style="text-align: center; color: #9ca3af; cursor: pointer; text-decoration: underline; font-size: 16px;">← Voltar ao painel</p>
   </div>
 
   <script>
+    let moedas = 5;
+
     function irParaCadastro() { show('cadastro-screen'); }
     function irParaDashboard() { show('dashboard-screen'); }
     function irParaPlanos() { show('planos-screen'); }
@@ -144,6 +164,43 @@
       document.getElementById('planos-screen').style.display = 'none';
       document.getElementById(id).style.display = 'block';
       window.scrollTo(0,0);
+    }
+
+    function enviarMensagem() {
+      const input = document.getElementById('mensagem-input');
+      const chatBox = document.getElementById('chat-box');
+      
+      if (input.value.trim() === '' || moedas <= 0) return;
+
+      // Adiciona mensagem do usuário
+      const msgUsuario = document.createElement('div');
+      msgUsuario.style.cssText = "background: #3a82f6; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-end; font-size: 15px;";
+      msgUsuario.textContent = input.value;
+      chatBox.appendChild(msgUsuario);
+
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Desconta 1 moeda
+      moedas--;
+      document.getElementById('contador-moedas').textContent = moedas;
+
+      // Resposta simulada da IA após meio segundo
+      setTimeout(() => {
+        const msgIA = document.createElement('div');
+        msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;";
+        
+        if (moedas > 0) {
+          msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por da. (Restam " + moedas + " moedas de teste)";
+        } else {
+          msgIA.textContent = "Suas moedas de teste acabaram! Escolha um plano abaixo para continuar.";
+          document.getElementById('input-area').style.display = 'none';
+          document.getElementById('aviso-esgotado').style.display = 'block';
+        }
+
+        chatBox.appendChild(msgIA);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 500);
     }
   </script>
 </body>
