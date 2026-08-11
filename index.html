@@ -7,65 +7,60 @@
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #fff; margin: 0; padding: 0; }
     .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-    .card { background: #111627; padding: 24px; border-radius: 12px; border: 1px solid #1f2937; }
-    button { cursor: pointer; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; }
+    .card { background: #111627; padding: 20px; border-radius: 12px; border: 1px solid #1f2937; margin-bottom: 15px; }
+    button { cursor: pointer; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; width: 100%; font-size: 16px; }
   </style>
 </head>
 <body>
 
-  <!-- ================= TELA DE APRESENTAÇÃO ================= -->
-  <div id="apresentacao-screen" class="dashboard-container">
-    <div style="text-align: center; padding: 40px 20px;">
-      <h1 style="font-size: 32px; color: #fff;">LeadVision <span style="color: #3b82f6;">AI</span></h1>
-      <p style="color: #9ca3af; max-width: 600px; margin: 0 auto 30px auto;">Automatize seu atendimento e transforme conversas em vendas 24h por dia.</p>
-      <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; font-size: 16px;">🚀 Quero Testar Gratuitamente</button>
+  <!-- ================= TELA ÚNICA DE APRESENTAÇÃO E VENDAS ================= -->
+  <div id="home-screen" class="dashboard-container">
+    <div style="text-align: center; padding: 40px 0;">
+      <h1 style="font-size: 36px; margin-bottom: 10px;">LeadVision <span style="color: #3b82f6;">AI</span></h1>
+      <p style="color: #9ca3af; font-size: 18px; margin-bottom: 30px;">Automatize seu atendimento no WhatsApp com inteligência artificial e transforme conversas em vendas 24h por dia.</p>
+    </div>
+
+    <!-- BENEFÍCIOS -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px;">
+      <div class="card"><h3>⚡ Atendimento Instantâneo</h3><p style="color: #9ca3af;">Responda clientes em segundos, sem filas.</p></div>
+      <div class="card"><h3>🤖 IA Humanizada</h3><p style="color: #9ca3af;">Conversas naturais que encantam seu cliente.</p></div>
+      <div class="card"><h3>📈 Mais Vendas</h3><p style="color: #9ca3af;">Foque apenas nos leads que já estão prontos para comprar.</p></div>
     </div>
 
     <!-- FAQ -->
-    <div style="margin-top: 40px;">
-      <h2 style="text-align: center; margin-bottom: 20px;">Dúvidas Frequentes</h2>
-      <div class="card" style="margin-bottom: 10px;">
-        <h4 style="margin:0; color:#3b82f6;">Como a IA aprende sobre meu negócio?</h4>
-        <p style="font-size: 14px; color: #9ca3af;">Você nos envia informações básicas sobre seus serviços e a IA personaliza o atendimento.</p>
-      </div>
-      <div class="card">
-        <h4 style="margin:0; color:#3b82f6;">Preciso deixar o celular ligado?</h4>
-        <p style="font-size: 14px; color: #9ca3af;">Não! O sistema funciona na nuvem, 24 horas por dia, de forma independente.</p>
-      </div>
-    </div>
+    <h2 style="text-align: center;">Dúvidas Frequentes</h2>
+    <div class="card"><h4>Como a IA aprende?</h4><p style="color: #9ca3af;">Você nos envia os detalhes dos seus serviços e a IA se personaliza.</p></div>
+    <div class="card"><h4>Preciso deixar o celular ligado?</h4><p style="color: #9ca3af;">Não, funciona 100% na nuvem.</p></div>
+
+    <!-- BOTÃO FINAL PARA AÇÃO -->
+    <button onclick="irParaCadastro()" style="background: #3a82f6; color: #fff; margin-top: 20px;">🚀 Quero Testar Gratuitamente</button>
   </div>
 
   <!-- ================= TELA DE CADASTRO ================= -->
-  <div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 40px;">
-    <div class="card" style="max-width: 420px; margin: 0 auto;">
+  <div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 50px;">
+    <div class="card" style="max-width: 400px; margin: 0 auto;">
       <h2 style="text-align: center;">Crie sua conta</h2>
-      <input id="cadastro-nome" type="text" placeholder="Seu nome" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
-      <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff; width: 100%;">Continuar para Planos ➔</button>
+      <input type="text" placeholder="Seu nome" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 6px; box-sizing: border-box;">
+      <button onclick="irParaPlanos()" style="background: #3a82f6; color: #fff;">Continuar ➔</button>
+      <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; margin-top: 15px; text-decoration: underline;">Voltar</p>
     </div>
   </div>
 
   <!-- ================= TELA DE PLANOS ================= -->
-  <div id="planos-screen" class="dashboard-container" style="display: none; padding-top: 40px; text-align: center;">
+  <div id="planos-screen" class="dashboard-container" style="display: none; padding-top: 50px; text-align: center;">
     <h2>Escolha seu Plano</h2>
-    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-      <div class="card" style="width: 280px;">
-        <h3>Mensal</h3>
-        <p style="font-size: 24px; font-weight: bold;">R$ 97/mês</p>
-        <button style="background: #3a82f6; color: #fff; width: 100%;">Assinar</button>
-      </div>
-      <div class="card" style="width: 280px; border-color: #3b82f6;">
-        <h3 style="color: #3b82f6;">Anual (Economize)</h3>
-        <p style="font-size: 24px; font-weight: bold;">R$ 77/mês</p>
-        <button style="background: #3b82f6; color: #fff; width: 100%;">Assinar Anual</button>
-      </div>
-    </div>
+    <div class="card"><h3>Mensal: R$ 97/mês</h3></div>
+    <div class="card" style="border-color: #3b82f6;"><h3>Anual: R$ 77/mês (Economize!)</h3></div>
+    <button style="background: #3a82f6; color: #fff;">Assinar Agora</button>
+    <p onclick="voltar()" style="text-align: center; color: #6b7280; cursor: pointer; margin-top: 15px; text-decoration: underline;">Voltar</p>
   </div>
 
   <script>
     function irParaCadastro() { show('cadastro-screen'); }
     function irParaPlanos() { show('planos-screen'); }
+    function voltar() { show('home-screen'); }
     function show(id) {
-      document.getElementById('apresentacao-screen').style.display = 'none';
+      document.getElementById('home-screen').style.display = 'none';
       document.getElementById('cadastro-screen').style.display = 'none';
       document.getElementById('planos-screen').style.display = 'none';
       document.getElementById(id).style.display = 'block';
