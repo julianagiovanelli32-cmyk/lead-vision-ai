@@ -151,27 +151,35 @@
       <div id="aviso-esgotado" style="display: none; text-align: center; margin-top: 15px;">
         <p style="color: #ef4444; font-weight: bold; margin-bottom: 10px;">Suas moedas de teste acabaram!</p>
         <button onclick="ganharMoedas()" style="background: #3a82f6; color: #fff; width: 100%;">🚀 Escolher um Plano e Assinar Ilimitado</button>
-      </div>
+      </div> 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    window.ganharMoedas = function() {
+        if (typeof moedas !== 'undefined') {
+            moedas = 5;
+        } else {
+            window.moedas = 5;
+        }
+        
+        var contador = document.getElementById('contador-moedas');
+        if (contador) {
+            contador.textContent = 5;
+        }
+        
+        var inputArea = document.getElementById('input-area');
+        if (inputArea) {
+            inputArea.style.display = 'flex';
+        }
+        
+        var avisoEsgotado = document.getElementById('aviso-esgotado');
+        if (avisoEsgotado) {
+            avisoEsgotado.style.display = 'none';
+        }
+    };
+});
+</script>
 
-    </div>
-
-    <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer; margin-top: 20px; text-decoration: underline; font-size: 15px;">← Sair / Voltar ao início</p>
-  </div>
-
-  <!-- ================= TELA DE PLANOS (COM TODOS OS LINKS DO ASAAS) ================= -->
-  <div id="planos-screen" class="dashboard-container" style="display: none; padding-top: 40px; text-align: center;">
-    <h2 style="font-size: 30px; margin-bottom: 10px;">Escolha seu Plano</h2>
-    <p style="color: #9ca3af; margin-bottom: 30px; font-size: 18px;">Desbloqueie mensagens ilimitadas e o poder total da automação</p>
     
-    <!-- Plano Inicial -->
-    <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left;">
-      <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Inicial</h3>
-      <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 97<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <a href="https://www.asaas.com/c/hr5rfz3anb5hhj9a" target="_blank" style="text-decoration: none;">
-        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Inicial</button>
-      </a>
-    </div>
-
     <!-- Plano Profissional -->
     <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left; border-color: #3b82f6;">
       <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Profissional</h3>
