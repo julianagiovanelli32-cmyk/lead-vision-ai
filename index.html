@@ -222,23 +222,23 @@
     }
 
     function enviarMensagem() {
-      const input = document.getElementById('mensagem-input');
-      const chatBox = document.getElementById('chat-box');
-      
-      if (input.value.trim() === '' || moedas <= 0) return;
+    const input = document.getElementById('mensagem-input');
+    const chatBox = document.getElementById('chat-box');
 
-      const msgUsuario = document.createElement('div');
-      msgUsuario.style.cssText = "background: #3a82f6; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-end; font-size: 15px;";
-      msgUsuario.textContent = input.value;
-      chatBox.appendChild(msgUsuario);
+    if (input.value.trim() === '' || moedas <= 0) return;
 
-      input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight;
+    const msgUsuario = document.createElement('div');
+    msgUsuario.style.cssText = "background: #3a82f6; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-end; color: #fff;";
+    msgUsuario.textContent = input.value;
+    chatBox.appendChild(msgUsuario);
 
-      moedas--;
-      document.getElementById('contador-moedas').textContent = moedas;
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-            setTimeout(() => {
+    moedas--;
+    document.getElementById('contador-moedas').textContent = moedas;
+
+    setTimeout(() => {
         const msgIA = document.createElement('div');
         msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; margin: 8px 0; color: #fff; max-width: 80%;";
         
@@ -267,3 +267,4 @@
             document.getElementById('aviso-esgotado').style.display = 'block';
         }
     }, 500);
+}
