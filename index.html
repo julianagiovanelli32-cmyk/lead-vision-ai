@@ -238,21 +238,53 @@
       moedas--;
       document.getElementById('contador-moedas').textContent = moedas;
 
-      setTimeout(() => {
+          setTimeout(async () => {
         const msgIA = document.createElement('div');
-        msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;";
-        
-        if (moedas > 0) {
-          msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por dia. (Restam " + moedas + " moedas de teste)";
-        } else {
-          msgIA.textContent = "Suas moedas de teste acabaram! Escolha um plano abaixo para continuar.";
-          document.getElementById('input-area').style.display = 'none';
-          document.getElementById('aviso-esgotado').style.display = 'block';
-        }
+        msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; margin-top: 8px; color: #cbd5e1;";
 
-        chatBox.appendChild(msgIA);
+        if (moedas > 0) {
+            // Mostra temporariamente que está pensando
+            msgIA.textContent = "Pensando...";
+            chatBox.appendChild(msgIA);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Chamada real para a API de Inteligência Artificial
+                const respostaAPI = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer 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' // Substitua pela sua chave da OpenAI
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o-mini",
+                        messages: [
+                            { role: "system", content: "Você é o assistente virtual do LeadVision AI, um sistema de atendimento automatizado por IA para WhatsApp. Seja direto, educado e prestativo em português do Brasil." },
+                            { role: "user", content: msgUsuario.textContent }
+                        ],
+                        temperature: 0.7
+                    })
+                });
+
+                const dados = await respostaAPI.json();
+                if (dados.choices && dados.choices.length > 0) {
+                    msgIA.textContent = dados.choices[0].message.content;
+                } else {
+                    msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por dia.";
+                }
+            } catch (erro) {
+                msgIA.textContent = "Entendido! Como IA, estou pronta para responder seus clientes automaticamente 24h por dia.";
+            }
+        } else {
+            msgIA.textContent = "Suas moedas de teste acabaram! Escolha um plano para continuar.";
+            document.getElementById('input-area').style.display = 'none';
+            document.getElementById('aviso-esgotado').style.display = 'block';
+            chatBox.appendChild(msgIA);
+        }
+        
         chatBox.scrollTop = chatBox.scrollHeight;
-      }, 500);
+    }, 500);
+
     }
   </script>
 </body>
