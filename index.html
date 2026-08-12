@@ -238,32 +238,32 @@
       moedas--;
       document.getElementById('contador-moedas').textContent = moedas;
 
-        setTimeout(() => {
-    const msgIA = document.createElement('div');
-    msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; margin: 8px 0; color: #fff; max-width: 80%;";
-    
-    if (moedas > 0) {
-        msgIA.textContent = "Pensando...";
-        chatBox.appendChild(msgIA);
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        setTimeout(() => {
-            const respostasGratuitas = [
-                "Olá! Entendi a sua dúvida. Nossos serviços são focados em trazer a melhor qualidade e agilidade para você. Como posso te ajudar?",
-                "Com certeza! Trabalhamos com todo o empenho para garantir o melhor resultado. Você gostaria de saber mais sobre nossos valores ou prazos?",
-                "Recebi sua mensagem! Estamos à disposição para atender seu pedido com total dedicação. Tem alguma preferência de horário ou data?",
-                "Ótima pergunta! O nosso atendimento é personalizado para cada cliente. Quer que eu te envie a nossa tabela completa?"
-            ];
-            const respostaAleatoria = respostasGratuitas[Math.floor(Math.random() * respostasGratuitas.length)];
-            
-            msgIA.textContent = respostaAleatoria;
+            setTimeout(() => {
+        const msgIA = document.createElement('div');
+        msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; margin: 8px 0; color: #fff; max-width: 80%;";
+        
+        if (moedas > 0) {
+            msgIA.textContent = "Pensando...";
+            chatBox.appendChild(msgIA);
             chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000);
-    } else {
-        msgIA.textContent = "Suas moedas de teste acabaram! Escolha uma opção para ganhar mais.";
-        chatBox.appendChild(msgIA);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        document.getElementById('input-area').style.display = 'none';
-        document.getElementById('aviso-esgotado').style.display = 'block';
-    }
-}, 500);
+
+            setTimeout(() => {
+                const respostasGratuitas = [
+                    "Olá! Entendi a sua dúvida. Nossos serviços são focados em trazer a melhor qualidade e agilidade para você. Como posso te ajudar?",
+                    "Com certeza! Trabalhamos com todo o empenho para garantir o melhor resultado. Você gostaria de saber mais sobre nossos valores ou prazos?",
+                    "Recebi sua mensagem! Estamos à disposição para atender seu pedido com total dedicação. Tem alguma preferência de horário ou data?",
+                    "Ótima pergunta! O nosso atendimento é personalizado para cada cliente. Quer que eu te envie a nossa tabela completa?"
+                ];
+                const respostaAleatoria = respostasGratuitas[Math.floor(Math.random() * respostasGratuitas.length)];
+                
+                msgIA.textContent = respostaAleatoria;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        } else {
+            msgIA.textContent = "Suas moedas de teste acabaram! Escolha uma opção para ganhar mais.";
+            chatBox.appendChild(msgIA);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            document.getElementById('input-area').style.display = 'none';
+            document.getElementById('aviso-esgotado').style.display = 'block';
+        }
+    }, 500);
