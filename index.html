@@ -285,7 +285,11 @@ function ganharMoedas() {
     const avisoEsgotado = document.getElementById('aviso-esgotado');
     if (avisoEsgotado) {
         avisoEsgotado.style.display = 'none';
- }
-}
+    }
+
+    // Recarrega a página instantaneamente com as moedas renovadas
+    location.reload();
+
+
 
 
