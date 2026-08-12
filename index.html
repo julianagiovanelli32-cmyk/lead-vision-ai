@@ -272,16 +272,20 @@ document.addEventListener("DOMContentLoaded", function() {
 function ganharMoedas() {
     moedas = 5;
     
-    // Atualiza o contador na tela se ele existir
     const contador = document.getElementById('contador-moedas');
-    if (contador) contador.textContent = moedas;
+    if (contador) {
+        contador.textContent = moedas;
+    }
     
-    // Mostra a área de digitar a mensagem de volta
     const inputArea = document.getElementById('input-area');
-    if (inputArea) inputArea.style.display = 'flex';
+    if (inputArea) {
+        inputArea.style.display = 'flex';
+    }
     
-    // Esconde o aviso de moedas esgotadas
     const avisoEsgotado = document.getElementById('aviso-esgotado');
-    if (avisoEsgotado) avisoEsgotado.style.display = 'none';
+    if (avisoEsgotado) {
+        avisoEsgotado.style.display = 'none';
+ }
 }
+
 
