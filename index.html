@@ -271,7 +271,12 @@
 }
 function ganharMoedas() {
     moedas = 5;
-    document.getElementById('contador-moedas').textContent = moedas; 
-    document.getElementById('input-area').style.display = 'flex';
-    document.getElementById('aviso-esgotado').style.display = 'none';
+    const contador = document.getElementById('contador-moedas');
+    if (contador) contador.textContent = moedas;
+    
+    const inputArea = document.getElementById('input-area');
+    if (inputArea) inputArea.style.display = 'flex';
+    
+    const avisoEsgotado = document.getElementById('aviso-esgotado');
+    if (avisoEsgotado) avisoEsgotado.style.display = 'none';
 }
