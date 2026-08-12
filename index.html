@@ -260,16 +260,10 @@
             msgIA.textContent = respostaAleatoria;
             chatBox.scrollTop = chatBox.scrollHeight;
         }, 1000);
+    } else {
+        msgIA.textContent = "Suas moedas de teste acabaram! Escolha uma opção para ganhar mais.";
+        chatBox.appendChild(msgIA);
+        document.getElementById('input-area').style.display = 'none';
+        document.getElementById('aviso-esgotado').style.display = 'block';
     }
 }, 500);
-   = 'block';
-            chatBox.appendChild(msgIA);
-        }
-        
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 500);
-
-    }
-  </script>
-</body>
-</html>
