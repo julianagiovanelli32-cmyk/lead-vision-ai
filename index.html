@@ -200,25 +200,60 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 
   <script>
-    let moedas = 5;
+let moedas = 5;
 
-    function irParaCadastro() { show('cadastro-screen'); }
-    function irParaDashboard() { show('dashboard-screen'); }
-    function irParaPlanos() { show('planos-screen'); }
-    function voltarDashboard() { show('dashboard-screen'); }
-    function voltar() { show('home-screen'); }
-    
-    function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-    
-    function show(id) {
-      document.getElementById('home-screen').style.display = 'none';
-      document.getElementById('cadastro-screen').style.display = 'none';
-      document.getElementById('dashboard-screen').style.display = 'none';
-      document.getElementById('planos-screen').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
-      window.scrollTo(0,0);
+function irParaCadastro() {
+    show('cadastro-screen');
+}
+
+function irParaDashboard() {
+    show('dashboard-screen');
+}
+
+function irParaPlanos() {
+    show('planos-screen');
+}
+
+function voltarDashboard() {
+    show('dashboard-screen');
+}
+
+function voltar() {
+    show('home-screen');
+}
+
+function começarTeste() {
+    moedas = 5;
+    localStorage.setItem('moedas', 5);
+
+    const contador = document.getElementById('contador-moedas');
+
+    if (contador) {
+        contador.textContent = moedas;
     }
+
+    show('dashboard-screen');
+}
+
+function abrirModal(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+
+function fecharModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
+function show(id) {
+    document.getElementById('home-screen').style.display = 'none';
+    document.getElementById('cadastro-screen').style.display = 'none';
+    document.getElementById('dashboard-screen').style.display = 'none';
+    document.getElementById('planos-screen').style.display = 'none';
+
+    document.getElementById(id).style.display = 'block';
+
+    window.scrollTo(0, 0);
+}
+    
 
     function enviarMensagem() {
     const input = document.getElementById('mensagem-input');
