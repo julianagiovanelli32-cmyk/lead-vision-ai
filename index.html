@@ -2,418 +2,990 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/manifest.json">
+
   <title>LeadVision AI - Automação Inteligente</title>
+
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #fff; margin: 0; padding: 0; }
-    .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    .card { background: #111627; padding: 26px; border-radius: 14px; border: 1px solid #1f2937; margin-bottom: 20px; }
-    button { cursor: pointer; border: none; padding: 16px 24px; border-radius: 10px; font-weight: bold; font-size: 17px; }
-    input { width: 100%; padding: 16px; margin-bottom: 18px; background: #0b0f19; border: 1px solid #374151; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 17px; }
-    .footer { text-align: center; padding: 30px 0; border-top: 1px solid #1f2937; margin-top: 40px; color: #9ca3af; font-size: 14px; }
-    .footer a { color: #3b82f6; text-decoration: none; margin: 0 10px; cursor: pointer; }
-    .footer a:hover { text-decoration: underline; }
-    
-    /* Estilo do Modal */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-    .modal-content { background: #111627; padding: 30px; border-radius: 14px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; border: 1px solid #3b82f6; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #0b0f19;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dashboard-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .card {
+      background: #111627;
+      padding: 26px;
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px;
+      margin-bottom: 18px;
+      background: #0b0f19;
+      border: 1px solid #374151;
+      color: #fff;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 17px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid #1f2937;
+      margin-top: 40px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #111627;
+      padding: 30px;
+      border-radius: 14px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      border: 1px solid #3b82f6;
+      box-sizing: border-box;
+    }
+
+    .tela {
+      display: none;
+    }
+
+    .azul {
+      color: #3b82f6;
+    }
+
+    .botao-azul {
+      background: #3a82f6;
+      color: #fff;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-container {
+        padding: 16px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .chat-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start !important;
+      }
+
+      #input-area {
+        flex-direction: column;
+      }
+
+      #input-area button {
+        width: 100% !important;
+        height: 50px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-  
-<!-- ================= PÁGINA PRINCIPAL ================= -->
-<div id="home-screen" class="dashboard-container">
+<!-- ===================================================== -->
+<!-- PÁGINA PRINCIPAL -->
+<!-- ===================================================== -->
 
-    <div style="text-align: center; padding: 30px 0 20px 0;">
-        <h1 style="font-size: 30px; margin-bottom: 14px;">
-            LeadVision <span style="color: #3b82f6;">AI</span>
-        </h1>
+<div id="home-screen" class="dashboard-container tela" style="display: block;">
 
-        <p style="color: #cbd5e1; font-size: 18px; margin-bottom: 30px; line-height: 1.6;">
-            Automatize seu atendimento no WhatsApp com inteligência artificial e transforme conversas em vendas 24 horas por dia.
-        </p>
+  <div style="text-align: center; padding: 30px 0 20px 0;">
 
-        <div class="card" style="text-align: left; background: #161b2e; border-color: #3b82f6; margin-bottom: 30px;">
-            <h3 style="color: #3b82f6; margin-top: 0; margin-bottom: 14px; font-size: 22px;">
-                O que é o LeadVision AI?
-            </h3>
+    <h1 style="font-size: 30px; margin-bottom: 14px;">
+      LeadVision <span class="azul">AI</span>
+    </h1>
 
-            <p style="color: #e2e8f0; font-size: 18px; line-height: 1.7; margin: 0;">
-                Nosso sistema foi desenvolvido para empresas que perdem vendas por demorarem a responder no WhatsApp. A inteligência artificial assume o primeiro contato com o cliente, tira dúvidas sobre produtos ou serviços e ajuda a transformar conversas em oportunidades de venda.
-            </p>
-        </div>
+    <p style="color: #cbd5e1; font-size: 18px; margin-bottom: 30px; line-height: 1.6;">
+      Automatize seu atendimento no WhatsApp com inteligência artificial
+      e transforme conversas em vendas 24 horas por dia.
+    </p>
+
+    <div class="card" style="text-align: left; background: #161b2e; border-color: #3b82f6;">
+
+      <h3 class="azul" style="margin-top: 0; font-size: 22px;">
+        O que é o LeadVision AI?
+      </h3>
+
+      <p style="color: #e2e8f0; font-size: 18px; line-height: 1.7; margin: 0;">
+        Nosso sistema foi desenvolvido para empresas que perdem vendas por
+        demorarem a responder no WhatsApp. A inteligência artificial assume
+        o primeiro contato com o cliente, tira dúvidas sobre produtos ou
+        serviços e ajuda a transformar conversas em oportunidades de venda.
+      </p>
+
+    </div>
+  </div>
+
+
+  <!-- BENEFÍCIOS -->
+
+  <h3 class="azul" style="margin-bottom: 16px; text-transform: uppercase; font-size: 16px;">
+    Por que escolher o LeadVision AI?
+  </h3>
+
+  <div class="card">
+
+    <h4 style="margin: 0 0 10px 0; font-size: 18px;">
+      ⚡ Atendimento Instantâneo
+    </h4>
+
+    <p style="color: #cbd5e1; margin: 0; font-size: 17px;">
+      Responda clientes em segundos, a qualquer hora do dia ou da noite.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h4 style="margin: 0 0 10px 0; font-size: 20px;">
+      🤖 IA Humanizada
+    </h4>
+
+    <p style="color: #cbd5e1; margin: 0; font-size: 17px;">
+      Conversas naturais que entendem o seu negócio.
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h4 style="margin: 0 0 10px 0; font-size: 20px;">
+      📈 Mais Vendas
+    </h4>
+
+    <p style="color: #cbd5e1; margin: 0; font-size: 17px;">
+      Foque nos clientes que realmente estão interessados em comprar.
+    </p>
+
+  </div>
+
+
+  <!-- FAQ -->
+
+  <h3 class="azul" style="margin-bottom: 18px; text-transform: uppercase; font-size: 16px;">
+    Dúvidas Frequentes
+  </h3>
+
+  <div class="card">
+
+    <h4 style="margin: 0 0 10px 0; font-size: 19px;">
+      Como a IA aprende sobre meu negócio?
+    </h4>
+
+    <p style="color: #cbd5e1; margin: 0; font-size: 17px; line-height: 1.6;">
+      Você nos envia os detalhes dos seus serviços e a IA se personaliza automaticamente.
+    </p>
+
+    <button
+      type="button"
+      onclick="começarTeste()"
+      class="botao-azul"
+      style="margin-top: 20px;">
+
+      🎁 Ganhar 5 Moedas de Teste Grátis
+
+    </button>
+
+  </div>
+
+
+  <div class="footer">
+
+    <span onclick="abrirModal('modal-termos')" style="cursor:pointer;">
+      Termos de Uso
+    </span>
+
+    &nbsp; | &nbsp;
+
+    <span onclick="abrirModal('modal-privacidade')" style="cursor:pointer;">
+      Política de Privacidade
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- TELA DE CADASTRO -->
+<!-- ===================================================== -->
+
+<div id="cadastro-screen" class="dashboard-container tela">
+
+  <div class="card" style="max-width: 440px; margin: 40px auto;">
+
+    <h2 style="text-align: center; margin-top: 0;">
+      Crie sua conta grátis
+    </h2>
+
+    <p style="text-align: center; color: #9ca3af;">
+      Ganhe 5 moedas para testar a inteligência artificial.
+    </p>
+
+    <label style="color:#cbd5e1;">
+      Seu Nome
+    </label>
+
+    <input
+      type="text"
+      placeholder="Digite seu nome completo">
+
+
+    <label style="color:#cbd5e1;">
+      E-mail profissional
+    </label>
+
+    <input
+      type="email"
+      placeholder="seu@email.com">
+
+
+    <label style="color:#cbd5e1;">
+      WhatsApp
+    </label>
+
+    <input
+      type="text"
+      placeholder="(00) 00000-0000">
+
+
+    <button
+      type="button"
+      onclick="começarTeste()"
+      class="botao-azul">
+
+      Começar meu teste grátis
+
+    </button>
+
+
+    <p
+      onclick="voltar()"
+      style="text-align:center; color:#9ca3af; cursor:pointer; margin-top:24px; text-decoration:underline;">
+
+      ← Voltar ao início
+
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- TELA DE CHAT -->
+<!-- ===================================================== -->
+
+<div id="dashboard-screen" class="dashboard-container tela">
+
+  <div class="card" style="max-width: 600px; margin: 30px auto; border-color: #3b82f6;">
+
+    <div
+      class="chat-header"
+      style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1f2937; padding-bottom:15px; margin-bottom:15px;">
+
+      <h2 style="margin:0; font-size:20px; color:#3b82f6;">
+        🤖 Teste Prático da IA
+      </h2>
+
+      <div
+        style="background:#0b0f19; padding:8px 14px; border-radius:8px; border:1px solid #374151; font-weight:bold; color:#3b82f6;">
+
+        🪙 <span id="contador-moedas">5</span> Moedas
+
+      </div>
+
     </div>
 
-    <h3 style="color: #3b82f6; margin-bottom: 16px; text-transform: uppercase; font-size: 16px;">
-        Por que escolher o LeadVision AI?
+
+    <p style="color:#9ca3af; font-size:15px; margin-top:0;">
+
+      Envie mensagens simulando um cliente interessado para testar
+      as respostas automáticas da inteligência artificial.
+
+    </p>
+
+
+    <!-- CHAT -->
+
+    <div
+      id="chat-box"
+      style="background:#0b0f19; height:260px; border-radius:10px; border:1px solid #374151; padding:15px; overflow-y:auto; margin-bottom:15px; display:flex; flex-direction:column; gap:10px;">
+
+      <div
+        style="background:#1f2937; padding:10px 14px; border-radius:8px; max-width:80%; align-self:flex-start;">
+
+        Olá! Sou a inteligência artificial do seu negócio.
+        Digite uma mensagem abaixo para testar como eu respondo aos seus clientes! 🚀
+
+      </div>
+
+    </div>
+
+
+    <!-- CAMPO DE MENSAGEM -->
+
+    <div id="input-area" style="display:flex; gap:10px;">
+
+      <input
+        type="text"
+        id="mensagem-input"
+        placeholder="Digite sua mensagem de teste..."
+        style="margin-bottom:0;">
+
+      <button
+        type="button"
+        onclick="enviarMensagem()"
+        style="background:#3a82f6; color:#fff; width:120px; padding:0;">
+
+        Enviar
+
+      </button>
+
+    </div>
+
+
+    <!-- AVISO DE FIM DAS MOEDAS -->
+
+    <div
+      id="aviso-esgotado"
+      style="display:none; text-align:center; margin-top:20px;">
+
+      <p style="color:#ef4444; font-weight:bold;">
+
+        Suas 5 moedas de teste acabaram!
+
+      </p>
+
+      <p style="color:#cbd5e1;">
+
+        Para continuar utilizando o LeadVision AI,
+        escolha um plano abaixo.
+
+      </p>
+
+      <button
+        type="button"
+        onclick="irParaPlanos()"
+        class="botao-azul">
+
+        🚀 Ver Planos e Assinar
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <p
+    onclick="voltar()"
+    style="text-align:center; color:#9ca3af; cursor:pointer; text-decoration:underline;">
+
+    ← Voltar ao início
+
+  </p>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- TELA DE PLANOS -->
+<!-- ===================================================== -->
+
+<div id="planos-screen" class="dashboard-container tela">
+
+  <div style="text-align:center; padding-top:30px;">
+
+    <h1>
+      Escolha seu plano
+    </h1>
+
+    <p style="color:#9ca3af;">
+      Continue utilizando o LeadVision AI sem limite de teste.
+    </p>
+
+  </div>
+
+
+  <!-- PLANO PROFISSIONAL -->
+
+  <div
+    class="card"
+    style="max-width:380px; margin:30px auto 20px auto; border-color:#3b82f6;">
+
+    <h3 style="color:#3b82f6; font-size:22px; margin-top:0;">
+      Plano Profissional
     </h3>
 
-    <div class="card">
-        <h4 style="margin: 0 0 10px 0; font-size: 18px;">
-            ⚡ Atendimento Instantâneo
-        </h4>
-        <p style="color: #cbd5e1; margin: 0; font-size: 17px;">
-            Responda clientes em segundos, a qualquer hora do dia ou da noite.
-        </p>
-    </div>
+    <p style="font-size:28px; font-weight:bold; margin:8px 0;">
+      R$ 197
+      <span style="font-size:14px; color:#9ca3af;">
+        /mês
+      </span>
+    </p>
 
-    <div class="card">
-        <h4 style="margin: 0 0 10px 0; font-size: 20px;">
-            🤖 IA Humanizada
-        </h4>
-        <p style="color: #cbd5e1; margin: 0; font-size: 17px;">
-            Conversas naturais que entendem o seu negócio.
-        </p>
-    </div>
+    <p style="color:#cbd5e1; line-height:1.6;">
+      Ideal para profissionais e pequenos negócios que desejam
+      automatizar o atendimento.
+    </p>
 
-    <h3 style="color: #3b82f6; margin-bottom: 18px; text-transform: uppercase; font-size: 16px;">
-        Dúvidas Frequentes
+    <a
+      href="https://www.asaas.com/c/4slna3da9ii47g2x"
+      target="_blank"
+      style="text-decoration:none;">
+
+      <button
+        type="button"
+        class="botao-azul"
+        style="margin-top:15px;">
+
+        Assinar Profissional
+
+      </button>
+
+    </a>
+
+  </div>
+
+
+  <!-- PLANO EMPRESARIAL -->
+
+  <div
+    class="card"
+    style="max-width:380px; margin:0 auto 30px auto;">
+
+    <h3 style="color:#3b82f6; font-size:22px; margin-top:0;">
+      Plano Empresarial
     </h3>
 
-    <div class="card">
-        <h4 style="margin: 0 0 10px 0; font-size: 19px;">
-            Como a IA aprende sobre meu negócio?
-        </h4>
+    <p style="font-size:28px; font-weight:bold; margin:8px 0;">
+      R$ 397
+      <span style="font-size:14px; color:#9ca3af;">
+        /mês
+      </span>
+    </p>
 
-        <p style="color: #cbd5e1; margin: 0; font-size: 17px; line-height: 1.6;">
-            Você nos envia os detalhes dos seus serviços e a IA se personaliza automaticamente.
-        </p>
+    <p style="color:#cbd5e1; line-height:1.6;">
+      Para empresas que desejam uma automação mais completa
+      para atendimento e vendas.
+    </p>
 
-        <button
-            type="button"
-            onclick="começarTeste()"
-            style="background: #3a82f6; color: #fff; width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px;">
-            🎁 Ganhar 5 Moedas de Teste Grátis
-        </button>
-    </div>
+    <a
+      href="https://www.asaas.com/c/2rdqqona5pct665b"
+      target="_blank"
+      style="text-decoration:none;">
 
-    <div class="footer">
-    </div>
+      <button
+        type="button"
+        class="botao-azul"
+        style="margin-top:15px;">
+
+        Assinar Empresarial
+
+      </button>
+
+    </a>
+
+  </div>
+
+
+  <p
+    onclick="voltarDashboard()"
+    style="text-align:center; color:#9ca3af; cursor:pointer; text-decoration:underline;">
+
+    ← Voltar para o teste
+
+  </p>
 
 </div>
 
 
-<!-- ================= TELA DE CADASTRO ================= -->
-<div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 40px;">
+<!-- ===================================================== -->
+<!-- MODAL TERMOS -->
+<!-- ===================================================== -->
 
-    <div class="card" style="max-width: 440px; margin: 0 auto;">
+<div id="modal-termos" class="modal">
 
-        <h2 style="text-align: center; margin-top: 0;">
-            Crie sua conta grátis
-        </h2>
+  <div class="modal-content">
 
-        <p style="text-align: center; color: #9ca3af;">
-            Ganhe 5 moedas para testar a inteligência artificial
-        </p>
+    <h2 style="color:#3b82f6;">
+      Termos de Uso
+    </h2>
 
-        <label>Seu Nome</label>
-        <input type="text" placeholder="Digite seu nome completo">
+    <p style="color:#cbd5e1; line-height:1.6;">
 
-        <label>E-mail profissional</label>
-        <input type="email" placeholder="seu@email.com">
+      Ao utilizar o LeadVision AI, você concorda com nossos termos.
+      O serviço é fornecido conforme disponibilidade e destina-se a
+      fins profissionais de automação.
 
-        <label>WhatsApp</label>
-        <input type="text" placeholder="(00) 00000-0000">
+      É proibido utilizar a plataforma para envio de spam,
+      atividades ilícitas ou qualquer finalidade que viole a legislação.
 
-        <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer;">
-            ← Voltar ao início
-        </p>
+    </p>
 
-    </div>
-</div>
+    <button
+      onclick="fecharModal('modal-termos')"
+      class="botao-azul">
 
+      Fechar
 
-<!-- ================= TELA DE CHAT DE TESTE ================= -->
-<div id="dashboard-screen" class="dashboard-container" style="display: none; padding-top: 30px;">
+    </button>
 
-    <div class="card" style="max-width: 600px; margin: 0 auto; border-color: #3b82f6;">
-
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 15px;">
-
-            <h2 style="margin: 0; font-size: 20px; color: #3b82f6;">
-                🤖 Teste Prático da IA
-            </h2>
-
-            <div style="background: #0b0f19; padding: 8px 14px; border-radius: 8px; border: 1px solid #374151; font-weight: bold; color: #3b82f6;">
-                🪙 <span id="contador-moedas">5</span> Moedas
-            </div>
-
-        </div>
-
-        <p style="color: #9ca3af; font-size: 15px;">
-            Envie mensagens simulando um cliente interessado para testar as respostas automáticas da inteligência artificial.
-        </p>
-
-        <div id="chat-box" style="background: #0b0f19; height: 260px; border-radius: 10px; border: 1px solid #374151; padding: 15px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
-
-            <div style="background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start;">
-                Olá! Sou a inteligência artificial do seu negócio. Digite algo abaixo para testar como eu respondo aos seus clientes! 🚀
-            </div>
-
-        </div>
-
-        <div id="input-area" style="display: flex; gap: 10px;">
-
-            <input
-                type="text"
-                id="mensagem-input"
-                placeholder="Digite sua mensagem de teste..."
-                style="margin-bottom: 0;">
-
-            <button
-                type="button"
-                onclick="enviarMensagem()"
-                style="background: #3a82f6; color: #fff; width: 120px; padding: 0;">
-                Enviar
-            </button>
-
-        </div>
-
-        <div id="aviso-esgotado" style="display: none; text-align: center; margin-top: 15px;">
-
-            <p style="color: #ef4444; font-weight: bold;">
-                Suas moedas de teste acabaram!
-            </p>
-
-            <button
-                type="button"
-                onclick="irParaPlanos()"
-                style="background: #3a82f6; color: #fff; width: 100%;">
-                🚀 Escolher um Plano e Assinar
-            </button>
-
-        </div>
-
-    </div>
+  </div>
 
 </div>
 
 
-    
+<!-- ===================================================== -->
+<!-- MODAL PRIVACIDADE -->
+<!-- ===================================================== -->
 
-  <!-- MODAL TERMOS DE USO -->
-  <div id="modal-termos" class="modal">
-    <div class="modal-content">
-      <h2 style="color: #3b82f6; margin-top: 0;">Termos de Uso</h2>
-      <p style="color: #cbd5e1; line-height: 1.6;">Ao utilizar o LeadVision AI, você concorda com nossos termos. O serviço é fornecido conforme disponibilidade e destina-se a fins profissionais de automação. É terminantemente proibido o uso da plataforma para envio de spam ou atividades ilícitas.</p>
-      <button onclick="fecharModal('modal-termos')" style="background: #3b82f6; color: #fff; width: 100%; margin-top: 15px;">Fechar</button>
-    </div>
+<div id="modal-privacidade" class="modal">
+
+  <div class="modal-content">
+
+    <h2 style="color:#3b82f6;">
+      Política de Privacidade
+    </h2>
+
+    <p style="color:#cbd5e1; line-height:1.6;">
+
+      Sua privacidade é nossa prioridade.
+      Coletamos apenas os dados necessários para o funcionamento
+      e cadastro da automação, como nome, e-mail e WhatsApp.
+
+    </p>
+
+    <button
+      onclick="fecharModal('modal-privacidade')"
+      class="botao-azul">
+
+      Fechar
+
+    </button>
+
   </div>
 
-  <!-- MODAL POLÍTICA DE PRIVACIDADE -->
-  <div id="modal-privacidade" class="modal">
-    <div class="modal-content">
-      <h2 style="color: #3b82f6; margin-top: 0;">Política de Privacidade</h2>
-      <p style="color: #cbd5e1; line-height: 1.6;">Sua privacidade é nossa prioridade. Coletamos apenas os dados necessários para o funcionamento e cadastro da automação (Nome, E-mail e WhatsApp). Não compartilhamos suas informações com terceiros.</p>
-      <button onclick="fecharModal('modal-privacidade')" style="background: #3b82f6; color: #fff; width: 100%; margin-top: 15px;">Fechar</button>
-    </div>
-  </div>
+</div>
 
-  <!-- ================= TELA DE CADASTRO ================= -->
-  <div id="cadastro-screen" class="dashboard-container" style="display: none; padding-top: 40px;">
-    <div class="card" style="max-width: 440px; margin: 0 auto;">
-      <h2 style="text-align: center; margin-top: 0; font-size: 26px;">Crie sua conta grátis</h2>
-      <p style="text-align: center; color: #9ca3af; font-size: 17px; margin-bottom: 24px;">Ganhe 5 moedas para testar a inteligência artificial</p>
-      
-      <label style="font-size: 15px; color: #cbd5e1; display: block; margin-bottom: 6px;">Seu Nome</label>
-      <input type="text" placeholder="Digite seu nome completo">
 
-      <label style="font-size: 15px; color: #cbd5e1; display: block; margin-bottom: 6px;">E-mail profissional</label>
-      <input type="email" placeholder="seu@email.com">
+<!-- ===================================================== -->
+<!-- JAVASCRIPT ÚNICO -->
+<!-- ===================================================== -->
 
-      <label style="font-size: 15px; color: #cbd5e1; display: block; margin-bottom: 6px;">WhatsApp</label>
-      <input type="text" placeholder="(00) 00000-0000">
-      <p onclick="voltar()" style="text-align: center; color: #9ca3af; cursor: pointer; margin-top: 24px; text-decoration: underline; font-size: 16px;">← Voltar ao início</p>
-    </div>
-  </div>
+<script>
 
-  <!-- ================= TELA DE CHAT DE TESTE ================= -->
-  <div id="dashboard-screen" class="dashboard-container" style="display: none; padding-top: 30px;">
-    
-    <div class="card" style="max-width: 600px; margin: 0 auto; border-color: #3b82f6;">
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 15px; margin-bottom: 15px;">
-        <h2 style="margin: 0; font-size: 20px; color: #3b82f6;">🤖 Teste Prático da IA</h2>
-        <div style="background: #0b0f19; padding: 8px 14px; border-radius: 8px; border: 1px solid #374151; font-weight: bold; color: #3b82f6;">
-          🪙 <span id="contador-moedas">5</span> Moedas
-        </div>
-      </div>
-
-      <p style="color: #9ca3af; font-size: 15px; margin-top: 0;">Envie mensagens simulando um cliente interessado para testar as respostas automáticas da inteligência artificial.</p>
-
-      <div id="chat-box" style="background: #0b0f19; height: 260px; border-radius: 10px; border: 1px solid #374151; padding: 15px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="background: #1f2937; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 15px;">
-          Olá! Sou a inteligência artificial do seu negócio. Digite algo abaixo para testar como eu respondo aos seus clientes! 🚀
-        </div>
-      </div>
-
-      <div id="input-area" style="display: flex; gap: 10px;">
-        <input type="text" id="mensagem-input" placeholder="Digite sua mensagem de teste..." style="margin-bottom: 0;">
-        <button onclick="enviarMensagem()" style="background: #3a82f6; color: #fff; width: 120px; padding: 0;">Enviar</button>
-      </div>
-
-      <div id="aviso-esgotado" style="display: none; text-align: center; margin-top: 15px;">
-        <p style="color: #ef4444; font-weight: bold; margin-bottom: 10px;">Suas moedas de teste acabaram!</p>
-        <button onclick="ganharMoedas()" style="background: #3a82f6; color: #fff; width: 100%;">🚀 Escolher um Plano e Assinar Ilimitado</button>
-      </div> 
-
-        
-        
-
-    
-    <!-- Plano Profissional -->
-    <div class="card" style="max-width: 380px; margin: 0 auto 20px auto; text-align: left; border-color: #3b82f6;">
-      <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Profissional</h3>
-      <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 197<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <a href="https://www.asaas.com/c/4slna3da9ii47g2x" target="_blank" style="text-decoration: none;">
-        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Profissional</button>
-      </a>
-    </div>
-
-    <!-- Plano Empresarial -->
-    <div class="card" style="max-width: 380px; margin: 0 auto 30px auto; text-align: left;">
-      <h3 style="margin-top: 0; color: #3b82f6; font-size: 22px;">Plano Empresarial</h3>
-      <p style="font-size: 28px; font-weight: bold; margin: 8px 0;">R$ 397<span style="font-size: 14px; color: #9ca3af;">/mês</span></p>
-      <a href="https://www.asaas.com/c/2rdqqona5pct665b" target="_blank" style="text-decoration: none;">
-        <button style="background: #3a82f6; color: #fff; margin-top: 15px; width: 100%;">Assinar Empresarial</button>
-      </a>
-    </div>
-
-    <p onclick="voltarDashboard()" style="text-align: center; color: #9ca3af; cursor: pointer; text-decoration: underline; font-size: 16px;">← Voltar ao painel</p>
-  </div>
-
-  <script>
 let moedas = 5;
 
-function irParaCadastro() {
-    show('cadastro-screen');
-}
 
-function irParaDashboard() {
-    show('dashboard-screen');
-}
-
-function irParaPlanos() {
-    show('planos-screen');
-}
-
-function voltarDashboard() {
-    show('dashboard-screen');
-}
-
-function voltar() {
-    show('home-screen');
-}
-
-function começarTeste() {
-    moedas = 5;
-    localStorage.setItem('moedas', '5');
-
-    const contador = document.getElementById('contador-moedas');
-
-    if (contador) {
-        contador.textContent = '5';
-    }
-
-    show('dashboard-screen');
-    
-}
-
-    document.getElementById('home-screen').style.display = 'none';
-    document.getElementById('cadastro-screen').style.display = 'none';
-    document.getElementById('planos-screen').style.display = 'none';
-
-    const dashboard = document.getElementById('dashboard-screen');
-
-    if (dashboard) {
-        dashboard.style.display = 'block';
-    }
-
-    window.scrollTo(0, 0);
-}
-
-function abrirModal(id) {
-    document.getElementById(id).style.display = 'flex';
-}
-
-function fecharModal(id) {
-    document.getElementById(id).style.display = 'none';
-}
+/* ================================
+   MOSTRAR UMA TELA
+================================ */
 
 function show(id) {
-    document.getElementById('home-screen').style.display = 'none';
-    document.getElementById('cadastro-screen').style.display = 'none';
-    document.getElementById('dashboard-screen').style.display = 'none';
-    document.getElementById('planos-screen').style.display = 'none';
 
-    document.getElementById(id).style.display = 'block';
+  const telas = [
+    "home-screen",
+    "cadastro-screen",
+    "dashboard-screen",
+    "planos-screen"
+  ];
+
+  telas.forEach(function(tela) {
+
+    const elemento = document.getElementById(tela);
+
+    if (elemento) {
+      elemento.style.display = "none";
+    }
+
+  });
+
+
+  const destino = document.getElementById(id);
+
+  if (destino) {
+
+    destino.style.display = "block";
 
     window.scrollTo(0, 0);
+
+  }
+
 }
-    
 
-    function enviarMensagem() {
-    const input = document.getElementById('mensagem-input');
-    const chatBox = document.getElementById('chat-box');
 
-    if (input.value.trim() === '' || moedas <= 0) return;
+/* ================================
+   NAVEGAÇÃO
+================================ */
 
-    const msgUsuario = document.createElement('div');
-    msgUsuario.style.cssText = "background: #3a82f6; padding: 10px 14px; border-radius: 8px; max-width: 80%; align-self: flex-end; color: #fff;";
-    msgUsuario.textContent = input.value;
-    chatBox.appendChild(msgUsuario);
+function irParaCadastro() {
 
-    input.value = '';
+  show("cadastro-screen");
+
+}
+
+
+function irParaDashboard() {
+
+  show("dashboard-screen");
+
+}
+
+
+function irParaPlanos() {
+
+  show("planos-screen");
+
+}
+
+
+function voltarDashboard() {
+
+  show("dashboard-screen");
+
+}
+
+
+function voltar() {
+
+  show("home-screen");
+
+}
+
+
+/* ================================
+   COMEÇAR TESTE
+================================ */
+
+function começarTeste() {
+
+  moedas = 5;
+
+  localStorage.setItem("moedas", "5");
+
+
+  const contador = document.getElementById("contador-moedas");
+
+  if (contador) {
+    contador.textContent = "5";
+  }
+
+
+  const inputArea = document.getElementById("input-area");
+
+  if (inputArea) {
+    inputArea.style.display = "flex";
+  }
+
+
+  const aviso = document.getElementById("aviso-esgotado");
+
+  if (aviso) {
+    aviso.style.display = "none";
+  }
+
+
+  show("dashboard-screen");
+
+}
+
+
+/* ================================
+   ENVIAR MENSAGEM
+================================ */
+
+function enviarMensagem() {
+
+  const input = document.getElementById("mensagem-input");
+
+  const chatBox = document.getElementById("chat-box");
+
+
+  if (!input || !chatBox) {
+    return;
+  }
+
+
+  const texto = input.value.trim();
+
+
+  if (texto === "") {
+    return;
+  }
+
+
+  if (moedas <= 0) {
+
+    mostrarFimDoTeste();
+
+    return;
+
+  }
+
+
+  /* MENSAGEM DO CLIENTE */
+
+  const msgUsuario = document.createElement("div");
+
+  msgUsuario.style.cssText =
+    "background:#3a82f6;" +
+    "padding:10px 14px;" +
+    "border-radius:8px;" +
+    "max-width:80%;" +
+    "align-self:flex-end;" +
+    "color:#fff;";
+
+  msgUsuario.textContent = texto;
+
+  chatBox.appendChild(msgUsuario);
+
+
+  input.value = "";
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+
+  /* GASTA UMA MOEDA */
+
+  moedas--;
+
+
+  const contador = document.getElementById("contador-moedas");
+
+  if (contador) {
+    contador.textContent = moedas;
+  }
+
+
+  /* RESPOSTA DA IA */
+
+  setTimeout(function() {
+
+    const msgIA = document.createElement("div");
+
+    msgIA.style.cssText =
+      "background:#1f2937;" +
+      "padding:10px 14px;" +
+      "border-radius:8px;" +
+      "margin:8px 0;" +
+      "color:#fff;" +
+      "max-width:80%;";
+
+    msgIA.textContent = "Pensando...";
+
+    chatBox.appendChild(msgIA);
+
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    moedas--;
-    document.getElementById('contador-moedas').textContent = moedas;
 
-    setTimeout(() => {
-        const msgIA = document.createElement('div');
-        msgIA.style.cssText = "background: #1f2937; padding: 10px 14px; border-radius: 8px; margin: 8px 0; color: #fff; max-width: 80%;";
-        
-        if (moedas > 0) {
-            msgIA.textContent = "Pensando...";
-            chatBox.appendChild(msgIA);
-            chatBox.scrollTop = chatBox.scrollHeight;
+    setTimeout(function() {
 
-            setTimeout(() => {
-                const respostasGratuitas = [
-                    "Olá! Entendi a sua dúvida. Nossos serviços são focados em trazer a melhor qualidade e agilidade para você. Como posso te ajudar?",
-                    "Com certeza! Trabalhamos com todo o empenho para garantir o melhor resultado. Você gostaria de saber mais sobre nossos valores ou prazos?",
-                    "Recebi sua mensagem! Estamos à disposição para atender seu pedido com total dedicação. Tem alguma preferência de horário ou data?",
-                    "Ótima pergunta! O nosso atendimento é personalizado para cada cliente. Quer que eu te envie a nossa tabela completa?"
-                ];
-                const respostaAleatoria = respostasGratuitas[Math.floor(Math.random() * respostasGratuitas.length)];
-                
-                msgIA.textContent = respostaAleatoria;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1000);
-        } else {
-            msgIA.textContent = "Suas moedas de teste acabaram! Escolha uma opção para ganhar mais.";
-            chatBox.appendChild(msgIA);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            document.getElementById('input-area').style.display = 'none';
-            document.getElementById('aviso-esgotado').style.display = 'block';
-        }
-    }, 500);
+      const respostas = [
+
+        "Olá! Entendi sua dúvida. Como posso ajudar você a conhecer melhor nossos serviços?",
+
+        "Com certeza! Podemos ajudar você a encontrar a melhor solução para sua necessidade. Gostaria de saber mais sobre nossos serviços?",
+
+        "Recebi sua mensagem! Estamos à disposição para atender você. Posso ajudar com informações sobre valores, serviços ou atendimento.",
+
+        "Ótima pergunta! Nosso atendimento é personalizado. Quer saber mais sobre como podemos ajudar sua empresa?",
+
+        "Perfeito! Entendi seu interesse. Posso apresentar as principais informações para você."
+
+      ];
+
+
+      const resposta =
+        respostas[Math.floor(Math.random() * respostas.length)];
+
+
+      msgIA.textContent = resposta;
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+
+      /* SE ACABOU A 5ª MOEDA */
+
+      if (moedas <= 0) {
+
+        setTimeout(function() {
+
+          mostrarFimDoTeste();
+
+        }, 700);
+
+      }
+
+    }, 1000);
+
+  }, 500);
+
 }
+
+
+/* ================================
+   MOSTRAR FIM DO TESTE
+================================ */
+
+function mostrarFimDoTeste() {
+
+  const inputArea = document.getElementById("input-area");
+
+  const aviso = document.getElementById("aviso-esgotado");
+
+
+  if (inputArea) {
+    inputArea.style.display = "none";
+  }
+
+
+  if (aviso) {
+    aviso.style.display = "block";
+  }
+
+}
+
+
+/* ================================
+   GANHAR MOEDAS NOVAMENTE
+================================ */
+
 function ganharMoedas() {
-    moedas = 5;
-    localStorage.setItem('moedas', 5);
 
-    const contador = document.getElementById('contador-moedas');
+  moedas = 5;
 
-    if (contador) {
-        contador.textContent = moedas;
-    }
+  localStorage.setItem("moedas", "5");
 
-    const inputArea = document.getElementById('input-area');
 
-    if (inputArea) {
-        inputArea.style.display = 'flex';
-    }
+  const contador =
+    document.getElementById("contador-moedas");
+
+  if (contador) {
+    contador.textContent = "5";
+  }
+
+
+  const inputArea =
+    document.getElementById("input-area");
+
+  if (inputArea) {
+    inputArea.style.display = "flex";
+  }
+
+
+  const aviso =
+    document.getElementById("aviso-esgotado");
+
+  if (aviso) {
+    aviso.style.display = "none";
+  }
+
 }
+
+
+/* ================================
+   MODAIS
+================================ */
+
+function abrirModal(id) {
+
+  const modal = document.getElementById(id);
+
+  if (modal) {
+    modal.style.display = "flex";
+  }
+
+}
+
+
+function fecharModal(id) {
+
+  const modal = document.getElementById(id);
+
+  if (modal) {
+    modal.style.display = "none";
+  }
+
+}
+
+
+/* ================================
+   ENTER NO CHAT
+================================ */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  const input =
+    document.getElementById("mensagem-input");
+
+
+  if (input) {
+
+    input.addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        enviarMensagem();
+
+      }
+
+    });
+
+  }
+
+});
+
 </script>
+
+</body>
+</html>
