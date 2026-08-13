@@ -739,37 +739,29 @@ function começarTeste() {
 
 
 /* ================================
+/* ================================
    ENVIAR MENSAGEM
 ================================ */
 
 function enviarMensagem() {
 
   const input = document.getElementById("mensagem-input");
-
   const chatBox = document.getElementById("chat-box");
-
 
   if (!input || !chatBox) {
     return;
   }
 
-
   const texto = input.value.trim();
-
 
   if (texto === "") {
     return;
   }
 
-
   if (moedas <= 0) {
-
     mostrarFimDoTeste();
-
     return;
-
   }
-
 
   /* MENSAGEM DO CLIENTE */
 
@@ -787,16 +779,13 @@ function enviarMensagem() {
 
   chatBox.appendChild(msgUsuario);
 
-
   input.value = "";
 
   chatBox.scrollTop = chatBox.scrollHeight;
 
-
   /* GASTA UMA MOEDA */
 
   moedas--;
-
 
   const contador = document.getElementById("contador-moedas");
 
@@ -804,118 +793,72 @@ function enviarMensagem() {
     contador.textContent = moedas;
   }
 
-
   /* RESPOSTA DA IA */
 
-  setTimeout(function() {
-
-    const msgIA = document.createElement("div");
-
-    msgIA.style.cssText =
-      "background:#1f2937;" +
-      "padding:10px 14px;" +
-      "border-radius:8px;" +
-      "margin:8px 0;" +
-      "color:#fff;" +
-      "max-width:80%;";
-
-    msgIA.textContent = "Pensando...";
-
-    chatBox.appendChild(msgIA);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-
-    setTimeout(function() {
-
-      const respostas = [
-
-        "Olá! Entendi sua dúvida. Como posso ajudar você a conhecer melhor nossos serviços?",
-
-        "Com certeza! Podemos ajudar você a encontrar a melhor solução para sua necessidade. Gostaria de saber mais sobre nossos serviços?",
-
-        "Recebi sua mensagem! Estamos à disposição para atender você. Posso ajudar com informações sobre valores, serviços ou atendimento.",
-
-        "Ótima pergunta! Nosso atendimento é personalizado. Quer saber mais sobre como podemos ajudar sua empresa?",
-
-        "Perfeito! Entendi seu interesse. Posso apresentar as principais informações para você."
-
-      ];
-
-
-      const resposta =
-        respostas[Math.floor(Math.random() * respostas.length)];
-
-
-      msgIA.textContent = resposta;
-
-      chatBox.scrollTop = chatBox.scrollHeight;
-
-
-      /* SE ACABOU A 5ª MOEDA */
-
-      if (moedas <= 0) {
-
-            // CHAMA A IA REAL NO SUPABASE
-    fetch('https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ mensagem: texto })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Exibe a resposta real que veio do Supabase
-        msgIA.textContent = data.resposta;
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        // SE ACABOU A 5ª MOEDA
-        if (moedas <= 0) {
-            setTimeout(function() {
-                mostrarFimDoTeste();
-
-function enviarMensagem() {
-  const input = document.getElementById("mensagem-input");
-  const chatBox = document.getElementById("chat-box");
-  if (!input || !chatBox) return;
-  const texto = input.value.trim();
-  if (texto === "") return;
-  if (moedas <= 0) {
-    mostrarFimDoTeste();
-    return;
-  }
-  const msgUsuario = document.createElement("div");
-  msgUsuario.style.cssText = "background:#3a82f6; padding:10px 14px; border-radius:8px; max-width:80%; align-self:flex-end; color:#fff;";
-  msgUsuario.textContent = texto;
-  chatBox.appendChild(msgUsuario);
-  input.value = "";
-  chatBox.scrollTop = chatBox.scrollHeight;
-  moedas--;
-  const contador = document.getElementById("contador-moedas");
-  if (contador) contador.textContent = moedas;
   const msgIA = document.createElement("div");
-  msgIA.style.cssText = "background:#1f2937; padding:10px 14px; border-radius:8px; margin:8px 0; color:#fff; max-width:80%;";
+
+  msgIA.style.cssText =
+    "background:#1f2937;" +
+    "padding:10px 14px;" +
+    "border-radius:8px;" +
+    "margin:8px 0;" +
+    "color:#fff;" +
+    "max-width:80%;";
+
   msgIA.textContent = "Pensando...";
+
   chatBox.appendChild(msgIA);
+
   chatBox.scrollTop = chatBox.scrollHeight;
-  fetch('https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mensagem: texto })
+
+  /* IA PELO SUPABASE */
+
+  fetch("https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mensagem: texto
+    })
   })
-  .then(response => response.json())
-  .then(data => {
-    msgIA.textContent = data.resposta || "Olá! Como posso ajudar?";
+  .then(function(response) {
+
+    if (!response.ok) {
+      throw new Error("Erro na função da IA");
+    }
+
+    return response.json();
+
+  })
+  .then(function(data) {
+
+    msgIA.textContent =
+      data.resposta || "Olá! Como posso ajudar você?";
+
     chatBox.scrollTop = chatBox.scrollHeight;
-    if (moedas <= 0) setTimeout(mostrarFimDoTeste, 700);
+
+    if (moedas <= 0) {
+
+      setTimeout(function() {
+        mostrarFimDoTeste();
+      }, 700);
+
+    }
+
   })
-  .catch(error => {
-    msgIA.textContent = "Erro ao conectar com a IA.";
+  .catch(function(error) {
+
+    console.error(error);
+
+    msgIA.textContent =
+      "Desculpe, não consegui conectar com a inteligência artificial.";
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
   });
+
 }
-
-
 
 /* ================================
    ENTER NO CHAT
