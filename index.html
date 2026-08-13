@@ -224,15 +224,25 @@ function voltar() {
 
 function começarTeste() {
     moedas = 5;
-    localStorage.setItem('moedas', 5);
+    localStorage.setItem('moedas', '5');
 
     const contador = document.getElementById('contador-moedas');
 
     if (contador) {
-        contador.textContent = moedas;
+        contador.textContent = '5';
     }
 
-    show('dashboard-screen');
+    document.getElementById('home-screen').style.display = 'none';
+    document.getElementById('cadastro-screen').style.display = 'none';
+    document.getElementById('planos-screen').style.display = 'none';
+
+    const dashboard = document.getElementById('dashboard-screen');
+
+    if (dashboard) {
+        dashboard.style.display = 'block';
+    }
+
+    window.scrollTo(0, 0);
 }
 
 function abrirModal(id) {
