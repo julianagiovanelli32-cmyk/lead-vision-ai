@@ -874,103 +874,45 @@ function enviarMensagem() {
         if (moedas <= 0) {
             setTimeout(function() {
                 mostrarFimDoTeste();
-            }, 700);
-        }
-    })
-    .catch(error => {
-        msgIA.textContent = "Erro ao conectar com a inteligência artificial.";
-        chatBox.scrollTop = chatBox.scrollHeight;
-    });
 
-
-  }, 500);
-
-}
-
-
-/* ================================
-   MOSTRAR FIM DO TESTE
-================================ */
-
-function mostrarFimDoTeste() {
-
-  const inputArea = document.getElementById("input-area");
-
-  const aviso = document.getElementById("aviso-esgotado");
-
-
-  if (inputArea) {
-    inputArea.style.display = "none";
+function enviarMensagem() {
+  const input = document.getElementById("mensagem-input");
+  const chatBox = document.getElementById("chat-box");
+  if (!input || !chatBox) return;
+  const texto = input.value.trim();
+  if (texto === "") return;
+  if (moedas <= 0) {
+    mostrarFimDoTeste();
+    return;
   }
-
-
-  if (aviso) {
-    aviso.style.display = "block";
-  }
-
-}
-
-
-/* ================================
-   GANHAR MOEDAS NOVAMENTE
-================================ */
-
-function ganharMoedas() {
-
-  moedas = 5;
-
-  localStorage.setItem("moedas", "5");
-
-
-  const contador =
-    document.getElementById("contador-moedas");
-
-  if (contador) {
-    contador.textContent = "5";
-  }
-
-
-  const inputArea =
-    document.getElementById("input-area");
-
-  if (inputArea) {
-    inputArea.style.display = "flex";
-  }
-
-
-  const aviso =
-    document.getElementById("aviso-esgotado");
-
-  if (aviso) {
-    aviso.style.display = "none";
-  }
-
-}
-
-
-/* ================================
-   MODAIS
-================================ */
-
-function abrirModal(id) {
-
-  const modal = document.getElementById(id);
-
-  if (modal) {
-    modal.style.display = "flex";
-  }
-
-}
-
-
-function fecharModal(id) {
-
-  const modal = document.getElementById(id);
-
-  if (modal) {
-    modal.style.display = "none";
-  }
-
+  const msgUsuario = document.createElement("div");
+  msgUsuario.style.cssText = "background:#3a82f6; padding:10px 14px; border-radius:8px; max-width:80%; align-self:flex-end; color:#fff;";
+  msgUsuario.textContent = texto;
+  chatBox.appendChild(msgUsuario);
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+  moedas--;
+  const contador = document.getElementById("contador-moedas");
+  if (contador) contador.textContent = moedas;
+  const msgIA = document.createElement("div");
+  msgIA.style.cssText = "background:#1f2937; padding:10px 14px; border-radius:8px; margin:8px 0; color:#fff; max-width:80%;";
+  msgIA.textContent = "Pensando...";
+  chatBox.appendChild(msgIA);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  fetch('https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mensagem: texto })
+  })
+  .then(response => response.json())
+  .then(data => {
+    msgIA.textContent = data.resposta || "Olá! Como posso ajudar?";
+    chatBox.scrollTop = chatBox.scrollHeight;
+    if (moedas <= 0) setTimeout(mostrarFimDoTeste, 700);
+  })
+  .catch(error => {
+    msgIA.textContent = "Erro ao conectar com a IA.";
+  });
 }
 
 
