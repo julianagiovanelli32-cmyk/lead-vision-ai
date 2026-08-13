@@ -856,15 +856,32 @@ function enviarMensagem() {
 
       if (moedas <= 0) {
 
-        setTimeout(function() {
+            // CHAMA A IA REAL NO SUPABASE
+    fetch('https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mensagem: texto })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Exibe a resposta real que veio do Supabase
+        msgIA.textContent = data.resposta;
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-          mostrarFimDoTeste();
+        // SE ACABOU A 5ª MOEDA
+        if (moedas <= 0) {
+            setTimeout(function() {
+                mostrarFimDoTeste();
+            }, 700);
+        }
+    })
+    .catch(error => {
+        msgIA.textContent = "Erro ao conectar com a inteligência artificial.";
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
 
-        }, 700);
-
-      }
-
-    }, 1000);
 
   }, 500);
 
