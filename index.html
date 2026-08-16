@@ -494,7 +494,6 @@
 
   </div>
 
-
   <!-- PLANO EMPRESARIAL -->
 
   <div
@@ -701,6 +700,7 @@ function voltar() {
 }
 
 
+
 /* ================================
    COMEÇAR TESTE
 ================================ */
@@ -711,13 +711,11 @@ function começarTeste() {
 
   localStorage.setItem("moedas", "5");
 
-
   const contador = document.getElementById("contador-moedas");
 
   if (contador) {
     contador.textContent = "5";
   }
-
 
   const inputArea = document.getElementById("input-area");
 
@@ -725,20 +723,36 @@ function começarTeste() {
     inputArea.style.display = "flex";
   }
 
-
   const aviso = document.getElementById("aviso-esgotado");
 
   if (aviso) {
     aviso.style.display = "none";
   }
 
-
   show("dashboard-screen");
-
 }
 
 
 /* ================================
+   FIM DO TESTE
+================================ */
+
+function mostrarFimDoTeste() {
+
+  const inputArea = document.getElementById("input-area");
+  const aviso = document.getElementById("aviso-esgotado");
+
+  if (inputArea) {
+    inputArea.style.display = "none";
+  }
+
+  if (aviso) {
+    aviso.style.display = "block";
+  }
+
+}
+
+  
 /* ================================
    ENVIAR MENSAGEM
 ================================ */
@@ -786,6 +800,8 @@ function enviarMensagem() {
   /* GASTA UMA MOEDA */
 
   moedas--;
+
+  localStorage.setItem("moedas", moedas);
 
   const contador = document.getElementById("contador-moedas");
 
