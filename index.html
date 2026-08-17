@@ -273,8 +273,9 @@
     </label>
 
     <input
-      type="text"
-      placeholder="Digite seu nome completo">
+  id="cadastro-nome"
+  type="text"
+  placeholder="Digite seu nome completo">
 
 
     <label style="color:#cbd5e1;">
@@ -282,8 +283,9 @@
     </label>
 
     <input
-      type="email"
-      placeholder="seu@email.com">
+  id="cadastro-email"
+  type="email"
+  placeholder="seu@email.com">
 
 
     <label style="color:#cbd5e1;">
@@ -291,8 +293,9 @@
     </label>
 
     <input
-      type="text"
-      placeholder="(00) 00000-0000">
+  id="cadastro-whatsapp"
+  type="text"
+  placeholder="(00) 00000-0000">
 
 
     <button
@@ -757,31 +760,76 @@ function voltar() {
    COMEÇAR TESTE
 ================================ */
 
-function começarTeste() {
+async function começarTeste() {
 
-  moedas = 5;
+  const nome = document.getElementById("cadastro-nome")?.value.trim();
+  const email = document.getElementById("cadastro-email")?.value.trim();
+  const whatsapp = document.getElementById("cadastro-whatsapp")?.value.trim();
 
-  localStorage.setItem("moedas", "5");
-
-  const contador = document.getElementById("contador-moedas");
-
-  if (contador) {
-    contador.textContent = "5";
+  if (!nome || !email) {
+    alert("Digite seu nome e seu e-mail para começar o teste grátis.");
+    return;
   }
 
-  const inputArea = document.getElementById("input-area");
+  try {
 
-  if (inputArea) {
-    inputArea.style.display = "flex";
+    const resposta = await fetch(
+      "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/rapid-api",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          whatsapp: whatsapp
+        })
+      }
+    );
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok || !dados.sucesso) {
+      console.error("Erro ao criar usuário:", dados);
+      alert("Não foi possível criar sua conta. Tente novamente.");
+      return;
+    }
+
+    moedas = 5;
+
+    localStorage.setItem("moedas", "5");
+    localStorage.setItem("usuarioId", dados.usuario.id);
+    localStorage.setItem("usuarioEmail", email);
+
+    const contador = document.getElementById("contador-moedas");
+
+    if (contador) {
+      contador.textContent = "5";
+    }
+
+    const inputArea = document.getElementById("input-area");
+
+    if (inputArea) {
+      inputArea.style.display = "flex";
+    }
+
+    const aviso = document.getElementById("aviso-esgotado");
+
+    if (aviso) {
+      aviso.style.display = "none";
+    }
+
+    show("dashboard-screen");
+
+  } catch (erro) {
+
+    console.error("Erro no cadastro:", erro);
+
+    alert("Não foi possível conectar ao sistema. Tente novamente.");
+
   }
 
-  const aviso = document.getElementById("aviso-esgotado");
-
-  if (aviso) {
-    aviso.style.display = "none";
-  }
-
-  show("dashboard-screen");
 }
 
 
