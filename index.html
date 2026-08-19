@@ -372,9 +372,11 @@
     </div>
 
 
-    !-- CAMPO DE MENSAGEM -->
+     <!-- CAMPO DE MENSAGEM -->
 
-    <div id="aviso-esgotado" style="display:none; text-align:center; margin:35px 0 20px 0;">
+<div
+  id="aviso-esgotado"
+  style="display:none; text-align:center; margin:35px 0 20px 0;">
 
   <h3 style="color:#ef4444;">
     ⚠️ Suas 5 moedas de teste acabaram
@@ -388,65 +390,34 @@
     type="button"
     class="botao-azul"
     onclick="mostrarPlanos()"
-    style="margin-top:20px;"
+    style="margin-top:20px;">
 
     🚀 Ver planos e continuar
+
   </button>
 
 </div>
 
-    <div id="input-area" style="display:flex; gap:10px;">
+<div id="input-area" style="display:flex; gap:10px;">
 
-      <input
-        type="text"
-        id="mensagem-input"
-        placeholder="Digite sua mensagem de teste..."
-        style="margin-bottom:0;">
+  <input
+    type="text"
+    id="mensagem-input"
+    placeholder="Digite sua mensagem de teste..."
+    style="margin-bottom:0;">
 
-      <button
-        type="button"
-        onclick="enviarMensagem()"
-        style="background:#3a82f6; color:#fff; width:120px; padding:0;">
+  <button
+    type="button"
+    onclick="enviarMensagem()"
+    style="background:#3a82f6; color:#fff; width:120px; padding:0;">
 
-        Enviar
+    Enviar
 
-      </button>
+  </button>
 
-    </div>
+</div>
 
-
-    function mostrarFimDoTeste() {
-
-  if (moedas > 0) {
-    return;
-  }
-
-  const inputArea = document.getElementById("input-area");
-  const aviso = document.getElementById("aviso-esgotado");
-
-  if (inputArea) {
-    inputArea.style.display = "none";
-  }
-
-  if (aviso) {
-    aviso.style.display = "block";
-  }
-
-}
-p>
-
-      <button
-        type="button"
-        onclick="irParaPlanos()"
-        class="botao-azul">
-
-        🚀 Ver Planos e Assinar
-
-      </button>
-
-    </div>
-
-  </div>
+</div>
 
 
   <p
@@ -478,10 +449,6 @@ p>
 
   </div>
 
-  
-<!-- PLANO INICIAL -->
-
-<!-- PLANO INICIAL -->
 
 <!-- PLANO INICIAL -->
 
@@ -568,9 +535,6 @@ p>
 </div>
 
   <!-- PLANO EMPRESARIAL -->
-
-  
-<!-- PLANO EMPRESARIAL -->
 
 <div
   class="card"
@@ -776,18 +740,11 @@ function voltar() {
 
 }
 
-
-
 /* ================================
    COMEÇAR TESTE
 ================================ */
 
 async function começarTeste() {
-const aviso = document.getElementById("aviso-esgotado");
-
-if (aviso) {
-  aviso.style.display = "none";
-}
 
   const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
@@ -823,11 +780,17 @@ if (aviso) {
       return;
     }
 
+    /* ==============================
+       INICIAR 5 MOEDAS GRÁTIS
+    ============================== */
+
     moedas = 5;
 
     localStorage.setItem("moedas", "5");
     localStorage.setItem("usuarioId", dados.usuario.id);
     localStorage.setItem("usuarioEmail", email);
+
+    /* Atualiza contador */
 
     const contador = document.getElementById("contador-moedas");
 
@@ -835,17 +798,23 @@ if (aviso) {
       contador.textContent = "5";
     }
 
+    /* Mostra campo de mensagem */
+
     const inputArea = document.getElementById("input-area");
 
     if (inputArea) {
       inputArea.style.display = "flex";
     }
 
+    /* Esconde aviso de fim do teste */
+
     const aviso = document.getElementById("aviso-esgotado");
 
     if (aviso) {
       aviso.style.display = "none";
     }
+
+    /* Abre o dashboard */
 
     show("dashboard-screen");
 
@@ -858,6 +827,7 @@ if (aviso) {
   }
 
 }
+}
 
 
 /* ================================
@@ -865,6 +835,11 @@ if (aviso) {
 ================================ */
 
 function mostrarFimDoTeste() {
+
+  // Só mostra o fim do teste quando as moedas acabarem
+  if (moedas > 0) {
+    return;
+  }
 
   const inputArea = document.getElementById("input-area");
   const aviso = document.getElementById("aviso-esgotado");
@@ -877,9 +852,16 @@ function mostrarFimDoTeste() {
     aviso.style.display = "block";
   }
 
-} 
+}
 
-  function mostrarPlanos() {
+
+function mostrarPlanos() {
+
+  // Só permite abrir os planos quando o teste acabou
+  if (moedas > 0) {
+    return;
+  }
+
   document.querySelectorAll(".tela").forEach((tela) => {
     tela.style.display = "none";
   });
@@ -894,6 +876,8 @@ function mostrarFimDoTeste() {
     top: 0,
     behavior: "smooth"
   });
+
+}
 }
 
   
