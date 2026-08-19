@@ -415,7 +415,11 @@
     </div>
 
 
-    <function mostrarFimDoTeste() {
+    function mostrarFimDoTeste() {
+
+  if (moedas > 0) {
+    return;
+  }
 
   const inputArea = document.getElementById("input-area");
   const aviso = document.getElementById("aviso-esgotado");
