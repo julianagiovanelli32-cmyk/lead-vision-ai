@@ -779,6 +779,11 @@ function voltar() {
 ================================ */
 
 async function começarTeste() {
+const aviso = document.getElementById("aviso-esgotado");
+
+if (aviso) {
+  aviso.style.display = "none";
+}
 
   const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
