@@ -372,7 +372,28 @@
     </div>
 
 
-    <!-- CAMPO DE MENSAGEM -->
+    !-- CAMPO DE MENSAGEM -->
+
+    <div id="aviso-esgotado" style="display:none; text-align:center; margin:20px 0;">
+
+  <h3 style="color:#ef4444;">
+    ⚠️ Suas 5 moedas de teste acabaram
+  </h3>
+
+  <p style="color:#cbd5e1;">
+    Seu teste gratuito terminou. Escolha um plano para continuar utilizando o LeadVision AI.
+  </p>
+
+  <button
+    type="button"
+    class="botao-azul"
+    onclick="mostrarPlanos()"
+    style="margin-top:15px;">
+
+    🚀 Ver planos e continuar
+  </button>
+
+</div>
 
     <div id="input-area" style="display:flex; gap:10px;">
 
@@ -394,24 +415,21 @@
     </div>
 
 
-    <!-- AVISO DE FIM DAS MOEDAS -->
+    <function mostrarFimDoTeste() {
 
-    <div
-      id="aviso-esgotado"
-      style="display:none; text-align:center; margin-top:20px;">
+  const inputArea = document.getElementById("input-area");
+  const aviso = document.getElementById("aviso-esgotado");
 
-      <p style="color:#ef4444; font-weight:bold;">
+  if (inputArea) {
+    inputArea.style.display = "none";
+  }
 
-        Suas 5 moedas de teste acabaram!
+  if (aviso) {
+    aviso.style.display = "block";
+  }
 
-      </p>
-
-      <p style="color:#cbd5e1;">
-
-        Para continuar utilizando o LeadVision AI,
-        escolha um plano abaixo.
-
-      </p>
+}
+p>
 
       <button
         type="button"
@@ -850,6 +868,23 @@ function mostrarFimDoTeste() {
     aviso.style.display = "block";
   }
 
+} 
+
+  function mostrarPlanos() {
+  document.querySelectorAll(".tela").forEach((tela) => {
+    tela.style.display = "none";
+  });
+
+  const planos = document.getElementById("planos-screen");
+
+  if (planos) {
+    planos.style.display = "block";
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
   
