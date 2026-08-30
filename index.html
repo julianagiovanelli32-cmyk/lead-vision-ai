@@ -1137,32 +1137,45 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-document.querySelector("form").addEventListener("submit", function(event) {
-    const nome = document.querySelector("#nome").value.trim();
-    const email = document.querySelector("#email").value.trim();
-    const whatsapp = document.querySelector("#whatsapp").value.trim();
+const btn1 = document.querySelector("form button");
+const botaoComecar = btn1 || document.querySelector("button");
 
-    // Validação básica
-    if (nome.length < 3) {
-        alert("Por favor, digite seu nome completo.");
-        event.preventDefault();
-        return;
-    }
-    
-    if (!email.includes("@") || !email.includes(".")) {
-        alert("Por favor, digite um e-mail válido.");
-        event.preventDefault();
-        return;
-    }
+    botaoComecar.addEventListener("click", function(event) {
+        // Tenta achar os campos (tentando pelos IDs comuns ou por seletores)
+        const inputNome = document.querySelector("#nome") || document.querySelector("input[placeholder*='Nome']");
+        const inputEmail = document.querySelector("#email") || document.querySelector("input[placeholder*='e-mail']");
+        const inputWp = document.querySelector("#whatsapp") || document.querySelector("input[placeholder*='00']");
 
-    if (whatsapp.length < 10) {
-        alert("Por favor, digite um número de WhatsApp válido com DDD.");
-        event.preventDefault();
-        return;
-    }
+        const nome = inputNome ? inputNome.value.trim() : "";
+        const email = inputEmail ? inputEmail.value.trim() : "";
+        const whatsapp = inputWp ? inputWp.value.trim() : "";
 
-    // Se passar por todas, o fluxo avança para o chat
-});
+        // Validação do Nome (mínimo de 3 letras)
+        if (nome.length < 3) {
+            alert("Por favor, digite seu nome completo.");
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+        
+        // Validação do E-mail (precisa ter @ e .)
+        if (!email.includes("@") || !email.includes(".")) {
+            alert("Por favor, digite um e-mail válido.");
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+
+        // Validação do WhatsApp (mínimo de 10 números contando com o DDD)
+        if (whatsapp.length < 10) {
+            alert("Por favor, digite um número de WhatsApp válido com DDD.");
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
+}
+
 
 </script>
 
