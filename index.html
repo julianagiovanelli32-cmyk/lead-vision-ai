@@ -1142,12 +1142,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 if (botao) {
     botao.addEventListener("click", function(event) {
-        const nome = document.querySelector("#nome") ? document.querySelector("#nome").value : "";
-        
+        const inputs = document.querySelectorAll("input");
+        const nome = inputs[0] ? inputs[0].value.trim() : "";
+        const email = inputs[1] ? inputs[1].value.trim() : "";
+        const whatsapp = inputs[2] ? inputs[2].value.trim() : "";
+
         if (nome.length < 3) {
             alert("Por favor, digite seu nome completo.");
             event.preventDefault();
+            return;
+        }
+        
+        if (!email.includes("@") || !email.includes(".")) {
+            alert("Por favor, digite um e-mail válido.");
+            event.preventDefault();
+            return;
+        }
+
+        if (whatsapp.length < 10) {
+            alert("Por favor, digite um número de WhatsApp válido.");
+            event.preventDefault();
+            return;
         }
     });
 }
-
