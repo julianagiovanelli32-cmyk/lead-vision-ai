@@ -418,7 +418,8 @@ function carregarCidades() {
 
     <button
   type="button"
-  onclick="iniciarTeste()"
+  onclick="começarTeste()"
+
 
   class="botao-azul">
 
@@ -854,21 +855,22 @@ function voltar() {
 /* ================================
    COMEÇAR TESTE
 ================================ */
-
-async function iniciarTeste() {
-
-
+async function começarTeste() {
   const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
   const whatsapp = document.getElementById("cadastro-whatsapp")?.value.trim();
 
-  if (!nome || !email) {
-    alert("Digite seu nome e seu e-mail para começar o teste grátis.");
+  if (!nome || nome.length < 3) {
+    alert("Por favor, digite seu nome completo (mínimo de 3 letras).");
+    return;
+  }
+
+  if (!email) {
+    alert("Digite seu e-mail para começar o teste grátis.");
     return;
   }
 
   try {
-
     const resposta = await fetch(
       "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/rapid-api",
       {
@@ -891,6 +893,34 @@ async function iniciarTeste() {
       alert("Não foi possível criar sua conta. Tente novamente.");
       return;
     }
+
+    moedas = 5;
+    localStorage.setItem("moedas", "5");
+    localStorage.setItem("usuarioId", dados.usuario.id);
+    localStorage.setItem("usuarioEmail", email);
+
+    const contador = document.getElementById("contador-moedas");
+    if (contador) {
+      contador.textContent = "5";
+    }
+
+    const inputArea = document.getElementById("input-area");
+    if (inputArea) {
+      inputArea.style.display = "flex";
+    }
+
+    const aviso = document.getElementById("aviso-esgotado");
+    if (aviso) {
+      aviso.style.display = "none";
+    }
+
+    show("dashboard-screen");
+
+  } catch (erro) {
+    console.error("Erro no cadastro:", erro);
+    alert("Não foi possível conectar ao sistema. Tente novamente.");
+  }
+}
 
     /* ==============================
        INICIAR 5 MOEDAS GRÁTIS
