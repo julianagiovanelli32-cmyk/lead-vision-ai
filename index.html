@@ -774,7 +774,7 @@ function carregarCidades() {
 </div>
 
 
-<-- ===================================================== -->
+<!-- ===================================================== -->
 <!-- JAVASCRIPT ÚNICO -->
 <!-- ===================================================== -->
 
@@ -854,7 +854,7 @@ function voltar() {
 /* ================================
    COMEÇAR TESTE
 ================================ */
-async function começarTeste() {
+async function comecarTeste() {
 
   alert("A função começarTeste foi chamada!");
 
@@ -924,53 +924,7 @@ async function começarTeste() {
   }
 }
 
-    /* ==============================
-       INICIAR 5 MOEDAS GRÁTIS
-    ============================== */
-
-    moedas = 5;
-
-    localStorage.setItem("moedas", "5");
-    localStorage.setItem("usuarioId", dados.usuario.id);
-    localStorage.setItem("usuarioEmail", email);
-
-    /* Atualiza contador */
-
-    const contador = document.getElementById("contador-moedas");
-
-    if (contador) {
-      contador.textContent = "5";
-    }
-
-    /* Mostra campo de mensagem */
-
-    const inputArea = document.getElementById("input-area");
-
-    if (inputArea) {
-      inputArea.style.display = "flex";
-    }
-
-    /* Esconde aviso de fim do teste */
-
-    const aviso = document.getElementById("aviso-esgotado");
-
-    if (aviso) {
-      aviso.style.display = "none";
-    }
-
-    /* Abre o dashboard */
-
-    show("dashboard-screen");
-
-  } catch (erro) {
-
-    console.error("Erro no cadastro:", erro);
-
-    alert("Não foi possível conectar ao sistema. Tente novamente.");
-
-  }
-
-}
+    
 
 /* ================================
    FIM DO TESTE
