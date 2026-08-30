@@ -1137,40 +1137,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-const botaoComecar = document.querySelector("form button") || document.querySelector("button");
 
-if (botaoComecar) {
-    botaoComecar.addEventListener("click", function(event) {
-        // Pega todos os inputs de texto do formulário na ordem em que aparecem
-        const inputs = document.querySelectorAll("input");
+  const botao = document.querySelector("button");
+
+if (botao) {
+    botao.addEventListener("click", function(event) {
+        const nome = document.querySelector("#nome") ? document.querySelector("#nome").value : "";
         
-        // Ajuste conforme a posição dos campos na sua tela de cadastro
-        const nome = inputs[0] ? inputs[0].value.trim() : "";
-        const email = inputs[1] ? inputs[1].value.trim() : "";
-        const whatsapp = inputs[2] ? inputs[2].value.trim() : "";
-
-        // Validação do Nome (mínimo de 3 letras)
         if (nome.length < 3) {
             alert("Por favor, digite seu nome completo.");
             event.preventDefault();
-            event.stopPropagation();
-            return false;
-        }
-        
-        // Validação do E-mail (precisa ter @ e .)
-        if (!email.includes("@") || !email.includes(".")) {
-            alert("Por favor, digite um e-mail válido.");
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-        }
-
-        // Validação do WhatsApp (mínimo de 10 números)
-        if (whatsapp.length < 10) {
-            alert("Por favor, digite um número de WhatsApp válido com DDD.");
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
         }
     });
 }
+
