@@ -133,6 +133,91 @@
 <!-- PÁGINA PRINCIPAL -->
 <!-- ===================================================== -->
 
+  <!-- Seletor Inteligente de Estados e Cidades + Aviso Comercial -->
+<div style="margin: 30px auto; padding: 25px; max-width: 500px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-family: sans-serif; text-align: center;">
+    <h3 style="color: #0f172a; margin-bottom: 15px; font-size: 20px;">Encontre Leads e Empresas na sua Região</h3>
+    
+    <div style="margin-bottom: 15px; text-align: left;">
+        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #475569; font-size: 14px;">Selecione o Estado:</label>
+        <select id="selectEstado" onchange="carregarCidades()" style="padding: 12px; width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; background: #f8fafc;">
+            <option value="">Carregando estados...</option>
+        </select>
+    </div>
+    
+    <div style="margin-bottom: 20px; text-align: left;">
+        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #475569; font-size: 14px;">Selecione a Cidade:</label>
+        <select id="selectCidade" onchange="mostrarResultadoBusca()" style="padding: 12px; width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; background: #f8fafc;">
+            <option value="">Primeiro escolha o estado</option>
+        </select>
+    </div>
+
+    <!-- Área onde aparece o resultado ou a chamada para assinar -->
+    <div id="resultadoBusca" style="display: none; margin-top: 20px; padding: 15px; background: #f1f5f9; border-radius: 8px; text-align: left;">
+        <p style="color: #1e293b; font-size: 14px; margin-bottom: 10px;"><b>Cidade selecionada:</b> <span id="cidadeEscolhidaNome"></span></p>
+        <p style="color: #b91c1c; font-size: 13px; margin-bottom: 12px;">⚠️ Nenhuma empresa ativa com plano verificado nesta localidade no momento.</p>
+        <div style="background: #ffffff; padding: 12px; border-radius: 6px; border-left: 4px solid #2563eb;">
+            <p style="font-size: 13px; color: #334155; margin-bottom: 8px;">É dono de empresa nesta cidade? Anuncie aqui e capte clientes todos os dias.</p>
+            <a href="#planos" style="display: inline-block; background: #2563eb; color: #ffffff; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold;">Ver Planos e Assinar</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Carrega automaticamente todos os estados do Brasil em ordem alfabética
+fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+    .then(response => response.json())
+    .then(estados => {
+        let selectEstado = document.getElementById('selectEstado');
+        selectEstado.innerHTML = '<option value="">Selecione o Estado</option>';
+        estados.forEach(estado => {
+            let option = document.createElement('option');
+            option.value = estado.sigla;
+            option.textContent = estado.nome;
+            selectEstado.appendChild(option);
+        });
+    });
+
+// Carrega automaticamente todas as cidades do estado escolhido
+function carregarCidades() {
+    let siglaEstado = document.getElementById('selectEstado').value;
+    let selectCidade = document.getElementById('selectCidade');
+    let boxResultado = document.getElementById('resultadoBusca');
+    
+    boxResultado.style.display = 'none';
+    selectCidade.innerHTML = '<option value="">Carregando cidades...</option>';
+    
+    if (!siglaEstado) {
+        selectCidade.innerHTML = '<option value="">Primeiro escolha o estado</option>';
+        return;
+    }
+
+    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${siglaEstado}/municipios?orderBy=nome`)
+        .then(response => response.json())
+        .then(cidades => {
+            selectCidade.innerHTML = '<option value="">Selecione a Cidade</option>';
+            cidades.forEach(cidade => {
+                let option = document.createElement('option');
+                option.value = cidade.nome;
+                option.textContent = cidade.nome;
+                selectCidade.appendChild(option);
+            });
+        });
+}
+
+function mostrarResultadoBusca() {
+    let cidade = document.getElementById('selectCidade').value;
+    let boxResultado = document.getElementById('resultadoBusca');
+    
+    if (cidade) {
+        document.getElementById('cidadeEscolhidaNome').textContent = cidade;
+        boxResultado.style.display = 'block';
+    } else {
+        boxResultado.style.display = 'none';
+    }
+}
+</script>
+
+
 <div id="home-screen" class="dashboard-container tela" style="display: block;">
 
   <div style="text-align: center; padding: 30px 0 20px 0;">
