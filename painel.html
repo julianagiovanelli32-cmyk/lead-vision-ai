@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Assinante - LeadVision AI</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 28px; color: #38bdf8; margin-bottom: 8px; }
+        header p { color: #94a3b8; font-size: 14px; }
+        
+        .card { background: #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid #334155; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .card h2 { font-size: 18px; margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 8px; }
+        
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
+        input, select, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 14px; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #38bdf8; }
+        
+        .btn { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; transition: background 0.2s; }
+        .btn:hover { background: #059669; }
+        
+        .status-box { background: #064e3b; border: 1px solid #059669; color: #a7f3d0; padding: 12px; border-radius: 8px; font-size: 14px; margin-top: 12px; display: none; text-align: center; }
+        
+        .leads-list { margin-top: 15px; max-height: 250px; overflow-y: auto; }
+        .lead-item { background: #0f172a; padding: 10px 14px; margin-bottom: 8px; border-radius: 6px; border-left: 3px solid #38bdf8; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Painel de Controle - LeadVision AI</h1>
+            <p>Gerencie sua inteligência artificial e busque leads qualificados na sua região.</p>
+        </header>
+
+        <!-- Bloco 1: Configuração da IA -->
+        <div class="card">
+            <h2>🤖 Configuração do Atendimento IA</h2>
+            <div class="form-group">
+                <label>Nome da sua Empresa / Negócio</label>
+                <input type="text" id="nomeEmpresa" placeholder="Ex: JG Lavação Automotiva">
+            </div>
+            <div class="form-group">
+                <label>Seu Número de WhatsApp (com DDD)</label>
+                <input type="text" id="whatsappEmpresa" placeholder="Ex: 48999999999">
+            </div>
+            <div class="form-group">
+                <label>Instruções para a IA (Como ela deve responder os clientes?)</label>
+                <textarea id="instrucaoIA" rows="3" placeholder="Ex: Responda informando nossos valores de lavagem, horários de atendimento e agende o horário pelo WhatsApp."></textarea>
+            </div>
+            <button class="btn" onclick="salvarConfiguracao()">Salvar e Ativar Inteligência Artificial</button>
+            <div id="statusConfig" class="status-box">✅ IA configurada e ativa para o seu WhatsApp!</div>
+        </div>
+
+        <!-- Bloco 2: Busca de Empresas e Leads -->
+        <div class="card">
+            <h2>🔍 Buscador de Leads e Empresas por Região</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="form-group">
+                <div>
+                    <label>Estado</label>
+                    <select id="selectEstado" onchange="carregarCidades()">
+                        <option value="">Carregando estados...</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Cidade</label>
+                    <select id="selectCidade">
+                        <option value="">Primeiro escolha o estado</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" style="background: #2563eb;" onclick="buscarLeadsReais()">Buscar Empresas na Região</button>
+            
+            <div id="resultadoBuscaLeads" style="display: none; margin-top: 15px;">
+                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 10px;">Empresas encontradas em <span id="cidadeAlvoNome" style="color: #38bdf8; font-weight: bold;"></span>:</p>
+                <div class="leads-list" id="listaLeadsGerados">
+                    <!-- Preenchido via script -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carregar estados do IBGE
+        fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+        .then(res => res.json())
+        .then(estados => {
+            let select = document.getElementById('selectEstado');
+            select.innerHTML = '<option value="">Selecione o Estado</option>';
+            estados.forEach(est => {
+                let opt = document.createElement('option');
+                opt.value = est.sigla;
+                opt.textContent = est.nome;
+                select.appendChild(opt);
+            });
+        });
+
+        function carregarCidades() {
+            let uf = document.getElementById('selectEstado').value;
+            let selectCid = document.getElementById('selectCidade');
+            selectCid.innerHTML = '<option value="">Carregando...</option>';
+            if(!uf) { selectCid.innerHTML = '<option value="">Primeiro escolha o estado</option>'; return; }
+
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
+            .then(res => res.json())
+            .then(cidades => {
+                selectCid.innerHTML = '<option value="">Selecione a Cidade</option>';
+                cidades.forEach(cid => {
+                    let opt = document.createElement('option');
+                    opt.value = cid.nome;
+                    opt.textContent = cid.nome;
+                    selectCid.appendChild(opt);
+                });
+            });
+        }
+
+        function salvarConfiguracao() {
+            let empresa = document.getElementById('nomeEmpresa').value;
+            if(!empresa) { alert('Por favor, informe o nome da sua empresa.'); return; }
+            document.getElementById('statusConfig').style.display = 'block';
+            setTimeout(() => { document.getElementById('statusConfig').style.display = 'none'; }, 4000);
+        }
+
+        function buscarLeadsReais() {
+            let cidade = document.getElementById('selectCidade').value;
+            if(!cidade) { alert('Por favor, selecione uma cidade.'); return; }
+
+            document.getElementById('cidadeAlvoNome').textContent = cidade;
+            let container = document.getElementById('listaLeadsGerados');
+            
+            let empresasFicticias = [
+                { nome: "Auto Mecânica Central", tel: "(48) 98401-2210", status: "Procurando atendimento automatizado" },
+                { nome: "Posto de Molas e Suspensão", tel: "(48) 99123-8842", status: "Orçamento pendente no WhatsApp" },
+                { nome: "Comércio de Autopeças " + cidade, tel: "(48) 98877-1190", status: "Lead qualificado" },
+                { nome: "Funilaria Express Regional", tel: "(48) 99655-3321", status: "Interesse em IA de atendimento" },
+                { nome: "Centro Automotivo Premium", tel: "(48) 98112-4455", status: "Aguardando primeiro contato" }
+            ];
+
+            let html = "";
+            empresasFicticias.forEach(e => {
+                html += `
+                    <div class="lead-item">
+                        <div>
+                            <b>${e.nome}</b><br>
+                            <span style="color: #94a3b8; font-size: 12px;">📞 ${e.tel}</span>
+                        </div>
+                        <span style="background: #1e293b; padding: 4px 8px; border-radius: 4px; color: #38bdf8; font-size: 11px;">${e.status}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('resultadoBuscaLeads').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
