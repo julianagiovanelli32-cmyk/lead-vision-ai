@@ -130,126 +130,9 @@
 <!-- PÁGINA PRINCIPAL -->
 <!-- ===================================================== -->
 
-
-    
 </head>
 
 <body>
-
-
-    <div style="margin-bottom: 15px; text-align: left;">
-        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #475569; font-size: 14px;">Selecione o Estado:</label>
-        <select id="selectEstado" onchange="carregarCidades()" style="padding: 12px; width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; background: #f8fafc;">
-            <option value="">Carregando estados...</option>
-        </select>
-    </div>
-    
-    <div style="margin-bottom: 20px; text-align: left;">
-        <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #475569; font-size: 14px;">Selecione a Cidade:</label>
-        <select id="selectCidade" onchange="mostrarResultadoBusca()" style="padding: 12px; width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; background: #f8fafc;">
-            <option value="">Primeiro escolha o estado</option>
-        </select>
-    </div>
-
-    <!-- Área onde aparece o resultado ou a chamada para assinar -->
-    <!-- Área de Teste Gratuito da Região -->
-            <!-- Área de Teste Gratuito da Região com Lista de Empresas -->
-    <div id="resultadoBusca" style="display: none; margin-top: 20px; padding: 18px; background: #0f172a; border: 1px solid #3b82f6; border-radius: 10px; text-align: left;">
-        <p style="color: #93c5fd; font-size: 14px; margin-bottom: 8px;">📍 <b>Região selecionada:</b> <span id="cidadeEscolhidaNome"></span></p>
-        <p style="color: #ffffff; font-size: 14px; margin-bottom: 12px; font-weight: 500;">Existem oportunidades e potenciais clientes procurando serviços nesta cidade agora:</p>
-        
-        <!-- Lista Dinâmica de Empresas -->
-        <div id="listaEmpresas" style="margin-bottom: 12px;"></div>
-
-        <div style="background: #1e293b; padding: 14px; border-radius: 8px; border-left: 4px solid #10b981;">
-            <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 10px;">Quer ver como a inteligência artificial captura esses clientes para o seu negócio de graça por alguns dias?</p>
-            <a href="https://www.asaas.com/c/176j8h25yt8drdq6" target="_blank" style="display: inline-block; background: #10b981; color: #ffffff; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; text-align: center; width: 100%;">🧪 Testar Captação Grátis Nesta Cidade</a>
-        </div>
-    </div>
-
-<script>
-// Carrega automaticamente todos os estados do Brasil em ordem alfabética
-fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
-    .then(response => response.json())
-    .then(estados => {
-        let selectEstado = document.getElementById('selectEstado');
-        selectEstado.innerHTML = '<option value="">Selecione o Estado</option>';
-        estados.forEach(estado => {
-            let option = document.createElement('option');
-            option.value = estado.sigla;
-            option.textContent = estado.nome;
-            selectEstado.appendChild(option);
-        });
-    });
-
-// Carrega automaticamente todas as cidades do estado escolhido
-function carregarCidades() {
-    let siglaEstado = document.getElementById('selectEstado').value;
-    let selectCidade = document.getElementById('selectCidade');
-    let boxResultado = document.getElementById('resultadoBusca');
-    
-    boxResultado.style.display = 'none';
-    selectCidade.innerHTML = '<option value="">Carregando cidades...</option>';
-    
-    if (!siglaEstado) {
-        selectCidade.innerHTML = '<option value="">Primeiro escolha o estado</option>';
-        return;
-    }
-
-    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${siglaEstado}/municipios?orderBy=nome`)
-        .then(response => response.json())
-        .then(cidades => {
-            selectCidade.innerHTML = '<option value="">Selecione a Cidade</option>';
-            cidades.forEach(cidade => {
-                let option = document.createElement('option');
-                option.value = cidade.nome;
-                option.textContent = cidade.nome;
-                selectCidade.appendChild(option);
-            });
-        });
-}
-
-    function mostrarResultadoBusca() {
-        let cidadeSelect = document.getElementById('selectCidade');
-        let cidadeNome = cidadeSelect.value;
-        let boxResultado = document.getElementById('resultadoBusca');
-        let spanNome = document.getElementById('cidadeEscolhidaNome');
-        let listaDiv = document.getElementById('listaEmpresas');
-
-        if (!cidadeNome) {
-            boxResultado.style.display = 'none';
-            return;
-        }
-
-        spanNome.textContent = cidadeNome;
-
-        let tiposNegocio = [
-            { nome: "Auto Center & Mecânica " + cidadeNome, status: "Interação pendente no WhatsApp" },
-            { nome: "Estética Automotiva " + cidadeNome, status: "Lead qualificado há 3 min" },
-            { nome: "Lavação Express " + cidadeNome, status: "Orçamento solicitado via IA" },
-            { nome: "Comércio e Distribuição " + cidadeNome, status: "Cliente procurando fornecedor" },
-            { nome: "Oficina Multimarcas " + cidadeNome, status: "Mensagem não respondida há 10m" },
-            { nome: "Funilaria e Pintura " + cidadeNome, status: "Novo lead interessado em serviços" },
-            { nome: "Posto e Conveniência " + cidadeNome, status: "Busca ativa por atendimento automático" }
-        ];
-
-        let htmlItens = "";
-        tiposNegocio.forEach(empresa => {
-            htmlItens += `
-                <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
-                    🏢 <b>${empresa.nome}</b> - <span style="color: #38bdf8;">${empresa.status}</span>
-                </div>
-            `;
-        });
-
-        listaDiv.innerHTML = htmlItens;
-        boxResultado.style.display = 'block';
-    }
-
-
-</script>
-
-
 
 <!-- ===================================================== -->
 <!-- NOVA PÁGINA PRINCIPAL -->
@@ -488,7 +371,7 @@ function carregarCidades() {
       style="cursor:pointer;"
     >
       Política de Privacidade
-    </span
+    </span>
 
 <!-- ===================================================== -->
 <!-- TELA DE CADASTRO -->
