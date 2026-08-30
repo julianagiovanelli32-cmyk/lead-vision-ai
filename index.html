@@ -209,7 +209,7 @@ function carregarCidades() {
         });
 }
 
-        function mostrarResultadoBusca() {
+    function mostrarResultadoBusca() {
         let cidadeSelect = document.getElementById('selectCidade');
         let cidadeNome = cidadeSelect.value;
         let boxResultado = document.getElementById('resultadoBusca');
@@ -223,7 +223,6 @@ function carregarCidades() {
 
         spanNome.textContent = cidadeNome;
 
-        // Lista ampliada de tipos de negócios para gerar variedade dinâmica
         let tiposNegocio = [
             { nome: "Auto Center & Mecânica " + cidadeNome, status: "Interação pendente no WhatsApp" },
             { nome: "Estética Automotiva " + cidadeNome, status: "Lead qualificado há 3 min" },
@@ -248,24 +247,8 @@ function carregarCidades() {
     }
 
 
-        spanNome.textContent = cidadeNome;
-
-        listaDiv.innerHTML = `
-            <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
-                🏢 <b>Auto Center ${cidadeNome}</b> - Interação pendente no WhatsApp
-            </div>
-            <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
-                🚗 <b>Estética Automotiva & Lavação</b> - Lead qualificado há 5 min
-            </div>
-            <div style="background: #1e293b; padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
-                🔧 <b>Oficina Mecânica Express</b> - Orçamento solicitado via IA
-            </div>
-        `;
-
-        boxResultado.style.display = 'block';
-    }
-
 </script>
+
 
 
 <div id="home-screen" class="dashboard-container tela" style="display: block;">
