@@ -1137,6 +1137,32 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+document.querySelector("form").addEventListener("submit", function(event) {
+    const nome = document.querySelector("#nome").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const whatsapp = document.querySelector("#whatsapp").value.trim();
+
+    // Validação básica
+    if (nome.length < 3) {
+        alert("Por favor, digite seu nome completo.");
+        event.preventDefault();
+        return;
+    }
+    
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Por favor, digite um e-mail válido.");
+        event.preventDefault();
+        return;
+    }
+
+    if (whatsapp.length < 10) {
+        alert("Por favor, digite um número de WhatsApp válido com DDD.");
+        event.preventDefault();
+        return;
+    }
+
+    // Se passar por todas, o fluxo avança para o chat
+});
 
 </script>
 
