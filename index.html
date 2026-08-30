@@ -782,9 +782,6 @@
 
 let moedas = 5;
   
-  function irParaCadastro() {
-  show("cadastro-screen");
-}
 
 /* ================================
    MOSTRAR UMA TELA
@@ -861,11 +858,9 @@ async function comecarTeste() {
   alert("A função começar teste foi chamada");
 
   const nome = document.getElementById("cadastro-nome")?.value.trim();
-
-
-  const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
   const whatsapp = document.getElementById("cadastro-whatsapp")?.value.trim();
+
   if (!nome || nome.length < 3) {
     alert("Por favor, digite seu nome completo (mínimo de 3 letras).");
     return;
