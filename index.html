@@ -1138,11 +1138,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-  const b = document.querySelector("button");
-if(b){b.addEventListener("click",function(e){
-const n = document.querySelector("#name") || document.querySelectorAll("input")[0];
-if(n && n.value.length < 3){
-alert("Por favor, digite seu nome completo.");
-e.preventDefault();
-return false;
-}});}
+  document.addEventListener("DOMContentLoaded", function() {
+
+  const input = document.getElementById("mensagem-input");
+
+  if (input) {
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        enviarMensagem();
+      }
+    });
+  }
+
+  // Validação específica apenas para o botão de cadastro, evitando conflitos globais
+  const botaoCadastro = document.querySelector("#cadastro-screen button");
+  if (botaoCadastro) {
+    botaoCadastro.addEventListener("click", function(e) {
+      const nomeInput = document.querySelector("#cadastro-nome");
+      if (nomeInput && nomeInput.value.trim().length < 3) {
+        alert("Por favor, digite seu nome completo.");
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
+
+});
