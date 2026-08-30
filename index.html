@@ -418,7 +418,7 @@ function carregarCidades() {
 
 <button
   type="button"
-  onclick="alert('O botão está funcionando!')"
+  onclick="começarTeste()"
   class="botao-azul">
 
   Começar meu teste grátis
@@ -854,6 +854,9 @@ function voltar() {
    COMEÇAR TESTE
 ================================ */
 async function começarTeste() {
+
+  alert("A função começarTeste foi chamada!");
+
   const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
   const whatsapp = document.getElementById("cadastro-whatsapp")?.value.trim();
