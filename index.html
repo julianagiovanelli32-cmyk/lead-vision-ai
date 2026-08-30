@@ -1137,18 +1137,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-const btn1 = document.querySelector("form button");
-const botaoComecar = btn1 || document.querySelector("button");
+const botaoComecar = document.querySelector("form button") || document.querySelector("button");
 
+if (botaoComecar) {
     botaoComecar.addEventListener("click", function(event) {
-        // Tenta achar os campos (tentando pelos IDs comuns ou por seletores)
-        const inputNome = document.querySelector("#nome") || document.querySelector("input[placeholder*='Nome']");
-        const inputEmail = document.querySelector("#email") || document.querySelector("input[placeholder*='e-mail']");
-        const inputWp = document.querySelector("#whatsapp") || document.querySelector("input[placeholder*='00']");
-
-        const nome = inputNome ? inputNome.value.trim() : "";
-        const email = inputEmail ? inputEmail.value.trim() : "";
-        const whatsapp = inputWp ? inputWp.value.trim() : "";
+        // Pega todos os inputs de texto do formulário na ordem em que aparecem
+        const inputs = document.querySelectorAll("input");
+        
+        // Ajuste conforme a posição dos campos na sua tela de cadastro
+        const nome = inputs[0] ? inputs[0].value.trim() : "";
+        const email = inputs[1] ? inputs[1].value.trim() : "";
+        const whatsapp = inputs[2] ? inputs[2].value.trim() : "";
 
         // Validação do Nome (mínimo de 3 letras)
         if (nome.length < 3) {
@@ -1166,7 +1165,7 @@ const botaoComecar = btn1 || document.querySelector("button");
             return false;
         }
 
-        // Validação do WhatsApp (mínimo de 10 números contando com o DDD)
+        // Validação do WhatsApp (mínimo de 10 números)
         if (whatsapp.length < 10) {
             alert("Por favor, digite um número de WhatsApp válido com DDD.");
             event.preventDefault();
@@ -1175,9 +1174,3 @@ const botaoComecar = btn1 || document.querySelector("button");
         }
     });
 }
-
-
-</script>
-
-</body>
-</html>
