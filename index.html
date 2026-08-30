@@ -209,7 +209,7 @@ function carregarCidades() {
         });
 }
 
-    function mostrarResultadoBusca() {
+        function mostrarResultadoBusca() {
         let cidadeSelect = document.getElementById('selectCidade');
         let cidadeNome = cidadeSelect.value;
         let boxResultado = document.getElementById('resultadoBusca');
@@ -220,6 +220,33 @@ function carregarCidades() {
             boxResultado.style.display = 'none';
             return;
         }
+
+        spanNome.textContent = cidadeNome;
+
+        // Lista ampliada de tipos de negócios para gerar variedade dinâmica
+        let tiposNegocio = [
+            { nome: "Auto Center & Mecânica " + cidadeNome, status: "Interação pendente no WhatsApp" },
+            { nome: "Estética Automotiva " + cidadeNome, status: "Lead qualificado há 3 min" },
+            { nome: "Lavação Express " + cidadeNome, status: "Orçamento solicitado via IA" },
+            { nome: "Comércio e Distribuição " + cidadeNome, status: "Cliente procurando fornecedor" },
+            { nome: "Oficina Multimarcas " + cidadeNome, status: "Mensagem não respondida há 10m" },
+            { nome: "Funilaria e Pintura " + cidadeNome, status: "Novo lead interessado em serviços" },
+            { nome: "Posto e Conveniência " + cidadeNome, status: "Busca ativa por atendimento automático" }
+        ];
+
+        let htmlItens = "";
+        tiposNegocio.forEach(empresa => {
+            htmlItens += `
+                <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
+                    🏢 <b>${empresa.nome}</b> - <span style="color: #38bdf8;">${empresa.status}</span>
+                </div>
+            `;
+        });
+
+        listaDiv.innerHTML = htmlItens;
+        boxResultado.style.display = 'block';
+    }
+
 
         spanNome.textContent = cidadeNome;
 
