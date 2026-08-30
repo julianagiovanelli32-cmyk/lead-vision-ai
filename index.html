@@ -782,7 +782,6 @@ function carregarCidades() {
 
 let moedas = 5;
   
-alert("JavaScript carregou!");
 
 /* ================================
    MOSTRAR UMA TELA
@@ -856,12 +855,10 @@ function voltar() {
 ================================ */
 async function comecarTeste() {
 
-  alert("A função começarTeste foi chamada!");
 
   const nome = document.getElementById("cadastro-nome")?.value.trim();
   const email = document.getElementById("cadastro-email")?.value.trim();
   const whatsapp = document.getElementById("cadastro-whatsapp")?.value.trim();
-  alert("Nome recebido: [" + nome + "]\nE-mail recebido: [" + email + "]\nWhatsApp recebido: [" + whatsapp + "]");
   if (!nome || nome.length < 3) {
     alert("Por favor, digite seu nome completo (mínimo de 3 letras).");
     return;
@@ -1124,7 +1121,5 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-
-alert("FINAL DO JAVASCRIPT");
 
 </script>
