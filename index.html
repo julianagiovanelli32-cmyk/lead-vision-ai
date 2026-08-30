@@ -209,17 +209,35 @@ function carregarCidades() {
         });
 }
 
-function mostrarResultadoBusca() {
-    let cidade = document.getElementById('selectCidade').value;
-    let boxResultado = document.getElementById('resultadoBusca');
-    
-    if (cidade) {
-        document.getElementById('cidadeEscolhidaNome').textContent = cidade;
+    function mostrarResultadoBusca() {
+        let cidadeSelect = document.getElementById('selectCidade');
+        let cidadeNome = cidadeSelect.value;
+        let boxResultado = document.getElementById('resultadoBusca');
+        let spanNome = document.getElementById('cidadeEscolhidaNome');
+        let listaDiv = document.getElementById('listaEmpresas');
+
+        if (!cidadeNome) {
+            boxResultado.style.display = 'none';
+            return;
+        }
+
+        spanNome.textContent = cidadeNome;
+
+        listaDiv.innerHTML = `
+            <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
+                🏢 <b>Auto Center ${cidadeNome}</b> - Interação pendente no WhatsApp
+            </div>
+            <div style="background: #1e293b; padding: 8px 12px; margin-bottom: 6px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
+                🚗 <b>Estética Automotiva & Lavação</b> - Lead qualificado há 5 min
+            </div>
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
+                🔧 <b>Oficina Mecânica Express</b> - Orçamento solicitado via IA
+            </div>
+        `;
+
         boxResultado.style.display = 'block';
-    } else {
-        boxResultado.style.display = 'none';
     }
-}
+
 </script>
 
 
