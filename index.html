@@ -1477,8 +1477,6 @@ async function pesquisarEmpresasReais() {
 
 const data = await response.json();
 
-    const data = await response.json();
-
     if (!response.ok) {
       throw new Error(data.erro || "Erro na pesquisa.");
     }
