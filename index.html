@@ -1300,100 +1300,99 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 
+/* ================================
+   CARREGAR ESTADOS
+================================ */
 
-  /* PESQUISA - ESTADOS E CIDADES */
+const estadoPesquisa = document.getElementById("pesquisa-estado");
+const cidadePesquisa = document.getElementById("pesquisa-cidade");
 
-  const estadoPesquisa =
-    document.getElementById("pesquisa-estado");
+if (estadoPesquisa) {
 
-  const cidadePesquisa =
-    document.getElementById("pesquisa-cidade");
+  fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome")
+    .then(response => response.json())
+    .then(estados => {
 
-  if (estadoPesquisa && cidadePesquisa) {
+      estados.forEach(estado => {
 
-    fetch(
-      "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
-    )
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(estados) {
+        const option = document.createElement("option");
 
-        estados.forEach(function(estado) {
+        option.value = estado.sigla;
+        option.textContent = estado.nome;
 
-          const option = document.createElement("option");
-
-          option.value = estado.sigla;
-          option.textContent = estado.nome;
-
-          estadoPesquisa.appendChild(option);
-
-        });
-
-      })
-      .catch(function(error) {
-
-        console.error("Erro ao carregar estados:", error);
+        estadoPesquisa.appendChild(option);
 
       });
 
+    })
+    .catch(error => {
 
-    estadoPesquisa.addEventListener("change", function() {
-
-      const uf = this.value;
-
-      cidadePesquisa.innerHTML =
-        '<option value="">Carregando cidades...</option>';
-
-      cidadePesquisa.disabled = true;
-
-      if (!uf) {
-
-        cidadePesquisa.innerHTML =
-          '<option value="">Primeiro escolha o estado</option>';
-
-        return;
-
-      }
-
-      fetch(
-        "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
-        uf +
-        "/municipios"
-      )
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(cidades) {
-
-          cidadePesquisa.innerHTML =
-            '<option value="">Selecione a Cidade</option>';
-
-          cidades.forEach(function(cidade) {
-
-            const option = document.createElement("option");
-
-            option.value = cidade.nome;
-            option.textContent = cidade.nome;
-
-            cidadePesquisa.appendChild(option);
-
-          });
-
-          cidadePesquisa.disabled = false;
-
-        })
-        .catch(function(error) {
-
-          console.error("Erro ao carregar cidades:", error);
-
-          cidadePesquisa.innerHTML =
-            '<option value="">Erro ao carregar cidades</option>';
-
-        });
+      console.error("Erro ao carregar estados:", error);
 
     });
 
-  }
+}
 
-});
+
+/* ================================
+   CARREGAR CIDADES
+================================ */
+
+if (estadoPesquisa && cidadePesquisa) {
+
+  estadoPesquisa.addEventListener("change", function() {
+
+    const uf = this.value;
+
+    cidadePesquisa.innerHTML =
+      '<option value="">Carregando cidades...</option>';
+
+    cidadePesquisa.disabled = true;
+
+    if (!uf) {
+
+      cidadePesquisa.innerHTML =
+        '<option value="">Primeiro escolha o estado</option>';
+
+      return;
+
+    }
+
+    fetch(
+      "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
+      uf +
+      "/municipios"
+    )
+      .then(response => response.json())
+      .then(cidades => {
+
+        cidadePesquisa.innerHTML =
+          '<option value="">Selecione a Cidade</option>';
+
+        cidades.forEach(cidade => {
+
+          const option = document.createElement("option");
+
+          option.value = cidade.nome;
+          option.textContent = cidade.nome;
+
+          cidadePesquisa.appendChild(option);
+
+        });
+
+        cidadePesquisa.disabled = false;
+
+      })
+      .catch(error => {
+
+        console.error("Erro ao carregar cidades:", error);
+
+        cidadePesquisa.innerHTML =
+          '<option value="">Erro ao carregar cidades</option>';
+
+      });
+
+  });
+
+}
+  
