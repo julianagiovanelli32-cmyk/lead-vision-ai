@@ -1404,6 +1404,78 @@ function carregarCidades(uf) {
     });
 
 }
+    });
+
+}
+
+/* ================================
+   PESQUISA DE EMPRESAS - TESTE
+================================ */
+
+function pesquisarEmpresasReais() {
+
+  const estado = document.getElementById("pesquisa-estado");
+  const cidade = document.getElementById("pesquisa-cidade");
+  const segmento = document.getElementById("pesquisa-segmento");
+  const resultado = document.getElementById("resultado-empresas");
+
+  if (!estado || !cidade || !segmento || !resultado) {
+    alert("Erro: campos da pesquisa não encontrados.");
+    return;
+  }
+
+  if (!estado.value) {
+    alert("Selecione o estado.");
+    return;
+  }
+
+  if (!cidade.value) {
+    alert("Selecione a cidade.");
+    return;
+  }
+
+  if (!segmento.value) {
+    alert("Selecione o segmento.");
+    return;
+  }
+
+  resultado.style.display = "block";
+
+  resultado.innerHTML = `
+    <div style="
+      background:#161b2e;
+      padding:20px;
+      border-radius:12px;
+      border:1px solid #3b82f6;
+    ">
+
+      <h3 style="color:#60a5fa; margin-top:0;">
+        🔎 Pesquisa realizada
+      </h3>
+
+      <p style="color:#cbd5e1;">
+        <strong>Estado:</strong>
+        ${estado.options[estado.selectedIndex].text}
+      </p>
+
+      <p style="color:#cbd5e1;">
+        <strong>Cidade:</strong>
+        ${cidade.value}
+      </p>
+
+      <p style="color:#cbd5e1;">
+        <strong>Segmento:</strong>
+        ${segmento.options[segmento.selectedIndex].text}
+      </p>
+
+      <p style="color:#9ca3af;">
+        Preparando busca de empresas reais...
+      </p>
+
+    </div>
+  `;
+
+}
 
 </script>
 
