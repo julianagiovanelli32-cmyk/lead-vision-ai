@@ -482,8 +482,8 @@
     id="pesquisa-estado"
     style="width:100%; padding:14px; margin-bottom:16px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
   >
-    <option value="">Selecione o Estado</option>
-    <option value="AC">Acre</option>
+<option value="">Selecione o Estado</option>
+<option value="AC">Acre</option>
 <option value="AL">Alagoas</option>
 <option value="AP">Amapá</option>
 <option value="AM">Amazonas</option>
@@ -1368,6 +1368,41 @@ if (estadoPesquisa) {
 if (estadoPesquisa && cidadePesquisa) {
 
   estadoPesquisa.addEventListener("change", function() {
+
+  const uf = this.value;
+
+  cidadePesquisa.innerHTML =
+    '<option value="">Selecione a Cidade</option>';
+
+  cidadePesquisa.disabled = false;
+
+  if (uf === "SC") {
+
+    const cidadesSC = [
+      "Araranguá",
+      "Braço do Norte",
+      "Criciúma",
+      "Florianópolis",
+      "Imbituba",
+      "Laguna",
+      "Tubarão",
+      "Urussanga"
+    ];
+
+    cidadesSC.forEach(function(nomeCidade) {
+
+      const option = document.createElement("option");
+
+      option.value = nomeCidade;
+      option.textContent = nomeCidade;
+
+      cidadePesquisa.appendChild(option);
+
+    });
+
+  }
+
+});
 
   const uf = this.value;
 
