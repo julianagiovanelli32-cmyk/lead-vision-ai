@@ -459,7 +459,81 @@
 
 </div>
 
+<!-- ===================================================== -->
+<!-- PESQUISA DE EMPRESAS -->
+<!-- ===================================================== -->
 
+<div class="card" style="margin-top:25px; border-color:#3b82f6;">
+
+  <h2 style="color:#60a5fa; margin-top:0; text-align:center;">
+    🔎 Encontre empresas na sua região
+  </h2>
+
+  <p style="color:#cbd5e1; text-align:center; line-height:1.6;">
+    Selecione o estado, a cidade e o segmento que deseja pesquisar.
+  </p>
+
+  <!-- ESTADO -->
+  <label style="display:block; margin-bottom:7px; color:#cbd5e1; font-weight:bold;">
+    Estado
+  </label>
+
+  <select
+    id="pesquisa-estado"
+    style="width:100%; padding:14px; margin-bottom:16px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
+  >
+    <option value="">Selecione o Estado</option>
+  </select>
+
+  <!-- CIDADE -->
+  <label style="display:block; margin-bottom:7px; color:#cbd5e1; font-weight:bold;">
+    Cidade
+  </label>
+
+  <select
+    id="pesquisa-cidade"
+    disabled
+    style="width:100%; padding:14px; margin-bottom:16px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
+  >
+    <option value="">Primeiro escolha o estado</option>
+  </select>
+
+  <!-- SEGMENTO -->
+  <label style="display:block; margin-bottom:7px; color:#cbd5e1; font-weight:bold;">
+    Segmento
+  </label>
+
+  <select
+    id="pesquisa-segmento"
+    style="width:100%; padding:14px; margin-bottom:20px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
+  >
+    <option value="">Selecione o segmento</option>
+    <option value="alimentacao">🍔 Alimentação</option>
+    <option value="beleza">💇 Beleza e estética</option>
+    <option value="automotivo">🚗 Automotivo</option>
+    <option value="construcao">🏗️ Construção</option>
+    <option value="comercio">🛍️ Comércio</option>
+    <option value="tecnologia">💻 Tecnologia</option>
+    <option value="servicos">🛠️ Serviços</option>
+    <option value="saude">❤️ Saúde</option>
+  </select>
+
+  <button
+    type="button"
+    id="botao-pesquisar-empresas"
+    class="botao-azul"
+    onclick="pesquisarEmpresasReais()"
+  >
+    🔎 Pesquisar empresas
+  </button>
+
+  <div
+    id="resultado-empresas"
+    style="display:none; margin-top:20px;"
+  ></div>
+
+</div>
+  
 <!-- RODAPÉ -->
 <div class="footer">
 
