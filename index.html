@@ -479,9 +479,9 @@
   </label>
 
 <select
-    id="pesquisa-estado"
-    onchange="carregarCidades(this.value)"
-    style="width:100%; padding:14px; margin-bottom:16px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
+  id="pesquisa-estado"
+  onchange="carregarCidades(this.value)"
+  style="width:100%; padding:14px; margin-bottom:16px; background:#0b0f19; color:#fff; border:1px solid #374151; border-radius:8px; font-size:16px;"
 >
 <option value="">Selecione o Estado</option>
 <option value="AC">Acre</option>
@@ -1306,13 +1306,13 @@ function enviarMensagem() {
 
 }
 
+<script>
+
 /* ================================
-   ENTER NO CHAT + PESQUISA
+   ENTER NO CHAT
 ================================ */
 
 document.addEventListener("DOMContentLoaded", function() {
-
-  /* ENTER NO CHAT */
 
   const input = document.getElementById("mensagem-input");
 
@@ -1332,3 +1332,55 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 
+});
+
+
+/* ================================
+   ESTADO → CIDADE
+================================ */
+
+function carregarCidades(uf) {
+
+  const cidade = document.getElementById("pesquisa-cidade");
+
+  if (!cidade) {
+    return;
+  }
+
+  cidade.innerHTML =
+    '<option value="">Selecione a Cidade</option>';
+
+  cidade.disabled = false;
+
+  if (uf === "SC") {
+
+    const cidadesSC = [
+      "Araranguá",
+      "Braço do Norte",
+      "Criciúma",
+      "Florianópolis",
+      "Imbituba",
+      "Laguna",
+      "Tubarão",
+      "Urussanga"
+    ];
+
+    cidadesSC.forEach(function(nomeCidade) {
+
+      const option = document.createElement("option");
+
+      option.value = nomeCidade;
+      option.textContent = nomeCidade;
+
+      cidade.appendChild(option);
+
+    });
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
