@@ -1369,6 +1369,66 @@ if (estadoPesquisa && cidadePesquisa) {
 
   estadoPesquisa.addEventListener("change", function() {
 
+  const uf = this.value;
+
+  cidadePesquisa.innerHTML =
+    '<option value="">Carregando cidades...</option>';
+
+  cidadePesquisa.disabled = true;
+
+  if (!uf) {
+
+    cidadePesquisa.innerHTML =
+      '<option value="">Primeiro escolha o estado</option>';
+
+    return;
+
+  }
+
+  fetch(
+    "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
+    uf +
+    "/municipios"
+  )
+    .then(function(response) {
+
+      if (!response.ok) {
+        throw new Error("Erro na API do IBGE");
+      }
+
+      return response.json();
+
+    })
+    .then(function(cidades) {
+
+      cidadePesquisa.innerHTML =
+        '<option value="">Selecione a Cidade</option>';
+
+      cidades.forEach(function(cidade) {
+
+        const option = document.createElement("option");
+
+        option.value = cidade.nome;
+        option.textContent = cidade.nome;
+
+        cidadePesquisa.appendChild(option);
+
+      });
+
+      cidadePesquisa.disabled = false;
+
+    })
+    .catch(function(error) {
+
+      console.error("Erro ao carregar cidades:", error);
+
+      cidadePesquisa.innerHTML =
+        '<option value="">Não foi possível carregar as cidades</option>';
+
+    });
+
+});
+
     const uf = this.value;
 
     cidadePesquisa.innerHTML =
