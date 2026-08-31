@@ -1332,7 +1332,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-
+  
 
 /* ================================
    ESTADO → CIDADE
@@ -1347,35 +1347,61 @@ function carregarCidades(uf) {
   }
 
   cidade.innerHTML =
-    '<option value="">Selecione a Cidade</option>';
+    '<option value="">Carregando cidades...</option>';
 
-  cidade.disabled = false;
+  cidade.disabled = true;
 
-  if (uf === "SC") {
+  if (!uf) {
 
-    const cidadesSC = [
-      "Araranguá",
-      "Braço do Norte",
-      "Criciúma",
-      "Florianópolis",
-      "Imbituba",
-      "Laguna",
-      "Tubarão",
-      "Urussanga"
-    ];
+    cidade.innerHTML =
+      '<option value="">Primeiro escolha o estado</option>';
 
-    cidadesSC.forEach(function(nomeCidade) {
+    return;
+  }
 
-      const option = document.createElement("option");
+  fetch(
+    "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
+    uf +
+    "/municipios"
+  )
+    .then(function(response) {
 
-      option.value = nomeCidade;
-      option.textContent = nomeCidade;
+      if (!response.ok) {
+        throw new Error("Erro ao buscar cidades");
+      }
 
-      cidade.appendChild(option);
+      return response.json();
+
+    })
+    .then(function(cidades) {
+
+      cidade.innerHTML =
+        '<option value="">Selecione a Cidade</option>';
+
+      cidades.forEach(function(cidadeItem) {
+
+        const option = document.createElement("option");
+
+        option.value = cidadeItem.nome;
+        option.textContent = cidadeItem.nome;
+
+        cidade.appendChild(option);
+
+      });
+
+      cidade.disabled = false;
+
+    })
+    .catch(function(error) {
+
+      console.error(error);
+
+      cidade.innerHTML =
+        '<option value="">Erro ao carregar cidades</option>';
+
+      cidade.disabled = false;
 
     });
-
-  }
 
 }
 
