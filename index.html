@@ -1332,36 +1332,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 
-/* ================================
-   CARREGAR ESTADOS
-================================ */
-
-const estadoPesquisa = document.getElementById("pesquisa-estado");
-const cidadePesquisa = document.getElementById("pesquisa-cidade");
-
-if (estadoPesquisa) {
-
-  fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome")
-    .then(response => response.json())
-    .then(estados => {
-
-      estados.forEach(estado => {
-
-        const option = document.createElement("option");
-
-        option.value = estado.sigla;
-        option.textContent = estado.nome;
-
-        estadoPesquisa.appendChild(option);
-
-      });
-
-    })
-    .catch(error => {
-
-      console.error("Erro ao carregar estados:", error);
-
-    });
-
-}
-
