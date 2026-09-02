@@ -1552,12 +1552,14 @@ const data = await response.json();
           <p style="color:#cbd5e1; margin:7px 0;">
             📞 ${
               empresa.telefone
-                ? empresa.telefone
-                : "Telefone não informado"
-            }
-          </p>
+  ? `<a href="tel:${empresa.telefone.replace(/\D/g, '')}" class="btn-telefone">
+       📞 ${empresa.telefone}
+     </a>`
+  : "Telefone não informado"
+}
+</p>
 
-          ${
+${
             empresa.site
               ? `
                 <p style="margin:10px 0 0;">
