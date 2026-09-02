@@ -1567,7 +1567,31 @@ const data = await response.json();
       : `<span style="color:#cbd5e1;">📞 Telefone não informado</span>`
   }
 </p>
-
+${
+  
+  empresa.telefone
+    ? `
+      <p style="margin:10px 0 0;">
+        <a
+          href="https://wa.me/${empresa.telefone.replace(/\D/g, '')}"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="
+            display:inline-block;
+            background:#25D366;
+            color:#fff;
+            padding:10px 14px;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:bold;
+          "
+        >
+          💬 Falar pelo WhatsApp
+        </a>
+      </p>
+    `
+    : ""
+}
 ${
             empresa.site
               ? `
