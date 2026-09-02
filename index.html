@@ -1549,14 +1549,23 @@ const data = await response.json();
             }
           </p>
 
-          <p style="color:#cbd5e1; margin:7px 0;">
-            📞 ${
-              empresa.telefone
-  ? `<a href="tel:${empresa.telefone.replace(/\D/g, '')}" class="btn-telefone">
-       📞 ${empresa.telefone}
-     </a>`
-  : "Telefone não informado"
-}
+          <p style="margin:7px 0;">
+  ${
+    empresa.telefone
+      ? `<a href="tel:${empresa.telefone.replace(/\D/g, '')}"
+           style="
+             display:inline-block;
+             background:#2563eb;
+             color:#fff;
+             padding:10px 14px;
+             border-radius:8px;
+             text-decoration:none;
+             font-weight:bold;
+           ">
+           📞 Ligar para empresa
+         </a>`
+      : `<span style="color:#cbd5e1;">📞 Telefone não informado</span>`
+  }
 </p>
 
 ${
