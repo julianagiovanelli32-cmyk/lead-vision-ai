@@ -564,9 +564,53 @@ function carregarDadosUsuario() {
        é teste grátis.
     */
 
-    document.getElementById("planoUsuario").textContent =
-        "Teste grátis";
+    async function verificarAcessoUsuario() {
+  const token = localStorage.getItem("usuarioToken");
 
+  if (!token) {
+    document.getElementById("planoUsuario").textContent = "Teste grátis";
+    document.getElementById("avisoTeste").style.display = "block";
+    return;
+  }
+
+  try {
+    const resposta = await fetch(
+      "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/verificar-acesso",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "sb_publishable_bMiDDpuSYORZcxqZ52Jz2w_F0wCcpsM",
+          "Authorization": "Bearer " + token
+        }
+      }
+    );
+
+    const data = await resposta.json();
+
+    if (!resposta.ok || !data.sucesso) {
+      throw new Error(data.erro || "Não foi possível verificar o plano.");
+    }
+
+    document.getElementById("nomeUsuario").textContent =
+      data.nome ||
+      (localStorage.getItem("usuarioEmail") || "").split("@")[0] ||
+      "Cliente";
+
+    if (data.planoAtivo) {
+      document.getElementById("planoUsuario").textContent = data.plano;
+      document.getElementById("avisoTeste").style.display = "none";
+    } else {
+      document.getElementById("planoUsuario").textContent = "Teste grátis";
+      document.getElementById("avisoTeste").style.display = "block";
+    }
+
+  } catch (erro) {
+    console.error("Erro ao verificar acesso:", erro);
+    document.getElementById("planoUsuario").textContent = "Teste grátis";
+    document.getElementById("avisoTeste").style.display = "block";
+  }
+}
     /*
        O token é utilizado pelo backend para
        verificar o plano real.
@@ -1187,17 +1231,12 @@ function carregarConfiguracao() {
    INICIALIZAÇÃO
 ================================ */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        carregarDadosUsuario();
-
-        carregarConfiguracao();
-
-    }
-);
-
+document.addEventListener("DOMContentLoaded", () => {
+    carregarDadosUsuario();
+    carregarConfiguracao();
+    verificarAcessoUsuario();
+});
+    
 </script>
 
 </body>
