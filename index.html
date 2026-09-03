@@ -1103,6 +1103,7 @@ async function comecarTeste() {
     localStorage.setItem("moedas", "5");
     localStorage.setItem("usuarioId", dados.usuario.id);
     localStorage.setItem("usuarioEmail", email);
+    localStorage.setItem("usuarioToken", dados.usuario.access_token);
 
     const contador = document.getElementById("contador-moedas");
     if (contador) {
@@ -1465,134 +1466,7 @@ async function pesquisarEmpresasReais() {
       "Content-Type": "application/json",
       "apikey": "sb_publishable_bMiDDpuSYORZcxqZ52Jz2w_F0wCcpsM",
       "Authorization": "Bearer sb_publishable_bMiDDpuSYORZcxqZ52Jz2w_F0wCcpsM"
-    },
 
-    body: JSON.stringify({
-      estado: estado.value,
-      cidade: cidade.value,
-      segmento: segmento.value
-    })
-  }
-);
-
-const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.erro || "Erro na pesquisa.");
-    }
-
-    if (!data.empresas || data.empresas.length === 0) {
-
-      resultado.innerHTML = `
-        <div style="
-          background:#161b2e;
-          padding:20px;
-          border-radius:12px;
-          border:1px solid #374151;
-        ">
-          <h3 style="color:#60a5fa;">
-            🔎 Nenhuma empresa encontrada
-          </h3>
-
-          <p style="color:#cbd5e1;">
-            Não encontramos empresas cadastradas para
-            ${cidade.value} nesse segmento.
-          </p>
-        </div>
-      `;
-
-      return;
-    }
-
-        let html = `
-      <div style="
-        background:#161b2e;
-        padding:20px;
-        border-radius:12px;
-        border:1px solid #3b82f6;
-      ">
-
-        <h3 style="color:#60a5fa; margin-top:0;">
-          🏢 Empresas encontradas
-        </h3>
-
-        <p style="color:#cbd5e1;">
-          Encontramos <strong>${data.empresas.length}</strong>
-          empresas em <strong>${cidade.value}</strong>.
-        </p>
-    `;
-
-    data.empresas.forEach(function(empresa) {
-
-      html += `
-        <div style="
-          background:#0b0f19;
-          padding:16px;
-          border-radius:10px;
-          border:1px solid #374151;
-          margin-top:12px;
-        ">
-
-          <h4 style="
-            color:#fff;
-            margin:0 0 12px 0;
-            font-size:18px;
-          ">
-            🏢 ${empresa.nome}
-          </h4>
-
-          <p style="color:#cbd5e1; margin:7px 0;">
-            📍 ${
-              empresa.endereco
-                ? empresa.endereco
-                : "Endereço não informado"
-            }
-          </p>
-
-          <p style="margin:7px 0;">
-  ${
-    empresa.telefone
-      ? `<a href="tel:${empresa.telefone.replace(/\D/g, '')}"
-           style="
-             display:inline-block;
-             background:#2563eb;
-             color:#fff;
-             padding:10px 14px;
-             border-radius:8px;
-             text-decoration:none;
-             font-weight:bold;
-           ">
-           📞 Ligar para empresa
-         </a>`
-      : `<span style="color:#cbd5e1;">📞 Telefone não informado</span>`
-  }
-</p>
-${
-  
-  empresa.telefone
-    ? `
-      <p style="margin:10px 0 0;">
-        <a
-          href="https://wa.me/${empresa.telefone.replace(/\D/g, '')}"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="
-            display:inline-block;
-            background:#25D366;
-            color:#fff;
-            padding:10px 14px;
-            border-radius:8px;
-            text-decoration:none;
-            font-weight:bold;
-          "
-        >
-          💬 Falar pelo WhatsApp
-        </a>
-      </p>
-    `
-    : ""
-}
-${
             empresa.site
               ? `
                 <p style="margin:10px 0 0;">
