@@ -3,159 +3,1203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Painel do Assinante - LeadVision AI</title>
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        header { text-align: center; margin-bottom: 30px; }
-        header h1 { font-size: 28px; color: #38bdf8; margin-bottom: 8px; }
-        header p { color: #94a3b8; font-size: 14px; }
-        
-        .card { background: #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid #334155; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .card h2 { font-size: 18px; margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 8px; }
-        
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-        input, select, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 14px; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: #38bdf8; }
-        
-        .btn { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; transition: background 0.2s; }
-        .btn:hover { background: #059669; }
-        
-        .status-box { background: #064e3b; border: 1px solid #059669; color: #a7f3d0; padding: 12px; border-radius: 8px; font-size: 14px; margin-top: 12px; display: none; text-align: center; }
-        
-        .leads-list { margin-top: 15px; max-height: 250px; overflow-y: auto; }
-        .lead-item { background: #0f172a; padding: 10px 14px; margin-bottom: 8px; border-radius: 6px; border-left: 3px solid #38bdf8; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            color: #f8fafc;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* RESUMO DO USUÁRIO */
+
+        .resumo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .resumo-card {
+            background: #172033;
+            border: 1px solid #26344d;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .resumo-card .icone {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .resumo-card .titulo {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .resumo-card .valor {
+            margin-top: 5px;
+            font-size: 17px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .card {
+            background: #151e2f;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 20px;
+            border: 1px solid #26344d;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+
+        .card-descricao {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid #475569;
+            background: #0d1525;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-blue {
+            background: #2563eb;
+        }
+
+        .btn-purple {
+            background: #7c3aed;
+        }
+
+        .btn-planos {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            margin-top: 12px;
+        }
+
+        .status-box {
+            background: #064e3b;
+            border: 1px solid #059669;
+            color: #a7f3d0;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        /* BUSCA */
+
+        .filtros {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .resultado-topo {
+            background: #0d1728;
+            border: 1px solid #26344d;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .resultado-topo strong {
+            color: #38bdf8;
+        }
+
+        .empresa {
+            background: #0d1525;
+            border: 1px solid #26344d;
+            border-left: 4px solid #38bdf8;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .empresa-nome {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #fff;
+        }
+
+        .empresa-info {
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .contato-bloqueado {
+            margin-top: 10px;
+            background: #2a1b0a;
+            border: 1px solid #92400e;
+            color: #fbbf24;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .contato-liberado {
+            margin-top: 10px;
+            background: #052e1b;
+            border: 1px solid #059669;
+            color: #a7f3d0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .contato-liberado a {
+            color: #67e8f9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 8px;
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        .aviso-teste {
+            background: linear-gradient(135deg, #172554, #312e81);
+            border: 1px solid #4f46e5;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .aviso-teste h3 {
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .aviso-teste p {
+            color: #c7d2fe;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            color: #94a3b8;
+            padding: 20px;
+        }
+
+        .erro {
+            background: #450a0a;
+            border: 1px solid #991b1b;
+            color: #fecaca;
+            padding: 13px;
+            border-radius: 9px;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 12px;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            .resumo {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 7px;
+            }
+
+            .resumo-card {
+                padding: 12px 6px;
+            }
+
+            .resumo-card .valor {
+                font-size: 14px;
+            }
+
+            .resumo-card .titulo {
+                font-size: 9px;
+            }
+
+            .filtros {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 17px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Painel de Controle - LeadVision AI</h1>
-            <p>Gerencie sua inteligência artificial e busque leads qualificados na sua região.</p>
-        </header>
+<div class="container">
 
-        <!-- Bloco 1: Configuração da IA -->
-        <div class="card">
-            <h2>🤖 Configuração do Atendimento IA</h2>
-            <div class="form-group">
-                <label>Nome da sua Empresa / Negócio</label>
-                <input type="text" id="nomeEmpresa" placeholder="Ex: JG Lavação Automotiva">
-            </div>
-            <div class="form-group">
-                <label>Seu Número de WhatsApp (com DDD)</label>
-                <input type="text" id="whatsappEmpresa" placeholder="Ex: 48999999999">
-            </div>
-            <div class="form-group">
-                <label>Instruções para a IA (Como ela deve responder os clientes?)</label>
-                <textarea id="instrucaoIA" rows="3" placeholder="Ex: Responda informando nossos valores de lavagem, horários de atendimento e agende o horário pelo WhatsApp."></textarea>
-            </div>
-            <button class="btn" onclick="salvarConfiguracao()">Salvar e Ativar Inteligência Artificial</button>
-            <div id="statusConfig" class="status-box">✅ IA configurada e ativa para o seu WhatsApp!</div>
+    <header>
+        <h1>🚀 LeadVision AI</h1>
+        <p>Encontre empresas e oportunidades de negócio na sua região com inteligência.</p>
+    </header>
+
+    <!-- RESUMO -->
+
+    <div class="resumo">
+
+        <div class="resumo-card">
+            <div class="icone">👤</div>
+            <div class="titulo">Cliente</div>
+            <div class="valor" id="nomeUsuario">Visitante</div>
         </div>
 
-        <!-- Bloco 2: Busca de Empresas e Leads -->
-        <div class="card">
-            <h2>🔍 Buscador de Leads e Empresas por Região</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="form-group">
-                <div>
-                    <label>Estado</label>
-                    <select id="selectEstado" onchange="carregarCidades()">
-                        <option value="">Carregando estados...</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Cidade</label>
-                    <select id="selectCidade">
-                        <option value="">Primeiro escolha o estado</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn" style="background: #2563eb;" onclick="buscarLeadsReais()">Buscar Empresas na Região</button>
-            
-            <div id="resultadoBuscaLeads" style="display: none; margin-top: 15px;">
-                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 10px;">Empresas encontradas em <span id="cidadeAlvoNome" style="color: #38bdf8; font-weight: bold;"></span>:</p>
-                <div class="leads-list" id="listaLeadsGerados">
-                    <!-- Preenchido via script -->
-                </div>
-            </div>
+        <div class="resumo-card">
+            <div class="icone">📦</div>
+            <div class="titulo">Plano</div>
+            <div class="valor" id="planoUsuario">Teste grátis</div>
         </div>
+
+        <div class="resumo-card">
+            <div class="icone">🪙</div>
+            <div class="titulo">Moedas</div>
+            <div class="valor" id="moedasUsuario">5</div>
+        </div>
+
     </div>
 
-    <script>
-        // Carregar estados do IBGE
-        fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
-        .then(res => res.json())
-        .then(estados => {
-            let select = document.getElementById('selectEstado');
-            select.innerHTML = '<option value="">Selecione o Estado</option>';
-            estados.forEach(est => {
-                let opt = document.createElement('option');
-                opt.value = est.sigla;
-                opt.textContent = est.nome;
-                select.appendChild(opt);
-            });
+    <!-- AVISO TESTE -->
+
+    <div class="aviso-teste" id="avisoTeste">
+        <h3>🎁 Você está no teste grátis</h3>
+        <p>
+            Você pode pesquisar empresas e conhecer as oportunidades.
+            Os telefones e contatos ficam protegidos até a assinatura de um plano.
+        </p>
+
+        <button class="btn btn-planos" onclick="irParaPlanos()">
+            🚀 Ver planos e desbloquear contatos
+        </button>
+    </div>
+
+    <!-- CONFIGURAÇÃO IA -->
+
+    <div class="card">
+
+        <h2>🤖 Configuração do Atendimento IA</h2>
+
+        <p class="card-descricao">
+            Configure como a inteligência artificial deve atender seus clientes.
+        </p>
+
+        <div class="form-group">
+            <label>Nome da sua Empresa / Negócio</label>
+            <input
+                type="text"
+                id="nomeEmpresa"
+                placeholder="Ex: JG Lavação Automotiva"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Seu Número de WhatsApp (com DDD)</label>
+            <input
+                type="text"
+                id="whatsappEmpresa"
+                placeholder="Ex: 48999999999"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>
+                Instruções para a IA
+            </label>
+
+            <textarea
+                id="instrucaoIA"
+                rows="4"
+                placeholder="Explique como você gostaria que a IA respondesse seus clientes."
+            ></textarea>
+        </div>
+
+        <button class="btn" onclick="salvarConfiguracao()">
+            🤖 Salvar e Ativar Inteligência Artificial
+        </button>
+
+        <div id="statusConfig" class="status-box">
+            ✅ Configuração salva com sucesso!
+        </div>
+
+    </div>
+
+    <!-- BUSCADOR -->
+
+    <div class="card">
+
+        <h2>🔍 Encontrar Leads e Empresas</h2>
+
+        <p class="card-descricao">
+            Escolha uma região e um segmento para encontrar empresas reais.
+        </p>
+
+        <div class="filtros">
+
+            <div class="form-group">
+
+                <label>Estado</label>
+
+                <select id="selectEstado" onchange="carregarCidades()">
+                    <option value="">Carregando estados...</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Cidade</label>
+
+                <select id="selectCidade">
+                    <option value="">Primeiro escolha o estado</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Segmento</label>
+
+                <select id="selectSegmento">
+
+                    <option value="">
+                        Selecione o segmento
+                    </option>
+
+                    <option value="alimentacao">
+                        🍔 Alimentação
+                    </option>
+
+                    <option value="beleza">
+                        💇 Beleza
+                    </option>
+
+                    <option value="automotivo">
+                        🚗 Automotivo
+                    </option>
+
+                    <option value="construcao">
+                        🏗️ Construção
+                    </option>
+
+                    <option value="comercio">
+                        🛍️ Comércio
+                    </option>
+
+                    <option value="tecnologia">
+                        💻 Tecnologia
+                    </option>
+
+                    <option value="servicos">
+                        🧰 Serviços
+                    </option>
+
+                    <option value="saude">
+                        🏥 Saúde
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <button
+            class="btn btn-blue"
+            id="botaoBuscar"
+            onclick="buscarLeadsReais()"
+        >
+            🔎 Pesquisar empresas
+        </button>
+
+        <div id="resultadoBuscaLeads" class="resultado">
+
+            <div class="resultado-topo">
+                📍 Empresas encontradas em
+                <strong id="cidadeAlvoNome"></strong>
+            </div>
+
+            <div id="listaLeadsGerados"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_FUNCTION =
+    "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/buscar-empresas";
+
+
+/* ================================
+   DADOS DO USUÁRIO
+================================ */
+
+function carregarDadosUsuario() {
+
+    const email =
+        localStorage.getItem("usuarioEmail") || "";
+
+    const token =
+        localStorage.getItem("usuarioToken") || "";
+
+    const moedas =
+        localStorage.getItem("moedas") || "5";
+
+    document.getElementById("moedasUsuario").textContent = moedas;
+
+    if (email) {
+
+        document.getElementById("nomeUsuario").textContent =
+            email.split("@")[0];
+
+    }
+
+    /*
+       Por segurança, o plano inicial exibido
+       é teste grátis.
+    */
+
+    document.getElementById("planoUsuario").textContent =
+        "Teste grátis";
+
+    /*
+       O token é utilizado pelo backend para
+       verificar o plano real.
+    */
+
+    if (!token) {
+
+        document.getElementById("avisoTeste").style.display =
+            "block";
+
+    }
+
+}
+
+
+/* ================================
+   PLANOS
+================================ */
+
+function irParaPlanos() {
+
+    /*
+       Tenta utilizar a função existente no
+       site principal, caso ela esteja disponível.
+    */
+
+    if (typeof window.mostrarPlanos === "function") {
+
+        window.mostrarPlanos();
+        return;
+
+    }
+
+    /*
+       Caso contrário, direciona para a página
+       principal onde os planos são apresentados.
+    */
+
+    window.location.href =
+        "https://lead-vision-ai.vercel.app/#planos";
+
+}
+
+
+/* ================================
+   ESTADOS IBGE
+================================ */
+
+fetch(
+    "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
+)
+.then(res => res.json())
+.then(estados => {
+
+    const select =
+        document.getElementById("selectEstado");
+
+    select.innerHTML =
+        '<option value="">Selecione o Estado</option>';
+
+    estados.forEach(est => {
+
+        const opt =
+            document.createElement("option");
+
+        opt.value = est.sigla;
+        opt.textContent = est.nome;
+
+        select.appendChild(opt);
+
+    });
+
+})
+.catch(() => {
+
+    document.getElementById("selectEstado").innerHTML =
+        '<option value="">Erro ao carregar estados</option>';
+
+});
+
+
+/* ================================
+   CIDADES
+================================ */
+
+function carregarCidades() {
+
+    const uf =
+        document.getElementById("selectEstado").value;
+
+    const selectCid =
+        document.getElementById("selectCidade");
+
+    selectCid.innerHTML =
+        '<option value="">Carregando cidades...</option>';
+
+    if (!uf) {
+
+        selectCid.innerHTML =
+            '<option value="">Primeiro escolha o estado</option>';
+
+        return;
+
+    }
+
+    fetch(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
+    )
+    .then(res => res.json())
+    .then(cidades => {
+
+        selectCid.innerHTML =
+            '<option value="">Selecione a Cidade</option>';
+
+        cidades.forEach(cid => {
+
+            const opt =
+                document.createElement("option");
+
+            opt.value = cid.nome;
+            opt.textContent = cid.nome;
+
+            selectCid.appendChild(opt);
+
         });
 
-        function carregarCidades() {
-            let uf = document.getElementById('selectEstado').value;
-            let selectCid = document.getElementById('selectCidade');
-            selectCid.innerHTML = '<option value="">Carregando...</option>';
-            if(!uf) { selectCid.innerHTML = '<option value="">Primeiro escolha o estado</option>'; return; }
+    })
+    .catch(() => {
 
-            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
-            .then(res => res.json())
-            .then(cidades => {
-                selectCid.innerHTML = '<option value="">Selecione a Cidade</option>';
-                cidades.forEach(cid => {
-                    let opt = document.createElement('option');
-                    opt.value = cid.nome;
-                    opt.textContent = cid.nome;
-                    selectCid.appendChild(opt);
-                });
-            });
+        selectCid.innerHTML =
+            '<option value="">Erro ao carregar cidades</option>';
+
+    });
+
+}
+
+
+/* ================================
+   BUSCAR EMPRESAS REAIS
+================================ */
+
+async function buscarLeadsReais() {
+
+    const estado =
+        document.getElementById("selectEstado").value;
+
+    const cidade =
+        document.getElementById("selectCidade").value;
+
+    const segmento =
+        document.getElementById("selectSegmento").value;
+
+    const token =
+        localStorage.getItem("usuarioToken");
+
+    const botao =
+        document.getElementById("botaoBuscar");
+
+    const resultado =
+        document.getElementById("resultadoBuscaLeads");
+
+    const lista =
+        document.getElementById("listaLeadsGerados");
+
+
+    if (!estado) {
+
+        alert("Por favor, selecione um estado.");
+
+        return;
+
+    }
+
+
+    if (!cidade) {
+
+        alert("Por favor, selecione uma cidade.");
+
+        return;
+
+    }
+
+
+    if (!segmento) {
+
+        alert("Por favor, selecione um segmento.");
+
+        return;
+
+    }
+
+
+    if (!token) {
+
+        alert(
+            "Não encontramos seu acesso. Faça o cadastro no teste grátis primeiro."
+        );
+
+        return;
+
+    }
+
+
+    botao.disabled = true;
+
+    botao.textContent =
+        "🔎 Pesquisando empresas...";
+
+    resultado.style.display =
+        "block";
+
+    lista.innerHTML =
+        '<div class="loading">⏳ Buscando empresas reais na região...</div>';
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                SUPABASE_FUNCTION,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey":
+                            "sb_publishable_bMiDDpuSYORZcxqZ52Jz2w_F0wCcpsM",
+
+                        "Authorization":
+                            "Bearer " + token
+                    },
+
+                    body: JSON.stringify({
+
+                        cidade: cidade,
+
+                        estado: estado,
+
+                        segmento: segmento,
+
+                        access_token: token
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await resposta.json();
+
+
+        if (!resposta.ok || !data.sucesso) {
+
+            throw new Error(
+                data.erro ||
+                "Não foi possível realizar a pesquisa."
+            );
+
         }
 
-        function salvarConfiguracao() {
-            let empresa = document.getElementById('nomeEmpresa').value;
-            if(!empresa) { alert('Por favor, informe o nome da sua empresa.'); return; }
-            document.getElementById('statusConfig').style.display = 'block';
-            setTimeout(() => { document.getElementById('statusConfig').style.display = 'none'; }, 4000);
+
+        document.getElementById("cidadeAlvoNome").textContent =
+            `${cidade} - ${estado}`;
+
+
+        const empresas =
+            data.empresas || [];
+
+
+        const contatosLiberados =
+            data.contatosLiberados === true;
+
+
+        if (empresas.length === 0) {
+
+            lista.innerHTML = `
+                <div class="loading">
+                    😕 Não encontramos empresas desse segmento
+                    nessa região no momento.
+                </div>
+            `;
+
+            return;
+
         }
 
-        function buscarLeadsReais() {
-            let cidade = document.getElementById('selectCidade').value;
-            if(!cidade) { alert('Por favor, selecione uma cidade.'); return; }
 
-            document.getElementById('cidadeAlvoNome').textContent = cidade;
-            let container = document.getElementById('listaLeadsGerados');
-            
-            let empresasFicticias = [
-                { nome: "Auto Mecânica Central", tel: "(48) 98401-2210", status: "Procurando atendimento automatizado" },
-                { nome: "Posto de Molas e Suspensão", tel: "(48) 99123-8842", status: "Orçamento pendente no WhatsApp" },
-                { nome: "Comércio de Autopeças " + cidade, tel: "(48) 98877-1190", status: "Lead qualificado" },
-                { nome: "Funilaria Express Regional", tel: "(48) 99655-3321", status: "Interesse em IA de atendimento" },
-                { nome: "Centro Automotivo Premium", tel: "(48) 98112-4455", status: "Aguardando primeiro contato" }
-            ];
+        let html = "";
 
-            let html = "";
-            empresasFicticias.forEach(e => {
-                html += `
-                    <div class="lead-item">
-                        <div>
-                            <b>${e.nome}</b><br>
-                            <span style="color: #94a3b8; font-size: 12px;">📞 ${e.tel}</span>
-                        </div>
-                        <span style="background: #1e293b; padding: 4px 8px; border-radius: 4px; color: #38bdf8; font-size: 11px;">${e.status}</span>
+
+        empresas.forEach((empresa, index) => {
+
+            const nome =
+                empresa.nome ||
+                "Empresa sem nome";
+
+
+            const endereco =
+                empresa.endereco ||
+                "Endereço não informado";
+
+
+            html += `
+
+                <div class="empresa">
+
+                    <div class="empresa-nome">
+                        ${index + 1}. ${escapeHtml(nome)}
                     </div>
-                `;
-            });
 
-            container.innerHTML = html;
-            document.getElementById('resultadoBuscaLeads').style.display = 'block';
+                    <div class="empresa-info">
+
+                        📍 ${escapeHtml(endereco)}
+
+                    </div>
+
+                    <div class="badge">
+                        🏢 Empresa encontrada
+                    </div>
+
+            `;
+
+
+            if (contatosLiberados) {
+
+                const telefone =
+                    empresa.telefone || "";
+
+                const site =
+                    empresa.site || "";
+
+
+                html += `
+
+                    <div class="contato-liberado">
+
+                        <strong>✅ Contato desbloqueado</strong>
+
+                `;
+
+
+                if (telefone) {
+
+                    const telefoneLimpo =
+                        telefone.replace(/\D/g, "");
+
+                    html += `
+
+                        <br>
+                        📞 Telefone:
+                        <a href="tel:${telefoneLimpo}">
+                            ${escapeHtml(telefone)}
+                        </a>
+
+                        <br>
+
+                        <a
+                            href="https://wa.me/55${telefoneLimpo}"
+                            target="_blank"
+                        >
+                            💬 Falar pelo WhatsApp
+                        </a>
+
+                    `;
+
+                } else {
+
+                    html += `
+                        <br>
+                        📞 Telefone não informado.
+                    `;
+
+                }
+
+
+                if (site) {
+
+                    html += `
+
+                        <br>
+                        🌐
+                        <a
+                            href="${escapeAttribute(site)}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            Visitar site
+                        </a>
+
+                    `;
+
+                }
+
+
+                html += `</div>`;
+
+            } else {
+
+                html += `
+
+                    <div class="contato-bloqueado">
+
+                        🔒 <strong>Contato protegido</strong>
+
+                        <br>
+
+                        Telefone e WhatsApp ficam
+                        disponíveis somente para assinantes.
+
+                    </div>
+
+                `;
+
+            }
+
+
+            html += `</div>`;
+
+        });
+
+
+        lista.innerHTML =
+            html;
+
+
+        if (!contatosLiberados) {
+
+            const aviso =
+                document.createElement("div");
+
+            aviso.className =
+                "aviso-teste";
+
+            aviso.innerHTML = `
+
+                <h3>🔓 Quer acessar os contatos?</h3>
+
+                <p>
+                    Assine um plano LeadVision AI
+                    para desbloquear telefones e WhatsApp
+                    das empresas encontradas.
+                </p>
+
+                <button
+                    class="btn btn-planos"
+                    onclick="irParaPlanos()"
+                >
+                    🚀 Ver planos
+                </button>
+
+            `;
+
+            lista.appendChild(aviso);
+
         }
-    </script>
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        lista.innerHTML = `
+
+            <div class="erro">
+
+                ❌ ${escapeHtml(
+                    erro.message ||
+                    "Erro ao pesquisar empresas."
+                )}
+
+            </div>
+
+        `;
+
+    } finally {
+
+        botao.disabled = false;
+
+        botao.textContent =
+            "🔎 Pesquisar empresas";
+
+    }
+
+}
+
+
+/* ================================
+   SEGURANÇA DE HTML
+================================ */
+
+function escapeHtml(valor) {
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeAttribute(valor) {
+
+    return String(valor)
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+}
+
+
+/* ================================
+   CONFIGURAÇÃO DA IA
+================================ */
+
+function salvarConfiguracao() {
+
+    const empresa =
+        document.getElementById("nomeEmpresa").value.trim();
+
+    const whatsapp =
+        document.getElementById("whatsappEmpresa").value.trim();
+
+    const instrucao =
+        document.getElementById("instrucaoIA").value.trim();
+
+
+    if (!empresa) {
+
+        alert(
+            "Por favor, informe o nome da sua empresa."
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "nomeEmpresa",
+        empresa
+    );
+
+    localStorage.setItem(
+        "whatsappEmpresa",
+        whatsapp
+    );
+
+    localStorage.setItem(
+        "instrucaoIA",
+        instrucao
+    );
+
+
+    document.getElementById(
+        "statusConfig"
+    ).style.display = "block";
+
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "statusConfig"
+        ).style.display = "none";
+
+    }, 4000);
+
+}
+
+
+/* ================================
+   CARREGAR CONFIGURAÇÃO
+================================ */
+
+function carregarConfiguracao() {
+
+    const empresa =
+        localStorage.getItem("nomeEmpresa");
+
+    const whatsapp =
+        localStorage.getItem("whatsappEmpresa");
+
+    const instrucao =
+        localStorage.getItem("instrucaoIA");
+
+
+    if (empresa) {
+
+        document.getElementById(
+            "nomeEmpresa"
+        ).value = empresa;
+
+    }
+
+
+    if (whatsapp) {
+
+        document.getElementById(
+            "whatsappEmpresa"
+        ).value = whatsapp;
+
+    }
+
+
+    if (instrucao) {
+
+        document.getElementById(
+            "instrucaoIA"
+        ).value = instrucao;
+
+    }
+
+}
+
+
+/* ================================
+   INICIALIZAÇÃO
+================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        carregarDadosUsuario();
+
+        carregarConfiguracao();
+
+    }
+);
+
+</script>
+
 </body>
 </html>
