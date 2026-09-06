@@ -1738,100 +1738,169 @@
    GERAR ABORDAGEM COMERCIAL
 ================================ */
     
+/* ================================
+   GERAR ABORDAGEM COMERCIAL
+================================ */
+
 window.gerarAbordagem = async function(nomeEmpresa) {
 
-  if (moedas <= 0) {
-    mostrarFimDoTeste();
+  if (!nomeEmpresa) {
     return;
   }
 
-  if (!nomeEmpresa) {
+  if (moedas <= 0) {
+    show("dashboard-screen");
+    mostrarFimDoTeste();
     return;
   }
 
   const chat = document.getElementById("chat-box");
 
   if (!chat) {
+    alert("Não foi possível abrir o chat da IA.");
     return;
   }
 
-  const mensagemUsuario = document.createElement("div");
-  mensagemUsuario.className = "mensagem usuario";
+  /* Abrir a tela da IA */
+  show("dashboard-screen");
+
+  /* Descontar moeda */
+  moedas--;
+
+  localStorage.setItem(
+    "moedas",
+    String(moedas)
+  );
+
+  const contador =
+    document.getElementById("contador-moedas");
+
+  if (contador) {
+    contador.textContent =
+      String(moedas);
+  }
+
+  /* Mostrar pedido no chat */
+  const mensagemUsuario =
+    document.createElement("div");
+
+  mensagemUsuario.className =
+    "mensagem usuario";
+
   mensagemUsuario.textContent =
     "✨ Criar abordagem para " + nomeEmpresa;
 
-  chat.appendChild(mensagemUsuario);
+  chat.appendChild(
+    mensagemUsuario
+  );
 
-  moedas--;
-  localStorage.setItem("moedas", String(moedas));
+  /* Mostrar carregamento */
+  const carregando =
+    document.createElement("div");
 
-  const contador = document.getElementById("contador-moedas");
+  carregando.className =
+    "mensagem ia";
 
-  if (contador) {
-    contador.textContent = String(moedas);
-  }
+  carregando.textContent =
+    "🤖 Criando abordagem...";
 
-  const carregando = document.createElement("div");
-  carregando.className = "mensagem ia";
-  carregando.textContent = "🤖 Criando abordagem...";
-  chat.appendChild(carregando);
+  chat.appendChild(
+    carregando
+  );
 
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop =
+    chat.scrollHeight;
 
   try {
 
-    const resposta = await fetch(
-      "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          mensagem:
-            'Crie uma abordagem comercial personalizada para a empresa "' +
-            nomeEmpresa +
-            '". A mensagem deve ser natural, profissional, curta e despertar interesse. Não invente informações sobre a empresa. Escreva como uma mensagem que possa ser enviada ao responsável pela empresa.'
-        })
-      }
-    );
+    const resposta =
+      await fetch(
+        "https://ldgxtcpmswbbhrgyfnxr.supabase.co/functions/v1/ia-atendimento",
+        {
+          method: "POST",
 
-    const dados = await resposta.json();
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+
+            mensagem:
+              'Crie uma abordagem comercial personalizada para a empresa "' +
+              nomeEmpresa +
+              '". ' +
+              'A mensagem deve ser natural, profissional, curta e despertar interesse. ' +
+              'Não invente informações sobre a empresa. ' +
+              'Não diga que conhece informações que não foram fornecidas. ' +
+              'Escreva uma mensagem que possa ser enviada ao responsável pela empresa, ' +
+              'apresentando o LeadVision AI de forma simples e despertando interesse em conhecer a solução.'
+
+          })
+        }
+      );
+
+    const dados =
+      await resposta.json();
 
     carregando.remove();
 
-    const mensagemIA = document.createElement("div");
-    mensagemIA.className = "mensagem ia";
+    const mensagemIA =
+      document.createElement("div");
 
-    if (dados && dados.resposta) {
-      mensagemIA.textContent = dados.resposta;
+    mensagemIA.className =
+      "mensagem ia";
+
+    if (
+      dados &&
+      dados.resposta
+    ) {
+
+      mensagemIA.textContent =
+        dados.resposta;
+
     } else {
+
       mensagemIA.textContent =
         "Não consegui criar a abordagem agora. Tente novamente.";
+
     }
 
-    chat.appendChild(mensagemIA);
+    chat.appendChild(
+      mensagemIA
+    );
 
   } catch (erro) {
 
-    console.error("Erro ao gerar abordagem:", erro);
+    console.error(
+      "Erro ao gerar abordagem:",
+      erro
+    );
 
     carregando.remove();
 
-    const mensagemErro = document.createElement("div");
-    mensagemErro.className = "mensagem ia";
-    mensagemErro.textContent =
-      "Não foi possível criar a abordagem agora. Tente novamente.";
+    const mensagemErro =
+      document.createElement("div");
 
-    chat.appendChild(mensagemErro);
+    mensagemErro.className =
+      "mensagem ia";
+
+    mensagemErro.textContent =
+      "Não foi possível conectar à IA agora. Tente novamente.";
+
+    chat.appendChild(
+      mensagemErro
+    );
+
   }
 
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop =
+    chat.scrollHeight;
 
   if (moedas <= 0) {
     mostrarFimDoTeste();
   }
-}
+
+};
 
     /* ================================
        CARREGAR CIDADES
@@ -2132,7 +2201,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
                 <button
   class="botao-azul"
-  onclick="gerarAbordagem(decodeURIComponent('${encodeURIComponent(empresa.nome)}'))">
+  onclick="gerarAbordagem('${escaparHTML(empresa.nome)}')"
 
   ✨ Gerar Abordagem
 
@@ -2168,7 +2237,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
                  <button
   class="botao-azul"
-  onclick="gerarAbordagem(this.closest('.empresa').querySelector('h3').textContent.replace('🏢 ', '').trim())">
+  onclick="gerarAbordagem('${escaparHTML(empresa.nome)}')"
 
   ✨ Gerar Abordagem
 
