@@ -1740,8 +1740,6 @@
     
 async function gerarAbordagem(nomeEmpresa) {
 
-  alert("A função foi chamada!");
-
   if (moedas <= 0) {
     mostrarFimDoTeste();
     return;
@@ -2168,13 +2166,13 @@ async function gerarAbordagem(nomeEmpresa) {
 
                                 </div>
 
-                                <button
-                  class="botao-azul"
-                  onclick="gerarAbordagem()"
-                  
-                  ✨ Gerar Abordagem
+                 <button
+  class="botao-azul"
+  onclick="gerarAbordagem(this.closest('.empresa').querySelector('h3').textContent.replace('🏢 ', '').trim())">
 
-                </button>
+  ✨ Gerar Abordagem
+
+</button>
               `;
 
             }
