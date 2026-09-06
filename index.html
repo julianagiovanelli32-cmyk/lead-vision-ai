@@ -2132,7 +2132,7 @@ async function gerarAbordagem(nomeEmpresa) {
 
                 <button
   class="botao-azul"
-  onclick="gerarAbordagem(${JSON.stringify(empresa.nome)})">
+  onclick="gerarAbordagem(decodeURIComponent('${encodeURIComponent(empresa.nome)}'))">
 
   ✨ Gerar Abordagem
 
