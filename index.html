@@ -2131,13 +2131,12 @@ async function gerarAbordagem(nomeEmpresa) {
                                 </div>
 
                 <button
-                  class="botao-azul"
-                  onclick="gerarAbordagem(this.dataset.empresa)"
-                  data-empresa="${escaparHTML(empresa.nome)}">
+  class="botao-azul"
+  onclick="gerarAbordagem(${JSON.stringify(empresa.nome)})">
 
-                  ✨ Gerar Abordagem
+  ✨ Gerar Abordagem
 
-                </button>
+</button>
 
               `;
 
