@@ -2194,7 +2194,8 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
                 <button
   class="botao-azul"
-  onclick="gerarAbordagem('${escaparHTML(empresa.nome)}')"
+  data-empresa="${escaparHTML(empresa.nome)}"
+  onclick="gerarAbordagem(this.dataset.empresa)">
 
   ✨ Gerar Abordagem
 
@@ -2230,7 +2231,8 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
                  <button
   class="botao-azul"
-  onclick="gerarAbordagem('${escaparHTML(empresa.nome)}')"
+  data-empresa="${escaparHTML(empresa.nome)}"
+  onclick="gerarAbordagem(this.dataset.empresa)">
 
   ✨ Gerar Abordagem
 
