@@ -1220,8 +1220,50 @@
        VARIÁVEIS
     ================================= */
 
+/* ================================
+   ARMAZENAMENTO COMPATÍVEL COM APK
+================================ */
+
+const armazenamento = {
+  dados: {},
+
+  carregar: function() {
+    try {
+      if (window.name) {
+        this.dados = JSON.parse(window.name);
+      }
+    } catch (e) {
+      this.dados = {};
+    }
+  },
+
+  salvar: function() {
+    try {
+      window.name = JSON.stringify(this.dados);
+    } catch (e) {
+      console.error("Erro ao salvar armazenamento:", e);
+    }
+  },
+
+  getItem: function(chave) {
+    return this.dados[chave] ?? null;
+  },
+
+  setItem: function(chave, valor) {
+    this.dados[chave] = String(valor);
+    this.salvar();
+  },
+
+  removeItem: function(chave) {
+    delete this.dados[chave];
+    this.salvar();
+  }
+};
+
+armazenamento.carregar();
+
 let moedas =
-  parseInt(localStorage.getItem("moedas") || "5");
+  parseInt(armazenamento.getItem("moedas") || "5");
 
 
     /* ================================
