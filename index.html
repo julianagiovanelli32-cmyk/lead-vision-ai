@@ -1601,7 +1601,7 @@ localStorage.setItem(
 
       moedas--;
 
-      localStorage.setItem
+      localStorage.setItem(
         "moedas",
         String(moedas)
       );
@@ -1764,7 +1764,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
   /* Descontar moeda */
   moedas--;
 
-  localStorage.setItem
+  localStorage.setItem(
     "moedas",
     String(moedas)
   );
@@ -2008,9 +2008,9 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
 
       const token =
-        localStorage.getItem
-          "usuarioToken"
-        );
+  localStorage.getItem(
+    "usuarioToken"
+  );
 
 
       if (!estado || !cidade || !segmento) {
