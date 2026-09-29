@@ -1453,27 +1453,25 @@ let moedas =
         }
 
 
-        localStorage.setItem(
+        armazenamento.setItem(
   "moedas",
   "5"
 );
 
-        
-        localStorage.setItem(
-          "usuarioId",
-          dados.usuario.id
-        );
+armazenamento.setItem(
+  "usuarioId",
+  dados.usuario.id
+);
 
-        localStorage.setItem(
-          "usuarioEmail",
-          email
-        );
+armazenamento.setItem(
+  "usuarioEmail",
+  email
+);
 
-        localStorage.setItem(
-          "usuarioToken",
-          dados.usuario.access_token
-        );
-
+armazenamento.setItem(
+  "usuarioToken",
+  dados.usuario.access_token
+);
 
         const contador =
           document.getElementById(
@@ -1641,7 +1639,7 @@ let moedas =
 
       moedas--;
 
-      localStorage.setItem(
+      armazenamento.setItem
         "moedas",
         String(moedas)
       );
@@ -1804,7 +1802,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
   /* Descontar moeda */
   moedas--;
 
-  localStorage.setItem(
+  armazenamento.setItem
     "moedas",
     String(moedas)
   );
@@ -2048,7 +2046,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
 
       const token =
-        localStorage.getItem(
+        armazenamento.getItem
           "usuarioToken"
         );
 
@@ -2365,7 +2363,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
       function() {
 
         const moedasSalvas =
-          localStorage.getItem(
+          armazenamento.getItem
             "moedas"
           );
 
