@@ -1224,9 +1224,48 @@
    ARMAZENAMENTO COMPATÍVEL COM APK
 ================================ */
 
-let moedas =
-  parseInt(localStorage.getItem("moedas") || "5");
+let armazenamento;
 
+try {
+  armazenamento = window.localStorage;
+
+  if (!armazenamento) {
+    armazenamento = {
+      dados: {},
+
+      getItem: function(chave) {
+        return this.dados[chave] || null;
+      },
+
+      setItem: function(chave, valor) {
+        this.dados[chave] = String(valor);
+      },
+
+      removeItem: function(chave) {
+        delete this.dados[chave];
+      }
+    };
+  }
+} catch (erro) {
+  armazenamento = {
+    dados: {},
+
+    getItem: function(chave) {
+      return this.dados[chave] || null;
+    },
+
+    setItem: function(chave, valor) {
+      this.dados[chave] = String(valor);
+    },
+
+    removeItem: function(chave) {
+      delete this.dados[chave];
+    }
+  };
+}
+
+let moedas =
+  parseInt(armazenamento.getItem("moedas") || "5");
 
     /* ================================
        TROCAR TELAS
@@ -1415,25 +1454,13 @@ let moedas =
         }
 
 
-        localStorage.setItem(
-  "moedas",
-  "5"
-);
+        armazenamento.setItem("moedas", "5");
 
-localStorage.setItem(
-  "usuarioId",
-  dados.usuario.id
-);
+armazenamento.setItem("usuarioId", dados.usuario.id);
 
-localStorage.setItem(
-  "usuarioEmail",
-  email
-);
+armazenamento.setItem("usuarioEmail", email);
 
-localStorage.setItem(
-  "usuarioToken",
-  dados.usuario.access_token
-);
+armazenamento.setItem("usuarioToken", dados.usuario.access_token);
 
         const contador =
           document.getElementById(
@@ -1601,10 +1628,7 @@ localStorage.setItem(
 
       moedas--;
 
-      localStorage.setItem(
-        "moedas",
-        String(moedas)
-      );
+      armazenamento.setItem("moedas", String(moedas));
 
 
       const contador =
@@ -1764,10 +1788,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
   /* Descontar moeda */
   moedas--;
 
-  localStorage.setItem(
-    "moedas",
-    String(moedas)
-  );
+  armazenamento.setItem("moedas", String(moedas));
 
   const contador =
     document.getElementById("contador-moedas");
@@ -2008,9 +2029,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
 
       const token =
-  localStorage.getItem(
-    "usuarioToken"
-  );
+  armazenamento.getItem("usuarioToken");
 
 
       if (!estado || !cidade || !segmento) {
@@ -2325,9 +2344,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
       function() {
 
         const moedasSalvas =
-          localStorage.getItem(
-  "moedas"
-);
+  armazenamento.getItem("moedas");
 
         if (
           moedasSalvas !== null
