@@ -2024,7 +2024,11 @@ alert(
 
       const token =
   armazenamento.getItem("usuarioToken");
-
+alert(
+  token
+    ? "A conta foi identificada."
+    : "Não foi encontrado o token da conta."
+);
 
       if (!estado || !cidade || !segmento) {
 
