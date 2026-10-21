@@ -2006,20 +2006,10 @@ window.gerarAbordagem = async function(nomeEmpresa) {
 
     async function pesquisarEmpresasReais() {
 
-      const estado =
-        document
-          .getElementById("pesquisa-estado")
-          ?.value;
-
-      const cidade =
-        document
-          .getElementById("pesquisa-cidade")
-          ?.value;
-
-      const segmento =
-        document
-          .getElementById("pesquisa-segmento")
-          ?.value;
+      
+const estado = document.getElementById("pesquisa-estado")?.value?.trim();
+const cidade = document.getElementById("pesquisa-cidade")?.value?.trim();
+const segmento = document.getElementById("pesquisa-segmento")?.value?.trim();
 
 
       const resultado =
