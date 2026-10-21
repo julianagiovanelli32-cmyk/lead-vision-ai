@@ -1435,7 +1435,8 @@ let moedas =
 
         const dados =
           await resposta.json();
-
+        
+console.log("RESPOSTA DO CADASTRO:", dados);
 
         if (!resposta.ok || !dados.sucesso) {
 
