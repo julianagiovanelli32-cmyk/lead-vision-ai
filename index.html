@@ -511,20 +511,19 @@
 
 
       <button
-        id="botao-pesquisar-empresas"
-        class="botao-azul"
-        onclick="pesquisarEmpresasReais()">
+  id="botao-pesquisar-empresas"
+  class="botao-azul"
+  type="button"
+  onclick="pesquisarEmpresasReais()"
+>
+  🔎 Pesquisar empresas
+</button>
 
-        🔎 Pesquisar empresas
-
-      </button>
-
-
-      <div
-        id="resultado-empresas"
-        class="resultado">
-      </div>
-
+<div
+  id="resultado-empresas"
+  class="resultado">
+</div>
+      
     </section>
 
 
@@ -2005,7 +2004,7 @@ window.gerarAbordagem = async function(nomeEmpresa) {
     ================================= */
 
     async function pesquisarEmpresasReais() {
-
+     alert("O botão foi clicado!");
       
 const estado = document.getElementById("pesquisa-estado")?.value?.trim();
 const cidade = document.getElementById("pesquisa-cidade")?.value?.trim();
